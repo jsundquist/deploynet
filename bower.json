@@ -1,0 +1,26 @@
+{
+  "name": "deploynet",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jsundquist/deploynet",
+  "authors": [
+    "jsundquist <jsundquist@gmail.com>"
+  ],
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "html5shiv": "~3.7.2",
+    "respond": "~1.4.2"
+  }
+}
