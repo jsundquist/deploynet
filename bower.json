@@ -1,26 +1,15 @@
 {
-  "name": "deploynet",
+  "name": "angular-seed",
+  "description": "A starter project for AngularJS",
   "version": "0.0.0",
-  "homepage": "https://github.com/jsundquist/deploynet",
-  "authors": [
-    "jsundquist <jsundquist@gmail.com>"
-  ],
-  "moduleType": [
-    "amd",
-    "es6",
-    "globals"
-  ],
+  "homepage": "https://github.com/angular/angular-seed",
   "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
+  "private": true,
   "dependencies": {
-    "jquery": "~2.1.1",
-    "html5shiv": "~3.7.2",
-    "respond": "~1.4.2"
+    "angular": "1.2.x",
+    "angular-route": "1.2.x",
+    "angular-loader": "1.2.x",
+    "angular-mocks": "~1.2.x",
+    "html5-boilerplate": "~4.3.0"
   }
 }
