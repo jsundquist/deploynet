@@ -2,14 +2,11 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-    'ngRoute',
-    //'deployNet.index'
-    'myApp.view1',
-    'myApp.view2',
-    'myApp.main',
-    'myApp.customerList',
-    'myApp.version'
+  'ngRoute',
+  'myApp.view1',
+  'myApp.view2',
+  'myApp.version'
 ]).
-    config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.otherwise({redirectTo: '/view1'});
-    }]);
+config(['$routeProvider', function($routeProvider) {
+  $routeProvider.otherwise({redirectTo: '/view1'});
+}]);
