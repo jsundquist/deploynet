@@ -2,5 +2,14 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "deploynet": {
+    "host": "localhost",
+    "port": 3306,
+    "database": "deploynet",
+    "username": "deploynet",
+    "password": "aw3som3s@uce",
+    "name": "deploynet",
+    "connector": "mysql"
   }
 }
