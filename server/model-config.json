@@ -29,5 +29,9 @@
   "manufacturers": {
     "dataSource": "deploynet",
     "public": true
+  },
+  "products": {
+    "dataSource": "deploynet",
+    "public": true
   }
 }
