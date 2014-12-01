@@ -1,0 +1,15 @@
+<a href="#/configuration/manufacturer/" class="btn btn-default">Add Manufacturer</a>
+<table class="table table-responsive">
+    <thead>
+    <tr>
+        <th>Manufacturer</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="manufacturer in manufacturers">
+        <td>{{manufacturer.name}}</td>
+        <td><a href="#/configuration/manufacturer/{{manufacturer.id}}">Edit</a> | Delete</td>
+    </tr>
+    </tbody>
+</table>
