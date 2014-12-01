@@ -13,38 +13,26 @@ angular.module('myApp.manufacturers', ['ngRoute'])
         });
     }])
 
-    .controller('ManufacturersCtrl', ['$scope',function($scope) {
-        $scope.manufacturers = [{
-            name: 'test1',
-            id: 1
-        },{
-            name: 'test2',
-            id: 2
-        },{
-            name: 'test4',
-            id: 3
-        },{
-            name: 'test5',
-            id: 4
-        },{
-            name: 'test3',
-            id: 5
-        }];
+    .controller('ManufacturersCtrl', ['$scope','manufacturerService',function($scope, manufacturerService) {
+        $scope.manufacturers = manufacturerService.query();
     }])
-    .controller('ManufacturerCtrl', ['$scope','$routeParams', '$location',function($scope,$routeParams,$location) {
+    .controller('ManufacturerCtrl', ['$scope', 'manufacturerService','$routeParams', '$location',function($scope,manufacturerService,$routeParams,$location) {
         $scope.manufacturer = {
             name: '',
             id: 0
         };
         if ($routeParams.id) {
-            $scope.manufacturer = {
-                name: 'Some test manufacturer',
-                id: $routeParams.id
-            };
+            $scope.manufacturer = manufacturerService.get({id: $routeParams.id});
         }
         $scope.submit = function() {
             if($scope.manufacturer.name) {
-                $location.path('/configuration/manufacturers')
+                if($scope.manufacturer.id) {
+                    manufacturerService.update($scope.manufacturer);
+                } else {
+                    manufacturerService.save($scope.manufacturer);
+                }
+
+                $location.path('/configuration/manufacturers');
             }
         }
     }]);
