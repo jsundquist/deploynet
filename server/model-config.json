@@ -25,5 +25,13 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "manufacturers": {
+    "dataSource": "deploynet",
+    "public": true
+  },
+  "products": {
+    "dataSource": "deploynet",
+    "public": true
   }
 }
