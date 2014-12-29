@@ -9,7 +9,7 @@ angular.module('myApp.customers', ['ngRoute'])
         });
 
         $routeProvider.when('/customers/add', {
-            templateUrl: 'customers/add.html',
+            templateUrl: 'customers/form.html', 
             controller: 'CustomerFormCtrl'
         });
 
