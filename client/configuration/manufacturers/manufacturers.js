@@ -2,7 +2,7 @@
 
 angular.module('myApp.manufacturers', ['ngRoute'])
 
-    .config(['$routeProvider', function($routeProvider) {
+    .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/configuration/manufacturers', {
             templateUrl: 'configuration/manufacturers/manufacturers.html',
             controller: 'ManufacturersCtrl'
@@ -13,10 +13,11 @@ angular.module('myApp.manufacturers', ['ngRoute'])
         });
     }])
 
-    .controller('ManufacturersCtrl', ['$scope','manufacturerService',function($scope, manufacturerService) {
+    .controller('ManufacturersCtrl', ['$scope', 'manufacturerService', function ($scope, manufacturerService) {
         $scope.manufacturers = manufacturerService.query();
     }])
-    .controller('ManufacturerCtrl', ['$scope', 'manufacturerService','$routeParams', '$location',function($scope,manufacturerService,$routeParams,$location) {
+
+    .controller('ManufacturerCtrl', ['$scope', 'manufacturerService', '$routeParams', '$location', function ($scope, manufacturerService, $routeParams, $location) {
         $scope.manufacturer = {
             name: '',
             id: 0
@@ -24,9 +25,9 @@ angular.module('myApp.manufacturers', ['ngRoute'])
         if ($routeParams.id) {
             $scope.manufacturer = manufacturerService.get({id: $routeParams.id});
         }
-        $scope.submit = function() {
-            if($scope.manufacturer.name) {
-                if($scope.manufacturer.id) {
+        $scope.submit = function () {
+            if ($scope.manufacturer.name) {
+                if ($scope.manufacturer.id) {
                     manufacturerService.update($scope.manufacturer);
                 } else {
                     manufacturerService.save($scope.manufacturer);

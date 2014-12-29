@@ -2,7 +2,7 @@
 
 angular.module('myApp.products', ['ngRoute'])
 
-    .config(['$routeProvider', function($routeProvider) {
+    .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/configuration/products', {
             templateUrl: 'configuration/products/products.html',
             controller: 'ProductsCtrl'
@@ -13,11 +13,11 @@ angular.module('myApp.products', ['ngRoute'])
         });
     }])
 
-    .controller('ProductsCtrl', ['$scope','productService',function($scope, productService) {
+    .controller('ProductsCtrl', ['$scope', 'productService', function ($scope, productService) {
         $scope.products = productService.query({'filter[include]': 'manufacturers'});
     }])
-    
-    .controller('ProductCtrl', ['$scope', 'productService', 'manufacturerService', '$routeParams', '$location',function($scope, productService, manufacturerService, $routeParams, $location) {
+
+    .controller('ProductCtrl', ['$scope', 'productService', 'manufacturerService', '$routeParams', '$location', function ($scope, productService, manufacturerService, $routeParams, $location) {
         $scope.manufacturers = manufacturerService.query();
 
         $scope.product = {
@@ -32,8 +32,8 @@ angular.module('myApp.products', ['ngRoute'])
             $scope.product = productService.get({id: $routeParams.id});
         }
 
-        $scope.submit = function() {
-            if($scope.product.part_number) {
+        $scope.submit = function () {
+            if ($scope.product.part_number) {
                 var product = {
                     part_number: $scope.product.part_number,
                     alt_part_number: $scope.product.alt_part_number,
@@ -41,7 +41,7 @@ angular.module('myApp.products', ['ngRoute'])
                     manufacturer_id: $scope.product.manufacturer.id,
                     id: $scope.product.id
                 };
-                if($scope.product.id) {
+                if ($scope.product.id) {
                     productService.update(product);
                 } else {
                     productService.save(product);

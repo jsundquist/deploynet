@@ -1,6 +1,6 @@
 angular.module('myApp.manufacturerService', ['ngResource'])
-    .service('manufacturerService', ['$resource', function($resource) {
+    .service('manufacturerService', ['$resource', function ($resource) {
         return $resource('/api/manufacturers/:id', {}, {
-            update: { method: 'PUT'}
+            update: {method: 'PUT'}
         });
     }]);
