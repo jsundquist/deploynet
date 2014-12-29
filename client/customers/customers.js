@@ -20,7 +20,7 @@ angular.module('myApp.customers', ['ngRoute'])
         
         $routeProvider.when('/customer/locations/:id', {
             templateUrl: 'customers/locations.html',
-            controller: 'CustomerDetailsCtrl'
+            controller: 'CustomerLocationsCtrl'
         });
         
         $routeProvider.when('/customer/contacts/:id', {
@@ -52,16 +52,20 @@ angular.module('myApp.customers', ['ngRoute'])
     .controller('CustomersCtrl', ['$scope', 'customerService', function($scope, customerService) {
         $scope.customers = customerService.query();
     }])
-    .controller('CustomerDetailsCtrl', ['$scope', '$routeParams', '$location', 'customerService', function($scope, $routeParams, $location, customerService){
+    .controller('CustomerDetailsCtrl', ['$scope', '$routeParams', '$location', 'customerService', function($scope, $routeParams, $location, customerService) {
         $scope.customer = customerService.get({id: $routeParams.id});
     }])
-    .controller('CustomerFormCtrl', ['$scope', '$routeParams', '$location', 'customerService', function($scope, $routeParams, $location, customerService){
+    .controller('CustomerLocationsCtrl', ['$scope', '$routeParams', 'customerService', 'customerLocationService', function($scope, $routeParams, customerService, customerLocationService) {
+        $scope.customer = customerService.get({id: $routeParams.id});
+        $scope.locations = customerLocationService.query({id: $routeParams.id});
+    }])
+    .controller('CustomerFormCtrl', ['$scope', '$routeParams', '$location', 'customerService', function($scope, $routeParams, $location, customerService) {
         $scope.customer = {
             
         };
         
         if ($routeParams.id) {
-            $scope.customer = customerService.get({id: $rquoteParams.id});
+            $scope.customer = customerService.get({id: $routeParams.id});
         }
 
         $scope.submit = function() {

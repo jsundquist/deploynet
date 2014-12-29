@@ -1,11 +1,18 @@
 {
-  "name": "customers",
-  "plural": "customers",
+  "name": "locations",
+  "plural": "locations",
   "base": "PersistedModel",
   "properties": {
+    "customer_id": {
+      "type": "number",
+      "required": true
+    },
     "name": {
       "type": "string",
       "required": true
+    },
+    "location_id": {
+      "type": "number"
     },
     "address1": {
       "type": "string",
@@ -18,19 +25,18 @@
       "type": "string",
       "required": true
     },
-    "state": {
+    "state_id": {
       "type": "number",
       "required": true
     },
-    "postalcode": {
+    "postal_code": {
       "type": "string",
       "required": true
     },
     "active": {
-      "type": "string",
-      "required": true
+      "type": "boolean"
     },
-    "pimarycontact": {
+    "pimary_contact": {
       "type": "string"
     },
     "phone": {
@@ -41,13 +47,7 @@
     }
   },
   "validations": [],
-  "relations": {
-    "locations": {
-      "type": "hasMany",
-      "model": "locations",
-      "foreignKey": "customer_id"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": []
 }

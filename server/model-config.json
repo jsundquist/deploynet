@@ -37,5 +37,9 @@
   "customers": {
     "dataSource": "deploynet",
     "public": true
+  },
+  "locations": {
+    "dataSource": "deploynet",
+    "public": true
   }
 }

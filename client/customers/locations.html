@@ -24,12 +24,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1,001</td>
-            <td>Lorem</td>
-            <td>ipsum</td>
-            <td>dolor</td>
-            <td>sit</td>
+        <tr data-ng-repeat="location in locations">
+            <td>{{location.id}}</td>
+            <td>{{location.name}}</td>
+            <td>{{location.address1}} {{location.address2}} {{location.city}} {{location.state_id}} {{location.postal_code}}</td>
+            <td>{{location.phone}}</td>
+            <td>{{location.pimarycontact}}</td>
         </tr>
         </tbody>
     </table>
