@@ -3,7 +3,7 @@
     <li class="active">Customer List</li>
 </ol>
 <h1 class="sub-header">Customers</h1>
-<a href="#/">Add Customer</a>
+<a href="#/customers/add">Add Customer</a>
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -17,12 +17,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td><a href="">1,001</a></td>
-            <td>Lorem</td>
-            <td>ipsum</td>
-            <td>dolor</td>
-            <td>sit</td>
+        <tr data-ng-repeat="customer in customers">
+            <td><a href="#/customer/details/{{customer.id}}">{{customer.id}}</a></td>
+            <td>{{customer.name}}</td>
+            <td>{{customer.address1}} {{customer.address2}} {{customer.city}} {{customer.state}} {{customer.postalcode}}</td>
+            <td>{{customer.phone}}</td>
+            <td>{{customer.pimarycontact}}</td>
         </tr>
         </tbody>
     </table>

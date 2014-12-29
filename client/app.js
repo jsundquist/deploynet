@@ -9,9 +9,12 @@ angular.module('myApp', [
     'myApp.shippingMethods',
     'myApp.manufacturers',
     'myApp.products',
+    'myApp.customers',
     'myApp.version',
     'myApp.manufacturerService',
-    'myApp.productService'
+    'myApp.productService',
+    'myApp.customerService',
+    'myApp.customerLocationService',
 ]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/dashbaord'});
