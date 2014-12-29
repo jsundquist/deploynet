@@ -13,13 +13,13 @@
     <li role="presentation"><a href="#/customer/documents/{{customer.id}}">Documents</a></li>
 </ul>
 
-<h2>Customer Information<a href="#/customers/edit/1001" class="btn btn-default btn-sm pull-right" role="button">Edit Details</a></h2>
+<h2>Customer Information<a href="#/customer/details/{{customer.id}}/edit" class="btn btn-default btn-sm pull-right" role="button">Edit Details</a></h2>
 
 <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>Location Name: </th>
-            <td>{{customer.name}}</td>
+            <td><input type="">{{customer.name}}</td>
         </tr>
         <tr>
             <th>Location ID: </th>

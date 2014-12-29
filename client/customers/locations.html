@@ -12,6 +12,7 @@
     <li role="presentation"><a href="#/customer/orders/{{customer.id}}">Work Orders</a></li>
     <li role="presentation"><a href="#/customer/documents/{{customer.id}}">Documents</a></li>
 </ul>
+<a href="#/customer/locations/{{customer.id}}/add" class="btn btn-default btn-sm pull-right" role="button">Add Location</a>
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -25,7 +26,7 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="location in locations">
-            <td>{{location.id}}</td>
+            <td><a href="#/customer/location/{{location.id}}">{{location.id}}</a></td>
             <td>{{location.name}}</td>
             <td>{{location.address1}} {{location.address2}} {{location.city}} {{location.state_id}} {{location.postal_code}}</td>
             <td>{{location.phone}}</td>

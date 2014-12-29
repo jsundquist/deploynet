@@ -23,6 +23,11 @@ angular.module('myApp.customers', ['ngRoute'])
             controller: 'CustomerLocationsCtrl'
         });
         
+        $routeProvider.when('/customer/locations/:id/add', {
+            templateUrl: 'customers/locations.html',
+            controller: 'CustomerLocationsCtrl'
+        });
+        
         $routeProvider.when('/customer/contacts/:id', {
             templateUrl: 'customers/contacts.html',
             controller: 'CustomerDetailsCtrl'
@@ -52,13 +57,16 @@ angular.module('myApp.customers', ['ngRoute'])
     .controller('CustomersCtrl', ['$scope', 'customerService', function($scope, customerService) {
         $scope.customers = customerService.query();
     }])
+    
     .controller('CustomerDetailsCtrl', ['$scope', '$routeParams', '$location', 'customerService', function($scope, $routeParams, $location, customerService) {
         $scope.customer = customerService.get({id: $routeParams.id});
     }])
+    
     .controller('CustomerLocationsCtrl', ['$scope', '$routeParams', 'customerService', 'customerLocationService', function($scope, $routeParams, customerService, customerLocationService) {
         $scope.customer = customerService.get({id: $routeParams.id});
         $scope.locations = customerLocationService.query({id: $routeParams.id});
     }])
+    
     .controller('CustomerFormCtrl', ['$scope', '$routeParams', '$location', 'customerService', function($scope, $routeParams, $location, customerService) {
         $scope.customer = {
             
