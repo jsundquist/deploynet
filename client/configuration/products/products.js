@@ -16,7 +16,10 @@ angular.module('myApp.products', ['ngRoute'])
     .controller('ProductsCtrl', ['$scope','productService',function($scope, productService) {
         $scope.products = productService.query({'filter[include]': 'manufacturers'});
     }])
-    .controller('ProductCtrl', ['$scope', 'productService','$routeParams', '$location',function($scope,productService,$routeParams,$location) {
+    
+    .controller('ProductCtrl', ['$scope', 'productService', 'manufacturerService', '$routeParams', '$location',function($scope, productService, manufacturerService, $routeParams, $location) {
+        $scope.manufacturers = manufacturerService.query();
+
         $scope.product = {
             part_number: '',
             alt_part_number: '',
@@ -31,14 +34,20 @@ angular.module('myApp.products', ['ngRoute'])
 
         $scope.submit = function() {
             if($scope.product.part_number) {
+                var product = {
+                    part_number: $scope.product.part_number,
+                    alt_part_number: $scope.product.alt_part_number,
+                    description: $scope.product.description,
+                    manufacturer_id: $scope.product.manufacturer.id,
+                    id: $scope.product.id
+                };
                 if($scope.product.id) {
-                    productService.update($scope.product);
+                    productService.update(product);
                 } else {
-                    productService.save($scope.product);
+                    productService.save(product);
                 }
 
                 $location.path('/configuration/products');
             }
-        }
-
+        };
     }]);
