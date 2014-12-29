@@ -25,7 +25,12 @@ angular.module('myApp.customers', ['ngRoute'])
 
         $routeProvider.when('/customer/locations/:id/add', {
             templateUrl: 'customers/locations.html',
-            controller: 'CustomerLocationsCtrl'
+            controller: 'CustomerLocationFormCtrl'
+        });
+
+        $routeProvider.when('/customer/locations/:id/edit/:locationId', {
+            templateUrl: 'customers/locations.html',
+            controller: 'CustomerLocationFormCtrl'
         });
 
         $routeProvider.when('/customer/contacts/:id', {
@@ -76,7 +81,7 @@ angular.module('myApp.customers', ['ngRoute'])
             "state": 0,
             "postalcode": "",
             "active": "",
-            "pimarycontact": "",
+            "primarycontact": "",
             "phone": 0,
             "fax": 0,
             "id": 0
@@ -89,13 +94,49 @@ angular.module('myApp.customers', ['ngRoute'])
         }
 
         $scope.submit = function () {
-            if ($scope.customer.name) {
-                if ($scope.product.id) {
+            if ($scope.customerForm.name) {
+                if ($scope.customerForm.id) {
                     customerService.update($scope.customerForm);
                     $location.path('/customer/details/' + $routeParams.id);
                 }
                 customerService.save($scope.customerForm);
                 $location.path('/customers/');
+            }
+        };
+    }])
+
+    .controller('CustomerLocationFormCtrl', ['$scope', '$routeParams', '$location', 'customerService', 'customerLocationService', function ($scope, $routeParams, $location, customerService, customerLocationService) {
+        $scope.location = {
+            "customer_id": 0,
+            "name": "",
+            "address1": "",
+            "address2": "",
+            "city": "",
+            "state_id": 0,
+            "postal_code": "",
+            "active": "",
+            "primary_contact": "",
+            "phone": 0,
+            "fax": 0,
+            "id": 0
+        };
+
+        $scope.customer = customerService.get({id: $routeParams.id});
+
+        if ($routeParams.locationId) {
+            $scope.location = customerLocationService.get({id: $routeParams.locationId})
+        }
+
+        $scope.submit = function () {
+            if ($scope.location.name) {
+
+                if ($scope.location.id) {
+                    customerService.update($scope.location);
+                    $location.path('/customer/location/' + $routeParams.id + '/details/' + $routeParams.locationId);
+                }
+
+                customerService.save($scope.location);
+                $location.path('/customers/locations/' + $routeParams.id);
             }
         };
     }]);

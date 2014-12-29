@@ -50,7 +50,26 @@
         </label>
         <input type="text" id="customerPostalCode" name="customerPostalCode" class="form-control" ng-model="customerForm.postalcode" />
     </div>
-    
+    <div class="form-group">
+        <label for="customerPrimaryContact">
+            Primary Contact
+        </label>
+        <input type="text" id="customerPrimaryContact" name="customerPrimaryContact" class="form-control" ng-model="customerForm.primary_contact" />
+    </div>
+
+    <div class="form-group">
+        <label for="customerPhone">
+            Phone
+        </label>
+        <input type="text" id="customerPhone" name="customerPhone" class="form-control" ng-model="customerForm.phone" />
+    </div>
+
+    <div class="form-group">
+        <label for="customerFax">
+            Fax
+        </label>
+        <input type="text" id="customerFax" name="customerFax" class="form-control" ng-model="customerForm.fax" />
+    </div>
     <input type="hidden" name="id" id="id" value="" ng-model="customerForm.id" />
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
