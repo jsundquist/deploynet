@@ -13,37 +13,37 @@ angular.module('myApp.customers', ['ngRoute'])
             controller: 'CustomerFormCtrl'
         });
 
-        $routeProvider.when('/customers/details/:id', {
+        $routeProvider.when('/customer/details/:id', {
             templateUrl: 'customers/details.html',
             controller: 'CustomerDetailsCtrl'
         });
         
-        $routeProvider.when('/customers/locations/:id', {
+        $routeProvider.when('/customer/locations/:id', {
             templateUrl: 'customers/locations.html',
             controller: 'CustomerDetailsCtrl'
         });
         
-        $routeProvider.when('/customers/contacts/:id', {
+        $routeProvider.when('/customer/contacts/:id', {
             templateUrl: 'customers/contacts.html',
             controller: 'CustomerDetailsCtrl'
         });
         
-        $routeProvider.when('/customers/projects/:id', {
+        $routeProvider.when('/customer/projects/:id', {
             templateUrl: 'customers/projects.html',
             controller: 'CustomerDetailsCtrl'
         });
         
-        $routeProvider.when('/customers/orders/:id', {
+        $routeProvider.when('/customer/orders/:id', {
             templateUrl: 'customers/orders.html',
             controller: 'CustomerDetailsCtrl'
         });
         
-        $routeProvider.when('/customers/documents/:id', {
+        $routeProvider.when('/customer/documents/:id', {
             templateUrl: 'customers/documents.html',
             controller: 'CustomerDetailsCtrl'
         });
 
-        $routeProvider.when('/customers/details/:id/edit', {
+        $routeProvider.when('/customer/details/:id/edit', {
             templateUrl: 'customers/edit.html',
             controller: 'CustomerFormCtrl'
         });
