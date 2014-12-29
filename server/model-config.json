@@ -33,5 +33,9 @@
   "products": {
     "dataSource": "deploynet",
     "public": true
+  },
+  "customers": {
+    "dataSource": "deploynet",
+    "public": true
   }
 }
