@@ -49,21 +49,23 @@ angular.module('myApp.customers', ['ngRoute'])
         });
     }])
 
-    .controller('CustomersCtrl', ['$scope',function($scope) {
-
+    .controller('CustomersCtrl', ['$scope', 'customerService', function($scope, customerService) {
+        $scope.customers = customerService.query();
     }])
-    .controller('CustomerDetailsCtrl', ['$scope', '$routeParams', '$location',function($scope, $routeParams, $location){
-        $scope.customer = {};
+    .controller('CustomerDetailsCtrl', ['$scope', '$routeParams', '$location', 'customerService', function($scope, $routeParams, $location, customerService){
+        $scope.customer = customerService.get({id: $routeParams.id});
     }])
-    .controller('CustomerFormCtrl', ['$scope', '$routeParams', '$location',function($scope, $routeParams, $location){
-        $scope.customer = {};
+    .controller('CustomerFormCtrl', ['$scope', '$routeParams', '$location', 'customerService', function($scope, $routeParams, $location, customerService){
+        $scope.customer = {
+            
+        };
         
         if ($routeParams.id) {
-            $scope.customer = {};
+            $scope.customer = customerService.get({id: $rquoteParams.id});
         }
-        
+
         $scope.submit = function() {
-            if ($scope.customer) {
+            if ($scope.customer.name) {
                 $location.path('/customer/details/' + 123456);
             }
         };

@@ -1,16 +1,16 @@
 <ol class="breadcrumb">
     <li><a href="#/">Home</a></li>
     <li><a href="#/customers">Customer List</a></li>
-    <li class="active">Customer Contacts #1,001</li>
+    <li class="active">Customer Contacts #{{customer.id}}</li>
 </ol>
-<h1 class="sub-header">(Customer Name)</h1>
+<h1 class="sub-header">{{customer.name}}</h1>
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation"><a href="#/customer/details/1001">Details</a></li>
-    <li role="presentation"><a href="#/customer/locations/1001">Locations</a></li>
-    <li role="presentation" class="active"><a href="#/customer/contacts/1001">Contacts</a></li>
-    <li role="presentation"><a href="#/customer/projects/1001">Projects</a></li>
-    <li role="presentation"><a href="#/customer/orders/1001">Work Orders</a></li>
-    <li role="presentation"><a href="#/customer/documents/1001">Documents</a></li>
+    <li role="presentation"><a href="#/customer/details/{{customer.id}}">Details</a></li>
+    <li role="presentation"><a href="#/customer/locations/{{customer.id}}">Locations</a></li>
+    <li role="presentation" class="active"><a href="#/customer/contacts/{{customer.id}}">Contacts</a></li>
+    <li role="presentation"><a href="#/customer/projects/{{customer.id}}">Projects</a></li>
+    <li role="presentation"><a href="#/customer/orders/{{customer.id}}">Work Orders</a></li>
+    <li role="presentation"><a href="#/customer/documents/{{customer.id}}">Documents</a></li>
 </ul>
 <div class="table-responsive">
     <table class="table table-striped">

@@ -15,7 +15,7 @@
       "type": "string"
     },
     "city": {
-      "type": "number",
+      "type": "string",
       "required": true
     },
     "state": {
@@ -34,10 +34,10 @@
       "type": "string"
     },
     "phone": {
-      "type": "string"
+      "type": "number"
     },
     "fax": {
-      "type": "string"
+      "type": "number"
     }
   },
   "validations": [],
