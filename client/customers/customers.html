@@ -9,7 +9,6 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Customer ID</th>
             <th>Name</th>
             <th>Address</th>
             <th>Phone</th>
@@ -18,8 +17,7 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="customer in customers">
-            <td><a href="#/customer/details/{{customer.id}}">{{customer.id}}</a></td>
-            <td>{{customer.name}}</td>
+            <td><a href="#/customer/details/{{customer.id}}">{{customer.name}}</a></td>
             <td>{{customer.address1}} {{customer.address2}} {{customer.city}} {{customer.state}} {{customer.postalcode}}</td>
             <td>{{customer.phone}}</td>
             <td>{{customer.pimarycontact}}</td>

@@ -1,12 +1,12 @@
 <ol class="breadcrumb">
     <li><a href="#/">Home</a></li>
     <li><a href="#/customers">Customer List</a></li>
-    <li class="active">Customer Locations #{{customer.id}}</li>
+    <li class="active">{{customer.name}} (Locations)</li>
 </ol>
 <h1 class="sub-header">{{customer.name}}</h1>
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation"><a href="#/customer/details/{{customer.id}}">Details</a></li>
-    <li role="presentation" class="active"><a href="#/customer/locations/{{customer.id}}">Locations</a></li>
+    <li role="presentation" class="active"><a href="#/customer/locations/{{customer.id}}">Sites</a></li>
     <li role="presentation"><a href="#/customer/contacts/{{customer.id}}">Contacts</a></li>
     <li role="presentation"><a href="#/customer/projects/{{customer.id}}">Projects</a></li>
     <li role="presentation"><a href="#/customer/orders/{{customer.id}}">Work Orders</a></li>
@@ -17,20 +17,24 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Location ID</th>
-            <th>Name</th>
+            <th>Site ID</th>
+            <th>Site Name</th>
             <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Postal Code</th>
             <th>Phone</th>
-            <th>Contact</th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="location in locations">
             <td><a href="#/customer/location/{{location.id}}">{{location.id}}</a></td>
             <td>{{location.name}}</td>
-            <td>{{location.address1}} {{location.address2}} {{location.city}} {{location.state_id}} {{location.postal_code}}</td>
+            <td>{{location.address1}} {{location.address2}}</td>
+            <td>{{location.city}}</td>
+            <td>{{location.state_id}}</td>
+            <td>{{location.postal_code}}</td>
             <td>{{location.phone}}</td>
-            <td>{{location.pimarycontact}}</td>
         </tr>
         </tbody>
     </table>
