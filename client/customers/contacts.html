@@ -13,6 +13,7 @@
     <li role="presentation"><a href="#/customer/documents/{{customer.id}}">Documents</a></li>
 </ul>
 <div class="table-responsive">
+    <a href="#/customer/contacts/{{customer.id}}/add" class="btn btn-default btn-sm pull-right" role="button">Add Contact</a>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -27,15 +28,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Lorem</td>
-            <td>ipsum</td>
-            <td>(000) 000-0000</td>
-            <td>test@test.com</td>
-            <td>&nbsp;</td>
-            <td>--/--/-- --:--</td>
-            <td>0</td>
-            <td>Edit | Delete</td>
+        <tr data-ng-repeat="contact in contacts">
+            <td>{{contact.name}}</td>
+            <td>{{contact.title}}</td>
+            <td>{{contact.phone}}<!-- (000) 000-0000 --></td>
+            <td>{{contact.email}}<!-- test@test.com --></td>
+            <td>{{contact.username}}</td>
+            <td>{{contact.lastLogin}} <!-- --/--/-- --:-- --></td>
+            <td>{{contact.loginCount}}</td>
+            <td><a href="#/customer/contacts/{{customer.id}}/edit/{{contact.id}}">Edit</a> | Delete</td>
         </tr>
         </tbody>
     </table>

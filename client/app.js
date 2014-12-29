@@ -15,6 +15,7 @@ angular.module('myApp', [
     'myApp.productService',
     'myApp.customerService',
     'myApp.customerLocationService',
+    'myApp.customerContactService',
 ]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/dashbaord'});

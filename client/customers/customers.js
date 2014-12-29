@@ -35,7 +35,17 @@ angular.module('myApp.customers', ['ngRoute'])
 
         $routeProvider.when('/customer/contacts/:id', {
             templateUrl: 'customers/contacts.html',
-            controller: 'CustomerDetailsCtrl'
+            controller: 'CustomerContactsCtrl'
+        });
+
+        $routeProvider.when('/customer/contacts/:id/add', {
+            templateUrl: 'customers/contacts.html',
+            controller: 'CustomerContactsCtrl'
+        });
+
+        $routeProvider.when('/customer/contacts/:id/edit/:contactId', {
+            templateUrl: 'customers/contacts.html',
+            controller: 'CustomerContactsCtrl'
         });
 
         $routeProvider.when('/customer/projects/:id', {
@@ -139,4 +149,9 @@ angular.module('myApp.customers', ['ngRoute'])
                 $location.path('/customers/locations/' + $routeParams.id);
             }
         };
+    }])
+
+    .controller('CustomerContactsCtrl', ['$scope', '$routeParams', 'customerService', 'customerContactService', function ($scope, $routeParams, customerService, customerContactService) {
+        $scope.customer = customerService.get({id: $routeParams.id});
+        $scope.contacts = customerContactService.query({id: $routeParams.id});
     }]);
