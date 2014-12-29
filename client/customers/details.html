@@ -1,12 +1,12 @@
 <ol class="breadcrumb">
     <li><a href="#/">Home</a></li>
     <li><a href="#/customers">Customer List</a></li>
-    <li class="active">Customer Details #{{customer.id}}</li>
+    <li class="active">{{customer.name}} (Details)</li>
 </ol>
 <h1 class="sub-header">{{customer.name}}</h1>
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#/customer/details/{{customer.id}}">Details</a></li>
-    <li role="presentation"><a href="#/customer/locations/{{customer.id}}">Locations</a></li>
+    <li role="presentation"><a href="#/customer/locations/{{customer.id}}">Sites</a></li>
     <li role="presentation"><a href="#/customer/contacts/{{customer.id}}">Contacts</a></li>
     <li role="presentation"><a href="#/customer/projects/{{customer.id}}">Projects</a></li>
     <li role="presentation"><a href="#/customer/orders/{{customer.id}}">Work Orders</a></li>
@@ -18,20 +18,12 @@
 <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
         <tr>
-            <th>Location Name: </th>
-            <td><input type="">{{customer.name}}</td>
+            <th>Customer Name: </th>
+            <td>{{customer.name}}</td>
         </tr>
         <tr>
-            <th>Location ID: </th>
-            <td>{{customer.id}}</td>
-        </tr>
-        <tr>
-            <th>Active: </th>
+            <th>Status: </th>
             <td>{{customer.active}}</td>
-        </tr>
-        <tr>
-            <th>Site Region Label: </th>
-            <td>Test</td>
         </tr>
         <tr>
             <th>Primary Contact: </th>
@@ -43,7 +35,7 @@
     <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>Address: </th>
-            <td><address>{{customer.address1}}<br ng-if="customer.address2" />{{customer.address2}}<br />{{customer.city}}, {{customer.state}} {{customer.postalcode}}</address></td>
+            <td><address>{{customer.address1}}<br ng-if="customer.address2" />{{customer.address2}}<br ng-if="customer.address3" />{{customer.address3}}<br />{{customer.city}}, {{customer.state}} {{customer.postalcode}}</address></td>
         </tr>
         <tr>
             <th>Phone: </th>

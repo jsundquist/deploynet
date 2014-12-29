@@ -1,12 +1,12 @@
 <ol class="breadcrumb">
     <li><a href="#/">Home</a></li>
     <li><a href="#/customers">Customer List</a></li>
-    <li class="active">Customer Documents #{{customer.id}}</li>
+    <li class="active">{{customer.name}} (Documents)</li>
 </ol>
 <h1 class="sub-header">{{customer.name}}</h1>
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation"><a href="#/customer/details/{{customer.id}}">Details</a></li>
-    <li role="presentation"><a href="#/customer/locations/{{customer.id}}">Locations</a></li>
+    <li role="presentation"><a href="#/customer/locations/{{customer.id}}">Sites</a></li>
     <li role="presentation"><a href="#/customer/contacts/{{customer.id}}">Contacts</a></li>
     <li role="presentation"><a href="#/customer/projects/{{customer.id}}">Projects</a></li>
     <li role="presentation"><a href="#/customer/orders/{{customer.id}}">Work Orders</a></li>
@@ -16,20 +16,20 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Customer ID</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Contact</th>
+            <th>File Name (File Size)</th>
+            <th>Uploaded By</th>
+            <th>Uploaded Date</th>
+            <th>Description</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>1,001</td>
-            <td>Lorem</td>
-            <td>ipsum</td>
-            <td>dolor</td>
-            <td>sit</td>
+            <td>Something.pdf (100kb)</td>
+            <td>Jane Doe</td>
+            <td>--/--/---- --:-- AM</td>
+            <td>Some Description</td>
+            <td>Delete</td>
         </tr>
         </tbody>
     </table>
