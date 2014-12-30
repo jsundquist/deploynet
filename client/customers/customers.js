@@ -9,7 +9,7 @@ angular.module('myApp.customers', ['ngRoute'])
         });
 
         $routeProvider.when('/customers/add', {
-            templateUrl: 'customers/form.html', 
+            templateUrl: 'customers/form.html',
             controller: 'CustomerFormCtrl'
         });
 
@@ -24,12 +24,12 @@ angular.module('myApp.customers', ['ngRoute'])
         });
 
         $routeProvider.when('/customer/locations/:id/add', {
-            templateUrl: 'customers/locations.html',
+            templateUrl: 'customers/location_form.html',
             controller: 'CustomerLocationFormCtrl'
         });
 
         $routeProvider.when('/customer/locations/:id/edit/:locationId', {
-            templateUrl: 'customers/locations.html',
+            templateUrl: 'customers/location_form.html',
             controller: 'CustomerLocationFormCtrl'
         });
 
@@ -153,5 +153,31 @@ angular.module('myApp.customers', ['ngRoute'])
 
     .controller('CustomerContactsCtrl', ['$scope', '$routeParams', 'customerService', 'customerContactService', function ($scope, $routeParams, customerService, customerContactService) {
         $scope.customer = customerService.get({id: $routeParams.id});
-        $scope.contacts = customerContactService.query({id: $routeParams.id});
+        $scope.contacts = customerContactService.query({id: $routeParams.id, filter: {where: {location_id: null}}});
+    }])
+
+    .controller('CustomerContactFormCtrl', ['$scope', '$routeParams', 'customerService', 'customerContactService', function ($scope, $routeParams, customerService, customerContactService) {
+        $scope.customer = customerService.get({id: $routeParams.id});
+        $scope.contact = {
+            first_name: '',
+            last_name: '',
+            address1: null,
+            address2: null,
+            address3: null,
+            city: null,
+            state_id: null,
+            postal_code: null,
+            phone: 0,
+            extension: null,
+            fax: 0,
+            cell_phone: 0,
+            email: null,
+            customer_id: $routeParams.id,
+            location_id: null,
+            time_zone_id: 0
+        };
+
+        if ($routeParams.contactId) {
+            $scope.contact = customerContactService.get({id: $routeParams.contactId})
+        }
     }]);
