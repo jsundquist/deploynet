@@ -259,7 +259,7 @@ angular.module('myApp.customers', ['ngRoute'])
 
         $scope.location = customerLocationService.get({id: $routeParams.id, locationId: $routeParams.locationId});
 
-        $scope.contacts = customerContactService.query();
+        $scope.contacts = customerContactService.query({id: $routeParams.id, locationId: $routeParams.locationId});
     }])
 
     .controller('CustomerLocationContactFormCtrl', ['$scope', '$routeParams', 'customerService', 'customerLocationService', 'customerContactService', function($scope, $routeParams, customerService, customerLocationService, customerContactService){
