@@ -9,7 +9,7 @@ angular.module('myApp.customers', ['ngRoute'])
         });
 
         $routeProvider.when('/customers/add', {
-            templateUrl: 'customers/form.html', 
+            templateUrl: 'customers/form.html',
             controller: 'CustomerFormCtrl'
         });
 
@@ -24,12 +24,12 @@ angular.module('myApp.customers', ['ngRoute'])
         });
 
         $routeProvider.when('/customer/locations/:id/add', {
-            templateUrl: 'customers/locations.html',
+            templateUrl: 'customers/location_form.html',
             controller: 'CustomerLocationFormCtrl'
         });
 
         $routeProvider.when('/customer/locations/:id/edit/:locationId', {
-            templateUrl: 'customers/locations.html',
+            templateUrl: 'customers/location_form.html',
             controller: 'CustomerLocationFormCtrl'
         });
 
@@ -195,5 +195,4 @@ angular.module('myApp.customers', ['ngRoute'])
                 $location.path('/customers/contacts/' + $routeParams.id);
             }
         };
-        
     }]);

@@ -1,17 +1,26 @@
 <ol class="breadcrumb">
     <li><a href="#/">Home</a></li>
     <li><a href="#/customers">Customer List</a></li>
+<<<<<<< HEAD
     <li class="active">{{customer.name}} (Contacts)</li>
+=======
+    <li class="active">{{customer.name}}</li>
+>>>>>>> 08842c2dd91a93b39e605c0dbdd93aa77edc0e14
 </ol>
 <h1 class="sub-header">{{customer.name}}</h1>
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation"><a href="#/customer/details/{{customer.id}}">Details</a></li>
+<<<<<<< HEAD
     <li role="presentation"><a href="#/customer/locations/{{customer.id}}">Locations</a></li>
+=======
+    <li role="presentation"><a href="#/customer/locations/{{customer.id}}">Sites</a></li>
+>>>>>>> 08842c2dd91a93b39e605c0dbdd93aa77edc0e14
     <li role="presentation" class="active"><a href="#/customer/contacts/{{customer.id}}">Contacts</a></li>
     <li role="presentation"><a href="#/customer/projects/{{customer.id}}">Projects</a></li>
     <li role="presentation"><a href="#/customer/orders/{{customer.id}}">Work Orders</a></li>
     <li role="presentation"><a href="#/customer/documents/{{customer.id}}">Documents</a></li>
 </ul>
+<<<<<<< HEAD
 <div>&nbsp;</div>
 <form role="form" ng-submit="submit()" ng-controller="CustomerContactFormCtrl" class="form-horizontal">
     <div class="form-group">
@@ -107,5 +116,82 @@
     </div>
     
     <input type="hidden" name="id" id="id" value="" ng-model="location.id" />
+=======
+<form role="form" ng-submit="submit()" ng-controller="CustomerContactFormCtrl">
+    <div class="form-group">
+        <label for="contactFirstName">
+            First Name
+        </label>
+        <input type="text" id="contactFirstName" name="contactFirstName" class="form-control" ng-model="contact.first_name" />
+    </div>
+    <div class="form-group">
+        <label for="contactLastName">
+            Last Name
+        </label>
+        <input type="text" id="contactLastName" name="contactLastName" class="form-control" ng-model="contact.last_name" />
+    </div>
+    <div class="form-group">
+        <label for="contactAddress">
+            Address
+        </label>
+        <input type="text" id="contactAddress" name="contactAddress" class="form-control" ng-model="contact.address1" />
+        <label for="contactAddress2">
+        </label>
+        <input type="text" id="contactAddress2" name="contactAddress2" class="form-control" ng-model="contact.address2" />
+        <label for="contactAddress3">
+        </label>
+        <input type="text" id="contactAddress3" name="contactAddress3" class="form-control" ng-model="contact.address3" />
+    </div>
+    <div class="form-group">
+        <label for="contactCity">
+            City
+        </label>
+        <input type="text" id="contactCity" name="contactCity" class="form-control" ng-model="contact.city" />
+    </div>
+    <div class="form-group">
+        <label for="contactState">
+            State
+        </label>
+        <input type="text" id="contactState" name="contactState" class="form-control" ng-model="contact.state_id" />
+    </div>
+    <div class="form-group">
+        <label for="contactPostalCode">
+            Postal Code
+        </label>
+        <input type="text" id="contactPostalCode" name="contactPostalCode" class="form-control" ng-model="contact.postal_code" />
+    </div>
+
+    <div class="form-group">
+        <label for="contactPhone">
+            Phone
+        </label>
+        <input type="text" id="contactPhone" name="contactPhone" class="form-control" ng-model="contact.phone" />
+    </div>
+
+    <div class="form-group">
+        <label for="contactFax">
+            Fax
+        </label>
+        <input type="text" id="contactFax" name="contactFax" class="form-control" ng-model="contact.fax" />
+    </div>
+
+    <div class="form-group">
+        <label for="contactCellPhone">
+            Cell Phone
+        </label>
+        <input type="text" id="contactCellPhone" name="contactCellPhone" class="form-control" ng-model="contact.cell_phone" />
+    </div>
+
+    <div class="form-group">
+        <label for="contactEmail">
+            Email
+        </label>
+        <input type="text" id="contactEmail" name="contactEmail" class="form-control" ng-model="contact.email" />
+    </div>
+
+    <input type="hidden" name="customer_id" id="customer_id" value="" ng-model="contact.customer_id" />
+    <input type="hidden" name="location_id" id="location_id" value="" ng-model="contact.location_id" />
+    <input type="hidden" name="id" id="id" value="" ng-model="contact.id" />
+>>>>>>> 08842c2dd91a93b39e605c0dbdd93aa77edc0e14
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
