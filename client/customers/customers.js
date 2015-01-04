@@ -78,38 +78,38 @@ angular.module('myApp.customers', ['ngRoute'])
         });
 
         $routeProvider.when('/customer/location/$locationId/edit', {
-            templateUrl: 'customers/location.html',
-            controller: 'CustomerLocationCtrl'
+            templateUrl: 'customers/location_edit_form.html',
+            controller: 'CustomerLocationEditCtrl'
         });
 
         $routeProvider.when('/customer/location/$locationId/contacts', {
-            templateUrl: 'customers/location.html',
-            controller: 'CustomerLocationCtrl'
+            templateUrl: 'customers/location_contacts.html',
+            controller: 'CustomerContactsCtrl'
         });
 
         $routeProvider.when('/customer/location/$locationId/contact/add', {
-            templateUrl: 'customers/location.html',
-            controller: 'CustomerLocationCtrl'
+            templateUrl: 'customers/location_contact_form.html',
+            controller: 'CustomerLocationContactFormCtrl'
         });
 
         $routeProvider.when('/customer/location/$locationId/contact/$contactId/edit', {
-            templateUrl: 'customers/location.html',
-            controller: 'CustomerLocationCtrl'
+            templateUrl: 'customers/location_contact_form.html',
+            controller: 'CustomerLocationContactFormCtrl'
         });
 
         $routeProvider.when('/customer/location/$locationId/projects', {
-            templateUrl: 'customers/location.html',
-            controller: 'CustomerLocationCtrl'
+            templateUrl: 'customers/location_projects.html',
+            controller: 'CustomerLocationProjectsCtrl'
         });
 
         $routeProvider.when('/customer/location/$locationId/workorders', {
-            templateUrl: 'customers/location.html',
-            controller: 'CustomerLocationCtrl'
+            templateUrl: 'customers/location_orders.html',
+            controller: 'CustomerLocationWorkOrdersCtrl'
         });
 
         $routeProvider.when('/customer/location/$locationId/documents', {
-            templateUrl: 'customers/location.html',
-            controller: 'CustomerLocationCtrl'
+            templateUrl: 'customers/location_documents.html',
+            controller: 'CustomerLocationDocumentsCtrl'
         });
 
     }])
