@@ -1,0 +1,64 @@
+{
+  "name": "contacts",
+  "plural": "contacts",
+  "base": "PersistedModel",
+  "properties": {
+    "first_name": {
+      "type": "string",
+      "required": true
+    },
+    "last_name": {
+      "type": "string",
+      "required": true
+    },
+    "customer_id": {
+      "type": "number",
+      "required": true
+    },
+    "location_id": {
+      "type": "number"
+    },
+    "address1": {
+      "type": "string"
+    },
+    "address2": {
+      "type": "string"
+    },
+    "address3": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state_id": {
+      "type": "number"
+    },
+    "postal_code": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "number",
+      "required": true
+    },
+    "fax": {
+      "type": "number"
+    },
+    "cell_phone": {
+      "type": "number"
+    },
+    "extention": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "time_zone_id": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

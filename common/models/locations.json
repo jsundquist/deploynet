@@ -47,7 +47,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "customers": {
+      "type": "belongsTo",
+      "model": "customers",
+      "foreignKey": "customer_id"
+    },
+    "contacts": {
+      "type": "hasMany",
+      "model": "contacts",
+      "foreignKey": "location_id"
+    }
+  },
   "acls": [],
   "methods": []
 }

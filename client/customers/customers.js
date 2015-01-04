@@ -39,13 +39,13 @@ angular.module('myApp.customers', ['ngRoute'])
         });
 
         $routeProvider.when('/customer/contacts/:id/add', {
-            templateUrl: 'customers/contacts.html',
-            controller: 'CustomerContactsCtrl'
+            templateUrl: 'customers/contact_form.html',
+            controller: 'CustomerContactFormCtrl'
         });
 
         $routeProvider.when('/customer/contacts/:id/edit/:contactId', {
-            templateUrl: 'customers/contacts.html',
-            controller: 'CustomerContactsCtrl'
+            templateUrl: 'customers/contact_form.html',
+            controller: 'CustomerContactFormCtrl'
         });
 
         $routeProvider.when('/customer/projects/:id', {
@@ -153,5 +153,47 @@ angular.module('myApp.customers', ['ngRoute'])
 
     .controller('CustomerContactsCtrl', ['$scope', '$routeParams', 'customerService', 'customerContactService', function ($scope, $routeParams, customerService, customerContactService) {
         $scope.customer = customerService.get({id: $routeParams.id});
-        $scope.contacts = customerContactService.query({id: $routeParams.id});
+        $scope.contacts = customerContactService.query({id: $routeParams.id, filter: { where: {location_id: null}}});
+    }])
+    
+    .controller('CustomerContactFormCtrl', ['$scope', '$routeParams', '$location', 'customerService', 'customerContactService', function ($scope, $routeParams, $location, customerService, customerContactService) {
+        $scope.customer = customerService.get({id: $routeParams.id});
+        
+        $scope.contact = {
+            id: null,
+            customer_id: $routeParams.id,
+            location_id: null,
+            first_name: '',
+            last_name: '',
+            address1: '',
+            address2: null,
+            address3: null,
+            city: '',
+            state_id: 0,
+            postal_code: '',
+            phone: null,
+            fax: null,
+            cell_phone: null,
+            extention: null,
+            email: '',
+            time_zone_id: ''
+        };
+        
+        if ($routeParams.contactId) {
+            $scope.contact = customerContactService.get({id: $routeParams.contactId});
+        }
+        
+         $scope.submit = function () {
+            if ($scope.contact.first_name) {
+
+                if ($scope.contact.id) {
+                    customerService.update($scope.contact);
+                    $location.path('/customer/contacts/' + $routeParams.id);
+                }
+
+                customerService.save($scope.contact);
+                $location.path('/customers/contacts/' + $routeParams.id);
+            }
+        };
+        
     }]);

@@ -46,8 +46,18 @@
       "type": "hasMany",
       "model": "locations",
       "foreignKey": "customer_id"
+    },
+    "contacts": {
+      "type": "hasMany",
+      "model": "contacts",
+      "foreignKey": "customer_id"
     }
   },
   "acls": [],
-  "methods": []
+  "methods": [],
+  "options": {
+     "mysql": {
+      "table": "customers"
+     }
+  }
 }

@@ -41,5 +41,9 @@
   "locations": {
     "dataSource": "deploynet",
     "public": true
+  },
+  "contacts": {
+    "dataSource": "deploynet",
+    "public": true
   }
 }
