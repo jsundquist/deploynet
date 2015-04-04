@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.configuration', ['ngRoute'])
+angular.module('deployNet.configuration', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/configuration', {

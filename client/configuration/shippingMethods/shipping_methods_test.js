@@ -1,8 +1,8 @@
 'use strict';
 
-describe('myApp.configuration module', function() {
+describe('deployNet.configuration module', function() {
 
-  beforeEach(module('myApp.configuration'));
+  beforeEach(module('deployNet.configuration'));
 
   describe('configuration controller', function(){
 

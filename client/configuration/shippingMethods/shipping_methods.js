@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.shippingMethods', ['ngRoute'])
+angular.module('deployNet.shippingMethods', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/configuration/shippingMethod/:methodId?', {

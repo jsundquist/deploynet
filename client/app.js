@@ -1,24 +1,24 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+angular.module('deployNet', [
     'ngRoute',
     'ngResource',
-    'myApp.dashboard',
-    'myApp.configuration',
-    'myApp.shippingMethods',
-    'myApp.manufacturers',
-    'myApp.products',
-    'myApp.customers',
-    'myApp.locations',
-    'myApp.version',
-    'myApp.manufacturerService',
-    'myApp.productService',
-    'myApp.customerService',
-    'myApp.customerLocationService',
-    'myApp.customerContactService',
-    'myApp.customerProjectService',
-    'myApp.customerWorkOrderService'
+    'deployNet.dashboard',
+    'deployNet.configuration',
+    'deployNet.shippingMethods',
+    'deployNet.manufacturers',
+    'deployNet.products',
+    'deployNet.customers',
+    'deployNet.locations',
+    'deployNet.version',
+    'deployNet.manufacturerService',
+    'deployNet.productService',
+    'deployNet.customerService',
+    'deployNet.customerLocationService',
+    'deployNet.customerContactService',
+    'deployNet.customerProjectService',
+    'deployNet.customerWorkOrderService'
 ]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/dashbaord'});

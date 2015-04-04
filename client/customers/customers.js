@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.customers', ['ngRoute'])
+angular.module('deployNet.customers', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/customers', {

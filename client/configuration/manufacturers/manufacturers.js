@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.manufacturers', ['ngRoute'])
+angular.module('deployNet.manufacturers', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/configuration/manufacturers', {

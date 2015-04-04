@@ -1,5 +1,5 @@
 angular
-    .module('myApp.locations', ['ngRoute'])
+    .module('deployNet.locations', ['ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/customer/location/$locationId/details', {
             templateUrl: 'customers/location.html',
