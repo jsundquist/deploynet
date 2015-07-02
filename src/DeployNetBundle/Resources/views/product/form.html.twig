@@ -1,3 +1,5 @@
+{% extends 'DeployNetBundle::layout.html.twig' %}
+{% block content %}
 <form role="form">
     <div class="form-group">
         <label for="productPartNumber">
@@ -27,3 +29,4 @@
     <input type="hidden" name="id" id="id" value="" />
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
+{% endblock %}
