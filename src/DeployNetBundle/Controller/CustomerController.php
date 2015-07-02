@@ -3,7 +3,6 @@ namespace DeployNetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class CustomerController
@@ -45,9 +44,7 @@ class CustomerController extends Controller
      */
     public function detailsAction()
     {
-        return new Response(
-            '<html><body>hello world</body></html>'
-        );
+
     }
 
     /**
@@ -55,9 +52,7 @@ class CustomerController extends Controller
      */
     public function locationsAction()
     {
-        return new Response(
-            '<html><body>hello world</body></html>'
-        );
+
     }
 
     /**
@@ -81,9 +76,7 @@ class CustomerController extends Controller
      */
     public function contactsAction()
     {
-        return new Response(
-            '<html><body>hello world</body></html>'
-        );
+
     }
 
     /**
