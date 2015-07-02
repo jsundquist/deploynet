@@ -12,15 +12,16 @@ class ProjectController extends Controller
      */
     public function indexAction()
     {
-
+        return $this->render("DeployNetBundle:Product:index.html.twig");
     }
 
     /**
      * @Route("/projects/add")
+     * @Route("/projects/details/{id}/edit")
      */
-    public function addAction()
+    public function formAction()
     {
-
+        return $this->render("DeployNetBundle:Product:form.html.twig");
     }
 
     /**
@@ -28,14 +29,6 @@ class ProjectController extends Controller
      */
     public function detailAction()
     {
-
-    }
-
-    /**
-     * @Route("/projects/details/{id}/edit")
-     */
-    public function editAction()
-    {
-
+        return $this->render("DeployNetBundle:Product:details.html.twig");
     }
 }

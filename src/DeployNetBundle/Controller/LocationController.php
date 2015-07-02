@@ -12,7 +12,7 @@ class LocationController extends Controller
      */
     public function detailAction()
     {
-
+        return $this->render("DeployNetBundle:Location:details.html.twig");
     }
 
     /**
@@ -20,7 +20,7 @@ class LocationController extends Controller
      */
     public function editAction()
     {
-
+        return $this->render("DeployNetBundle:Location:form.html.twig");
     }
 
     /**
@@ -28,31 +28,25 @@ class LocationController extends Controller
      */
     public function contactsAction()
     {
-
+        return $this->render("DeployNetBundle:Location:contacts.html.twig");
     }
 
     /**
      * @Route("/customer/location/{id}/contacts/add")
-     */
-    public function addContact()
-    {
-
-    }
-
-    /**
      * @Route("/customer/location/{id}/{contactId}/edit")
      */
-    public function editContactAction()
+    public function contactFormAction()
     {
-
+        return $this->render("DeployNetBundle:Location:contact.form.html.twig");
     }
+
 
     /**
      * @Route("/customer/location/{id}/projects")
      */
     public function projectsAction()
     {
-
+        return $this->render("DeployNetBundle:Location:projects.html.twig");
     }
 
     /**
@@ -60,14 +54,14 @@ class LocationController extends Controller
      */
     public function workOrdersAction()
     {
-
+        return $this->render("DeployNetBundle:Location:orders.html.twig");
     }
 
     /**
      * @Route("/customer/location/{id}/documents")
      */
     public function documentsAction()
-    {
+    {return $this->render("DeployNetBundle:Location:documents.html.twig");
 
     }
 }

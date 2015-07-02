@@ -12,6 +12,6 @@ class DashboardController extends Controller
      */
     public function indexAction()
     {
-
+        return $this->render("DeployNetBundle:Dashboard:index.html.twig");
     }
 }

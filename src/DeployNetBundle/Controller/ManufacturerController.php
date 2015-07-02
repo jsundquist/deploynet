@@ -13,7 +13,7 @@ class ManufacturerController extends Controller
      */
     public function indexAction()
     {
-
+        return $this->render("DeployNetBundle:Manufacturer:index.html.twig");
     }
 
     /**
@@ -21,6 +21,6 @@ class ManufacturerController extends Controller
      */
     public function formAction()
     {
-
+        return $this->render("DeployNetBundle:Manufacturer:form.html.twig");
     }
 }

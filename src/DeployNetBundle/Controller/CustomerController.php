@@ -12,14 +12,12 @@ class CustomerController extends Controller
 {
 
     /**
-     * @Route("/customer")
+     * @Route("/customers")
      */
     public function indexAction()
     {
 
-        return $this->render(
-            'deploynet/customer/index.html.twig'
-        );
+        return $this->render("DeployNetBundle:Customer:index.html.twig");
     }
 
     /**
@@ -27,7 +25,7 @@ class CustomerController extends Controller
      */
     public function addAction()
     {
-
+        return $this->render("DeployNetBundle:Customer:form.html.twig");
     }
 
     /**
@@ -36,7 +34,7 @@ class CustomerController extends Controller
      */
     public function editAction($id)
     {
-
+        return $this->render("DeployNetBundle:Customer:form.html.twig");
     }
 
     /**
@@ -44,31 +42,7 @@ class CustomerController extends Controller
      */
     public function detailsAction()
     {
-
-    }
-
-    /**
-     * @Route("/customer/locations/{id}")
-     */
-    public function locationsAction()
-    {
-
-    }
-
-    /**
-     * @Route("/customer/locations/{id}/add")
-     */
-    public function addLocationAction()
-    {
-
-    }
-
-    /**
-     * @Route("/customer/locations/{id}/edit/{locationid}")
-     */
-    public function editLocationAction()
-    {
-
+        return $this->render("DeployNetBundle:Customer:details.html.twig");
     }
 
     /**
@@ -76,7 +50,7 @@ class CustomerController extends Controller
      */
     public function contactsAction()
     {
-
+        return $this->render("DeployNetBundle:Customer:contacts.html.twig");
     }
 
     /**
@@ -84,7 +58,7 @@ class CustomerController extends Controller
      */
     public function addContactAction()
     {
-
+        return $this->render("DeployNetBundle:Customer:contact.form.html.twig");
     }
 
     /**
@@ -92,7 +66,7 @@ class CustomerController extends Controller
      */
     public function editContactAction()
     {
-
+        return $this->render("DeployNetBundle:Customer:contact.form.html.twig");
     }
 
     /**
@@ -100,7 +74,7 @@ class CustomerController extends Controller
      */
     public function projectsAction()
     {
-
+        return $this->render("DeployNetBundle:Customer:projects.html.twig");
     }
 
     /**
@@ -108,7 +82,7 @@ class CustomerController extends Controller
      */
     public function ordersAction()
     {
-
+        return $this->render("DeployNetBundle:Customer:orders.html.twig");
     }
 
     /**
@@ -116,6 +90,6 @@ class CustomerController extends Controller
      */
     public function documentsAction()
     {
-
+        return $this->render("DeployNetBundle:Customer:documents.html.twig");
     }
 }

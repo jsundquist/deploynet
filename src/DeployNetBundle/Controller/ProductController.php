@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function indexAction()
     {
-
+        return $this->render("DeployNetBundle:Product:index.html.twig");
     }
 
     /**
@@ -21,6 +21,6 @@ class ProductController extends Controller
      */
     public function formAction()
     {
-
+        return $this->render("DeployNetBundle:Product:form.html.twig");
     }
 }
