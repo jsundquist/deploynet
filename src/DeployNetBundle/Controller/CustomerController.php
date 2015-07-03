@@ -14,7 +14,7 @@ class CustomerController extends Controller
 {
 
     /**
-     * @Route("/customers")
+     * @Route("/customers", name="customers_index")
      */
     public function indexAction()
     {
@@ -25,13 +25,15 @@ class CustomerController extends Controller
         return $this->render(
             "DeployNetBundle:Customer:index.html.twig",
             [
-                'customer' => $customers
+                'customers' => $customers
             ]
         );
     }
 
     /**
      * @Route("/customer/add");
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function addAction(Request $request)
     {
@@ -43,7 +45,7 @@ class CustomerController extends Controller
             ->add('address2', 'text')
             ->add('address3', 'text')
             ->add('city', 'text')
-            ->add('stateId', 'text')
+            ->add('stateId', 'integer')
             ->add('postalCode', 'text')
             ->add('phoneNumber', 'text')
             ->add('faxNumber', 'text')
@@ -53,7 +55,10 @@ class CustomerController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($customer);
+            $em->flush();
+            return $this->redirectToRoute('customers_index');
         }
 
         return $this->render(

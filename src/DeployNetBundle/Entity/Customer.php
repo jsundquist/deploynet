@@ -65,9 +65,9 @@ class Customer
     protected $faxNumber;
 
     /**
-     * @ORM\Column(type="string", length=100, name="active")
+     * @ORM\Column(type="boolean", name="active", options={"default": 1})
      */
-    protected $active;
+    protected $active = true;
 
     /**
      * Get id
@@ -289,10 +289,10 @@ class Customer
     /**
      * Set active
      *
-     * @param string $active
+     * @param bool $active
      * @return Customer
      */
-    public function setActive($active)
+    public function setActive($active = true)
     {
         $this->active = $active;
     
