@@ -1,8 +1,10 @@
 <?php
 namespace DeployNetBundle\Controller;
 
+use DeployNetBundle\Entity\Location;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class LocationController extends Controller
@@ -13,6 +15,54 @@ class LocationController extends Controller
     public function detailAction()
     {
         return $this->render("DeployNetBundle:Location:details.html.twig");
+    }
+
+    /**
+     * @Route("/customer/location/{customerId}/add")
+     */
+    public function addAction($customerId, Request $request)
+    {
+        $customerRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
+
+        $customer = $customerRepository->findOneBy(array('id' => $customerId));
+
+        $location = new Location();
+
+        $form = $this->createFormBuilder($location)
+            ->add("name", "text")
+            ->add("siteId", "text")
+            ->add('address1', 'text')
+            ->add('address2', 'text')
+            ->add('city', 'text')
+            ->add('state', 'entity',
+                [
+                    'class' => 'DeployNetBundle:State',
+                    'property' => 'name'
+                ]
+            )
+            ->add('postalCode', 'text')
+            ->add('phoneNumber', 'text')
+            ->add('faxNumber', 'text')
+            ->add('save', 'submit', array('label' => 'Save'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($location);
+            $em->flush();
+
+            return $this->redirectToRoute('customer_locations');
+        }
+
+        return $this->render(
+            "DeployNetBundle:Location:form.html.twig",
+            [
+                'customer' => $customer,
+                'form' => $form
+            ]
+        );
     }
 
     /**
