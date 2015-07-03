@@ -2,6 +2,7 @@
 namespace DeployNetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Customer
@@ -50,6 +51,12 @@ class Customer
     protected $stateId;
 
     /**
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="customers")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
+     */
+    protected $stateAbbreviation;
+
+    /**
      * @ORM\Column(type="string", length=100, name="postal_code")
      */
     protected $postalCode;
@@ -68,6 +75,16 @@ class Customer
      * @ORM\Column(type="boolean", name="active", options={"default": 1})
      */
     protected $active = true;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Location", mappedBy="customerName")
+     */
+    protected $locations;
+
+    public function __construct()
+    {
+        $this->locations = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -307,5 +324,38 @@ class Customer
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * Add locations
+     *
+     * @param \DeployNetBundle\Entity\Location $locations
+     * @return Customer
+     */
+    public function addLocation(\DeployNetBundle\Entity\Location $locations)
+    {
+        $this->locations[] = $locations;
+    
+        return $this;
+    }
+
+    /**
+     * Remove locations
+     *
+     * @param \DeployNetBundle\Entity\Location $locations
+     */
+    public function removeLocation(\DeployNetBundle\Entity\Location $locations)
+    {
+        $this->locations->removeElement($locations);
+    }
+
+    /**
+     * Get locations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLocations()
+    {
+        return $this->locations;
     }
 }

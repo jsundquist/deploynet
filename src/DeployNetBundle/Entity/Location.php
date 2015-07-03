@@ -61,6 +61,12 @@ class Location
     protected $stateId;
 
     /**
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="locations")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
+     */
+    protected $stateAbbreviation;
+
+    /**
      * @ORM\Column(type="string", length=100, name="postal_code")
      */
     protected $postalCode;
@@ -364,5 +370,28 @@ class Location
     public function getCustomerName()
     {
         return $this->customerName;
+    }
+
+    /**
+     * Set stateAbbreviation
+     *
+     * @param \DeployNetBundle\Entity\State $stateAbbreviation
+     * @return Location
+     */
+    public function setStateAbbreviation(\DeployNetBundle\Entity\State $stateAbbreviation = null)
+    {
+        $this->stateAbbreviation = $stateAbbreviation;
+    
+        return $this;
+    }
+
+    /**
+     * Get stateAbbreviation
+     *
+     * @return \DeployNetBundle\Entity\State 
+     */
+    public function getStateAbbreviation()
+    {
+        return $this->stateAbbreviation;
     }
 }
