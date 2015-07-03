@@ -1,8 +1,10 @@
 <?php
 namespace DeployNetBundle\Controller;
 
+use DeployNetBundle\Entity\Customer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class CustomerController
@@ -16,21 +18,54 @@ class CustomerController extends Controller
      */
     public function indexAction()
     {
+        $repository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
 
-        return $this->render("DeployNetBundle:Customer:index.html.twig");
+        $customers = $repository->findAll();
+
+        return $this->render(
+            "DeployNetBundle:Customer:index.html.twig",
+            [
+                'customer' => $customers
+            ]
+        );
     }
 
     /**
      * @Route("/customer/add");
      */
-    public function addAction()
+    public function addAction(Request $request)
     {
-        return $this->render("DeployNetBundle:Customer:form.html.twig");
+        $customer = new Customer();
+
+        $form = $this->createFormBuilder($customer)
+            ->add("name", "text")
+            ->add('address1', 'text')
+            ->add('address2', 'text')
+            ->add('address3', 'text')
+            ->add('city', 'text')
+            ->add('stateId', 'text')
+            ->add('postalCode', 'text')
+            ->add('phoneNumber', 'text')
+            ->add('faxNumber', 'text')
+            ->add('save', 'submit', array('label' => 'Save'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+        }
+
+        return $this->render(
+            "DeployNetBundle:Customer:form.html.twig",
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
      * @Route("/customer/details/{id}/edit")
-     * @param $id
      */
     public function editAction($id)
     {
