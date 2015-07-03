@@ -28,12 +28,17 @@ class Location
      * @ORM\ManyToOne(targetEntity="Customer", inversedBy="locations")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
-    protected $customerName;
+    protected $customer;
 
     /**
      * @ORM\Column(type="string", length=100, name="name")
      */
     protected $name;
+
+    /**
+     * @ORM\Column(type="string", length=100, name="site_id")
+     */
+    protected $siteId;
 
     /**
      * @ORM\Column(type="string", length=100, name="address1")
@@ -56,7 +61,7 @@ class Location
     protected $city;
 
     /**
-     * @ORM\Column(type="string", length=100, name="state_id")
+     * @ORM\Column(type="integer", length=100, name="state_id")
      */
     protected $stateId;
 
@@ -64,7 +69,7 @@ class Location
      * @ORM\ManyToOne(targetEntity="State", inversedBy="locations")
      * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
      */
-    protected $stateAbbreviation;
+    protected $state;
 
     /**
      * @ORM\Column(type="string", length=100, name="postal_code")
@@ -350,48 +355,71 @@ class Location
     }
 
     /**
-     * Set customerName
+     * Set customer
      *
-     * @param \DeployNetBundle\Entity\Customer $customerName
+     * @param \DeployNetBundle\Entity\Customer $customer
      * @return Location
      */
-    public function setCustomerName(\DeployNetBundle\Entity\Customer $customerName = null)
+    public function setCustomer(\DeployNetBundle\Entity\Customer $customer = null)
     {
-        $this->customerName = $customerName;
+        $this->customer = $customer;
     
         return $this;
     }
 
     /**
-     * Get customerName
+     * Get customer
      *
      * @return \DeployNetBundle\Entity\Customer 
      */
-    public function getCustomerName()
+    public function getCustomer()
     {
-        return $this->customerName;
+        return $this->customer;
     }
 
     /**
-     * Set stateAbbreviation
+     * Set siteId
      *
-     * @param \DeployNetBundle\Entity\State $stateAbbreviation
+     * @param string $siteId
      * @return Location
      */
-    public function setStateAbbreviation(\DeployNetBundle\Entity\State $stateAbbreviation = null)
+    public function setSiteId($siteId)
     {
-        $this->stateAbbreviation = $stateAbbreviation;
+        $this->siteId = $siteId;
     
         return $this;
     }
 
     /**
-     * Get stateAbbreviation
+     * Get siteId
+     *
+     * @return string 
+     */
+    public function getSiteId()
+    {
+        return $this->siteId;
+    }
+
+    /**
+     * Set state
+     *
+     * @param \DeployNetBundle\Entity\State $state
+     * @return Location
+     */
+    public function setState(\DeployNetBundle\Entity\State $state = null)
+    {
+        $this->state = $state;
+    
+        return $this;
+    }
+
+    /**
+     * Get state
      *
      * @return \DeployNetBundle\Entity\State 
      */
-    public function getStateAbbreviation()
+    public function getState()
     {
-        return $this->stateAbbreviation;
+        return $this->state;
     }
 }

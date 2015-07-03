@@ -30,12 +30,12 @@ class State {
     protected $abbreviation;
 
     /**
-     * @ORM\OneToMany(targetEntity="Customer", mappedBy="stateAbbreviation")
+     * @ORM\OneToMany(targetEntity="Customer", mappedBy="state")
      */
     protected $customers;
 
     /**
-     * @ORM\OneToMany(targetEntity="Location", mappedBy="stateAbbreviation")
+     * @ORM\OneToMany(targetEntity="Location", mappedBy="state")
      */
     protected $locations;
 

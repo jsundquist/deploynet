@@ -46,7 +46,7 @@ class Customer
     protected $city;
 
     /**
-     * @ORM\Column(type="string", length=100, name="state_id")
+     * @ORM\Column(type="integer", length=100, name="state_id")
      */
     protected $stateId;
 
@@ -54,7 +54,7 @@ class Customer
      * @ORM\ManyToOne(targetEntity="State", inversedBy="customers")
      * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
      */
-    protected $stateAbbreviation;
+    protected $state;
 
     /**
      * @ORM\Column(type="string", length=100, name="postal_code")
@@ -77,7 +77,7 @@ class Customer
     protected $active = true;
 
     /**
-     * @ORM\OneToMany(targetEntity="Location", mappedBy="customerName")
+     * @ORM\OneToMany(targetEntity="Location", mappedBy="customer")
      */
     protected $locations;
 
@@ -357,5 +357,28 @@ class Customer
     public function getLocations()
     {
         return $this->locations;
+    }
+
+    /**
+     * Set state
+     *
+     * @param \DeployNetBundle\Entity\State $state
+     * @return Customer
+     */
+    public function setState(\DeployNetBundle\Entity\State $state = null)
+    {
+        $this->state = $state;
+    
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return \DeployNetBundle\Entity\State 
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 }
