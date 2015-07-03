@@ -1,0 +1,32 @@
+{% extends 'DeployNetBundle::layout.html.twig' %}
+{% block content %}
+<form role="form">
+    <div class="form-group">
+        <label for="productPartNumber">
+            Part Number
+        </label>
+        <input type="text" id="productPartNumber" name="productPartNumber" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="productAltPartNumber">
+            Alt. Part Number
+        </label>
+        <input type="text" id="productAltPartNumber" name="productAltPartNumber" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="productDescription">
+            Description
+        </label>
+        <input type="text" id="productDescription" name="productDescription" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="productManufacturer">
+            Manufacturer
+        </label>
+        <select id="productManufacturer" name="productManufacturer" class="form-control">
+        </select>
+    </div>
+    <input type="hidden" name="id" id="id" value="" />
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'DeployNetBundle::layout.html.twig' %}
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/customers">Customer List</a></li>
+    <li class="active">NAME (Documents)</li>
+</ol>
+<h1 class="sub-header">NAME</h1>
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation"><a href="/customer/details/1">Details</a></li>
+    <li role="presentation"><a href="/customer/locations/1">Sites</a></li>
+    <li role="presentation"><a href="/customer/contacts/1">Contacts</a></li>
+    <li role="presentation"><a href="/customer/projects/1">Projects</a></li>
+    <li role="presentation"><a href="/customer/orders/1">Work Orders</a></li>
+    <li role="presentation" class="active"><a href="/customer/documents/1">Documents</a></li>
+</ul>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>File Name (File Size)</th>
+            <th>Uploaded By</th>
+            <th>Uploaded Date</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Something.pdf (100kb)</td>
+            <td>Jane Doe</td>
+            <td>--/--/---- --:-- AM</td>
+            <td>Some Description</td>
+            <td>Delete</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="center-block">
+        <ul class="pagination text-center">
+            <li class="disabled"><span>&laquo;</span></li>
+            <li class="active"><span>1 <span class="sr-only">(current)</span></span></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+{%  endblock %}

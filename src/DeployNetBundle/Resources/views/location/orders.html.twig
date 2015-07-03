@@ -1,0 +1,56 @@
+{% extends 'DeployNetBundle::layout.html.twig' %}
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/customers">Customer List</a></li>
+    <li><a href="/customer/details/1">NAME</a></li>
+    <li class="active">NAME (Work Orders)</li>
+</ol>
+<h1 class="sub-header">NAME</h1>
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation"><a href="/customer/location/1/details">Details</a></li>
+    <li role="presentation"><a href="/customer/location/1/contacts">Contacts</a></li>
+    <li role="presentation"><a href="/customer/location/1/projects">Projects</a></li>
+    <li role="presentation" class="active"><a href="/customer/location/1/workorders">Work Orders</a></li>
+    <li role="presentation"><a href="/customer/location1/documents">Documents</a></li>
+</ul>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Work Order ID</th>
+            <th>Project Name</th>
+            <th>Site ID</th>
+            <th>Site Name</th>
+            <th>Status</th>
+            <th>Location</th>
+            <th>Date Update</th>
+            <th>Invoiced Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><a href="#">1,001</a></td>
+            <td><a href="#">Project</a></td>
+            <td><a href="#">SITE</a></td>
+            <td>NAME</td>
+            <td>City, ST 00000</td>
+            <td>OPEN</td>
+            <td>--/--/---- --:-- AM</td>
+            <td>--/--/---- --:-- AM</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="center-block">
+        <ul class="pagination text-center">
+            <li class="disabled"><span>&laquo;</span></li>
+            <li class="active"><span>1 <span class="sr-only">(current)</span></span></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
