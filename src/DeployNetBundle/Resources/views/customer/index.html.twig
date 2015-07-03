@@ -5,7 +5,7 @@
         <li class="active">Customer List</li>
     </ol>
     <h1 class="sub-header">Customers</h1>
-    <a href="/customers/add">Add Customer</a>
+    <a href="/customer/add">Add Customer</a>
 
     <div class="table-responsive">
         <table class="table table-striped">
@@ -18,12 +18,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr data-ng-repeat="customer in customers">
-                <td><a href="/customer/details/"></a></td>
-                <td></td>
-                <td></td>
+            {% for customer in customers %}
+            <tr>
+                <td><a href="/customer/details/{{ customer.id }}">{{ customer.name }}</a></td>
+                <td>
+                    {{ customer.address1 }}<br />
+                    {{ customer.address2 }}<br />
+                    {{ customer.city }}, {{ customer.stateId }} {{ customer.postalCode }}
+                </td>
+                <td>{{ customer.phoneNumber }}</td>
                 <td></td>
             </tr>
+                {% endfor %}
             </tbody>
         </table>
         <div class="center-block">

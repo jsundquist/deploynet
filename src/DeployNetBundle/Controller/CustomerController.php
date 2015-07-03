@@ -71,18 +71,84 @@ class CustomerController extends Controller
 
     /**
      * @Route("/customer/details/{id}/edit")
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editAction($id)
+    public function editAction($id, Request $request)
     {
-        return $this->render("DeployNetBundle:Customer:form.html.twig");
+        $repository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
+
+        $customer = $repository->findOneBy(array('id' => $id));
+
+        $form = $this->createFormBuilder($customer)
+            ->add("name", "text")
+            ->add('address1', 'text')
+            ->add('address2', 'text')
+            ->add('address3', 'text')
+            ->add('city', 'text')
+            ->add('stateId', 'integer')
+            ->add('postalCode', 'text')
+            ->add('phoneNumber', 'text')
+            ->add('faxNumber', 'text')
+            ->add('save', 'submit', array('label' => 'Save'))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($customer);
+            $em->flush();
+        }
+
+        return $this->render(
+            "DeployNetBundle:Customer:form.html.twig",
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
-     * @Route("/customer/details/{id}")
+     * @Route("/customer/details/{id}", name="customer_details")
+     * @param string $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function detailsAction()
+    public function detailsAction($id)
     {
-        return $this->render("DeployNetBundle:Customer:details.html.twig");
+        $repository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
+
+        $customer = $repository->findOneBy(array('id' => $id));
+
+        return $this->render(
+            "DeployNetBundle:Customer:details.html.twig",
+            [
+                'customer' => $customer
+            ]
+        );
+    }
+
+    /**
+     * @Route("/customer/locations/{id}", name="")
+     */
+    public function locationsAction($id)
+    {
+        $customerRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
+
+        $customer = $customerRepository->findOneBy(array('id' => $id));
+
+        $locationsRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Location');
+
+        $locations = $locationsRepository->findAll();
+
+        return $this->render(
+            "DeployNetBundle:Customer:locations.html.twig",
+            [
+                'customer' => $customer,
+                'locations' => $locations
+            ]
+        );
     }
 
     /**
