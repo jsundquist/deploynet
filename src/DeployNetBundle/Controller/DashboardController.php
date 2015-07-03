@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DashboardController extends Controller
 {
     /**
-     * @Route("/dashboard")
+     * @Route("/")
      */
     public function indexAction()
     {

@@ -14,7 +14,10 @@
     <li role="presentation"><a href="/customer/orders/1">Work Orders</a></li>
     <li role="presentation"><a href="/customer/documents/1">Documents</a></li>
 </ul>
-<form role="form">
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+<!--<form role="form">
     <div class="form-group">
         <label for="locationName">
             Name
@@ -84,5 +87,5 @@
 
     <input type="hidden" name="id" id="id" value="" />
     <button type="submit" class="btn btn-default">Submit</button>
-</form>
+</form>-->
 {% endblock %}

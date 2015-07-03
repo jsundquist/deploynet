@@ -3,29 +3,29 @@
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
     <li><a href="/customers">Customer List</a></li>
-    <li><a href="/customer/details/1">{{customer.name}}</a></li>
-    <li class="active">NAME (Details)</li>
+    <li><a href="/customer/details/{{ customer.id }}">{{customer.name}}</a></li>
+    <li class="active">{{ location.name }} (Details)</li>
 </ol>
-<h1 class="sub-header">NAME</h1>
+<h1 class="sub-header">{{ location.name }}</h1>
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="/customer/location/1/details">Details</a></li>
-    <li role="presentation"><a href="/customer/location/1/contacts">Contacts</a></li>
-    <li role="presentation"><a href="/customer/location/1/projects">Projects</a></li>
-    <li role="presentation"><a href="/customer/location/1/workorders">Work Orders</a></li>
-    <li role="presentation"><a href="/customer/location/1/documents">Documents</a></li>
+    <li role="presentation" class="active"><a href="/customer/location/{{ location.id }}/details">Details</a></li>
+    <li role="presentation"><a href="/customer/location/{{ location.id }}/contacts">Contacts</a></li>
+    <li role="presentation"><a href="/customer/location/{{ location.id }}/projects">Projects</a></li>
+    <li role="presentation"><a href="/customer/location/{{ location.id }}/workorders">Work Orders</a></li>
+    <li role="presentation"><a href="/customer/location/{{ location.id }}/documents">Documents</a></li>
 </ul>
 
-<h2>Site Information<a href="/customer/location/1/edit" class="btn btn-default btn-sm pull-right" role="button">Edit Details</a></h2>
+<h2>Site Information<a href="/customer/location/{{ location.id }}/edit" class="btn btn-default btn-sm pull-right" role="button">Edit Details</a></h2>
 
 <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>Site Name: </th>
-            <td></td>
+            <td>{{ location.name }}</td>
         </tr>
         <tr>
             <th>Site ID: </th>
-            <td></td>
+            <td>{{ location.siteId }}</td>
         </tr>
         <tr>
             <th>Primary Contact: </th>
@@ -37,15 +37,22 @@
     <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>Address: </th>
-            <td><address><br /><br /><br /></address></td>
+            <td>
+                <address>
+                    {{ location.address1 }}<br />
+                    {{ location.address2 }}<br />
+                    {{ location.address3 }}<br />
+                    {{ location.city}}, {{ location.state.abbreviation }} {{ location.postalCode }}
+                </address>
+            </td>
         </tr>
         <tr>
             <th>Phone: </th>
-            <td><!--(000) 000-0000--></td>
+            <td>{{ location.phoneNumber }}<!--(000) 000-0000--></td>
         </tr>
         <tr>
             <th>Fax: </th>
-            <td><!--(000) 000-0000--></td>
+            <td>{{ location.faxNumber }}<!--(000) 000-0000--></td>
         </tr>
     </table>
 </div>

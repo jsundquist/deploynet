@@ -5,22 +5,36 @@ use DeployNetBundle\Entity\Location;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class LocationController extends Controller
 {
     /**
-     * @Route("/customer/location/{id}/details")
+     * @Route("/customer/location/{locationId}/details")
      */
-    public function detailAction()
+    public function detailAction($locationId)
     {
-        return $this->render("DeployNetBundle:Location:details.html.twig");
+
+        $locationRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Location');
+
+        $location = $locationRepository->findOneBy(array('id' => $locationId));
+
+        $customerRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
+
+        $customer = $customerRepository->findOneBy(array('id' => $location->getcustomer()->getId()));
+
+        return $this->render(
+            "DeployNetBundle:Location:details.html.twig",
+            [
+                'location' => $location,
+                'customer' => $customer
+            ]
+        );
     }
 
     /**
      * @Route("/customer/location/{customerId}/add")
      */
-    public function addAction($customerId, Request $request)
+    public function addAction(Request $request, $customerId)
     {
         $customerRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
 
@@ -33,6 +47,7 @@ class LocationController extends Controller
             ->add("siteId", "text")
             ->add('address1', 'text')
             ->add('address2', 'text')
+            ->add('address3', 'text')
             ->add('city', 'text')
             ->add('state', 'entity',
                 [
@@ -50,17 +65,19 @@ class LocationController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $location->setCustomer($customer);
+            $location->setActive(true);
             $em->persist($location);
             $em->flush();
 
-            return $this->redirectToRoute('customer_locations');
+            return $this->redirectToRoute('customer_locations', ['id' => $customerId]);
         }
 
         return $this->render(
             "DeployNetBundle:Location:form.html.twig",
             [
-                'customer' => $customer,
-                'form' => $form
+                'form' => $form->createView(),
+                'customer' => $customer
             ]
         );
     }
