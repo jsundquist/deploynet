@@ -2,6 +2,7 @@
 namespace DeployNetBundle\Controller;
 
 use DeployNetBundle\Entity\Customer;
+use DeployNetBundle\Form\Type\CustomerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,23 +40,7 @@ class CustomerController extends Controller
     {
         $customer = new Customer();
 
-        $form = $this->createFormBuilder($customer)
-            ->add("name", "text")
-            ->add('address1', 'text')
-            ->add('address2', 'text')
-            ->add('address3', 'text')
-            ->add('city', 'text')
-            ->add('state', 'entity',
-                [
-                    'class' => 'DeployNetBundle:State',
-                    'property' => 'name'
-                ]
-            )
-            ->add('postalCode', 'text')
-            ->add('phoneNumber', 'text')
-            ->add('faxNumber', 'text')
-            ->add('save', 'submit', array('label' => 'Save'))
-            ->getForm();
+        $form = $this->createForm(new CustomerType(), $customer);
 
         $form->handleRequest($request);
 
@@ -86,23 +71,7 @@ class CustomerController extends Controller
 
         $customer = $repository->findOneBy(array('id' => $id));
 
-        $form = $this->createFormBuilder($customer)
-            ->add("name", "text")
-            ->add('address1', 'text')
-            ->add('address2', 'text')
-            ->add('address3', 'text')
-            ->add('city', 'text')
-            ->add('state', 'entity',
-                [
-                    'class' => 'DeployNetBundle:State',
-                    'property' => 'name'
-                ]
-            )
-            ->add('postalCode', 'text')
-            ->add('phoneNumber', 'text')
-            ->add('faxNumber', 'text')
-            ->add('save', 'submit', array('label' => 'Save'))
-            ->getForm();
+        $form = $this->createForm(new CustomerType(), $customer);
 
         $form->handleRequest($request);
 
