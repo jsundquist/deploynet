@@ -101,7 +101,7 @@ class LocationController extends Controller
     }
 
     /**
-     * @Route("/customer/location/{id}/contacts")
+     * @Route("/customer/location/{locationId}/contacts")
      * @param $locationId
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -129,7 +129,7 @@ class LocationController extends Controller
 
 
     /**
-     * @Route("/customer/location/{id}/projects")
+     * @Route("/customer/location/{locationId}/projects")
      * @param $locationId
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -147,7 +147,7 @@ class LocationController extends Controller
     }
 
     /**
-     * @Route("/customer/location/{id}/wordorders")
+     * @Route("/customer/location/{locationId}/workorders")
      * @param $locationId
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -165,7 +165,7 @@ class LocationController extends Controller
     }
 
     /**
-     * @Route("/customer/location/{id}/documents")
+     * @Route("/customer/location/{locationId}/documents")
      * @param $locationId
      * @return \Symfony\Component\HttpFoundation\Response
      */

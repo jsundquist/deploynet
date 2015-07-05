@@ -1,19 +1,6 @@
 {% extends 'DeployNetBundle::layout.html.twig' %}
 {% block content %}
-<ol class="breadcrumb">
-    <li><a href="/">Home</a></li>
-    <li><a href="/customers">Customer List</a></li>
-    <li><a href="/customer/details/1">NAME</a></li>
-    <li class="active">NAME (Work Orders)</li>
-</ol>
-<h1 class="sub-header">NAME</h1>
-<ul class="nav nav-tabs" role="tablist">
-    <li role="presentation"><a href="/customer/location/1/details">Details</a></li>
-    <li role="presentation"><a href="/customer/location/1/contacts">Contacts</a></li>
-    <li role="presentation"><a href="/customer/location/1/projects">Projects</a></li>
-    <li role="presentation" class="active"><a href="/customer/location/1/workorders">Work Orders</a></li>
-    <li role="presentation"><a href="/customer/location1/documents">Documents</a></li>
-</ul>
+    {{ include('DeployNetBundle::includes/location.header.html.twig', {'custer': customer, 'location': location, 'page': 'work orders'}) }}
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
