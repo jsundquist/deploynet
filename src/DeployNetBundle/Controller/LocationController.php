@@ -2,6 +2,7 @@
 namespace DeployNetBundle\Controller;
 
 use DeployNetBundle\Entity\Location;
+use DeployNetBundle\Form\Type\LocationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,18 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 class LocationController extends Controller
 {
     /**
-     * @Route("/customer/location/{locationId}/details")
+     * @Route("/customer/location/{locationId}/details", name="customer_location")
+     * @param $locationId
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function detailAction($locationId)
     {
-
-        $locationRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Location');
-
-        $location = $locationRepository->findOneBy(array('id' => $locationId));
-
-        $customerRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
-
-        $customer = $customerRepository->findOneBy(array('id' => $location->getcustomer()->getId()));
+        $location = $this->getLocation($locationId);
+        $customer = $this->getCustomer($location->getCustomer()->getId());
 
         return $this->render(
             "DeployNetBundle:Location:details.html.twig",
@@ -33,33 +30,17 @@ class LocationController extends Controller
 
     /**
      * @Route("/customer/location/{customerId}/add")
+     * @param Request $request
+     * @param $customerId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function addAction(Request $request, $customerId)
     {
-        $customerRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
-
-        $customer = $customerRepository->findOneBy(array('id' => $customerId));
+        $customer = $this->getCustomer($customerId);
 
         $location = new Location();
 
-        $form = $this->createFormBuilder($location)
-            ->add("name", "text")
-            ->add("siteId", "text")
-            ->add('address1', 'text')
-            ->add('address2', 'text')
-            ->add('address3', 'text')
-            ->add('city', 'text')
-            ->add('state', 'entity',
-                [
-                    'class' => 'DeployNetBundle:State',
-                    'property' => 'name'
-                ]
-            )
-            ->add('postalCode', 'text')
-            ->add('phoneNumber', 'text')
-            ->add('faxNumber', 'text')
-            ->add('save', 'submit', array('label' => 'Save'))
-            ->getForm();
+        $form = $this->createForm(new LocationType(), $location);
 
         $form->handleRequest($request);
 
@@ -84,18 +65,57 @@ class LocationController extends Controller
 
     /**
      * @Route("/customer/location/{id}/edit")
+     * @param Request $request
+     * @param $locationId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction()
+    public function editAction(Request $request, $locationId)
     {
-        return $this->render("DeployNetBundle:Location:form.html.twig");
+        $location = $this->getLocation($locationId);
+
+        $customer = $this->getCustomer($location->getCustomer()->getId());
+
+        $location = new Location();
+
+        $form = $this->createForm(new LocationType(), $location);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $location->setCustomer($customer);
+            $location->setActive(true);
+            $em->persist($location);
+            $em->flush();
+
+            return $this->redirectToRoute('customer_location', ['id' => $locationId]);
+        }
+
+        return $this->render(
+            "DeployNetBundle:Location:form.html.twig",
+            [
+                'form' => $form->createView(),
+                'customer' => $customer
+            ]
+        );
     }
 
     /**
-     * @Route("/customer/location/{id}/contacts")
+     * @Route("/customer/location/{locationId}/contacts")
+     * @param $locationId
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function contactsAction()
+    public function contactsAction($locationId)
     {
-        return $this->render("DeployNetBundle:Location:contacts.html.twig");
+        $location = $this->getLocation($locationId);
+        $customer = $this->getCustomer($location->getCustomer()->getId());
+        return $this->render(
+            "DeployNetBundle:Location:contacts.html.twig",
+            [
+                'customer' => $customer,
+                'location' => $location
+            ]
+        );
     }
 
     /**
@@ -109,26 +129,71 @@ class LocationController extends Controller
 
 
     /**
-     * @Route("/customer/location/{id}/projects")
+     * @Route("/customer/location/{locationId}/projects")
+     * @param $locationId
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function projectsAction()
+    public function projectsAction($locationId)
     {
-        return $this->render("DeployNetBundle:Location:projects.html.twig");
+        $location = $this->getLocation($locationId);
+        $customer = $this->getCustomer($location->getCustomer()->getId());
+        return $this->render(
+            "DeployNetBundle:Location:projects.html.twig",
+            [
+                'customer' => $customer,
+                'location' => $location
+            ]
+        );
     }
 
     /**
-     * @Route("/customer/location/{id}/wordorders")
+     * @Route("/customer/location/{locationId}/workorders")
+     * @param $locationId
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function workOrdersAction()
+    public function workOrdersAction($locationId)
     {
-        return $this->render("DeployNetBundle:Location:orders.html.twig");
+        $location = $this->getLocation($locationId);
+        $customer = $this->getCustomer($location->getCustomer()->getId());
+        return $this->render(
+            "DeployNetBundle:Location:orders.html.twig",
+            [
+                'customer' => $customer,
+                'location' => $location
+            ]
+        );
     }
 
     /**
-     * @Route("/customer/location/{id}/documents")
+     * @Route("/customer/location/{locationId}/documents")
+     * @param $locationId
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function documentsAction()
-    {return $this->render("DeployNetBundle:Location:documents.html.twig");
+    public function documentsAction($locationId)
+    {
+        $location = $this->getLocation($locationId);
+        $customer = $this->getCustomer($location->getCustomer()->getId());
 
+        return $this->render(
+            "DeployNetBundle:Location:documents.html.twig",
+            [
+                'customer' => $customer,
+                'location' => $location
+            ]
+        );
+    }
+
+    private function getLocation($locationId)
+    {
+        $locationRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Location');
+
+        return $locationRepository->findOneBy(array('id' => $locationId));
+    }
+
+    private function getCustomer($customerId)
+    {
+        $customerRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
+
+        return $customerRepository->findOneBy(array('id' => $customerId));
     }
 }

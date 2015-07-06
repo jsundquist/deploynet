@@ -81,9 +81,15 @@ class Customer
      */
     protected $locations;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Contact", mappedBy="customer")
+     */
+    protected $contacts;
+
     public function __construct()
     {
         $this->locations = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
     }
 
     /**
@@ -380,5 +386,38 @@ class Customer
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * Add contacts
+     *
+     * @param \DeployNetBundle\Entity\Contact $contacts
+     * @return Customer
+     */
+    public function addContact(\DeployNetBundle\Entity\Contact $contacts)
+    {
+        $this->contacts[] = $contacts;
+
+        return $this;
+    }
+
+    /**
+     * Remove contacts
+     *
+     * @param \DeployNetBundle\Entity\Contact $contacts
+     */
+    public function removeContact(\DeployNetBundle\Entity\Contact $contacts)
+    {
+        $this->contacts->removeElement($contacts);
+    }
+
+    /**
+     * Get contacts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getContacts()
+    {
+        return $this->contacts;
     }
 }

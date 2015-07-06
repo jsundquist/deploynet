@@ -1,0 +1,14 @@
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/customers">Customer List</a></li>
+    <li><a href="/customer/details/{{ customer.id }}">{{customer.name}}</a></li>
+    <li class="active">{{ location.name }} ({{ page|capitalize }})</li>
+</ol>
+<h1 class="sub-header">{{ location.name }}</h1>
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="{{ page == "details" ? 'active' : '' }}"><a href="{{ path('customer_location', {'locationId': location.id}) }}">Details</a></li>
+    <li role="presentation" class="{{ page == "contacts" ? 'active' : '' }}"><a href="/customer/location/{{ location.id }}/contacts">Contacts</a></li>
+    <li role="presentation" class="{{ page == "projects" ? 'active' : '' }}"><a href="/customer/location/{{ location.id }}/projects">Projects</a></li>
+    <li role="presentation" class="{{ page == "work orders" ? 'active' : '' }}"><a href="/customer/location/{{ location.id }}/workorders">Work Orders</a></li>
+    <li role="presentation" class="{{ page == "documents" ? 'active' : '' }}"><a href="/customer/location/{{ location.id }}/documents">Documents</a></li>
+</ul>
