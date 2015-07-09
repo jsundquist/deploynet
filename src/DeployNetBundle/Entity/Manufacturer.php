@@ -1,6 +1,8 @@
 <?php
 namespace DeployNetBundle\Entity;
 
+use DeployNetBundle\Entity\Product;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -37,7 +39,7 @@ class Manufacturer
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -60,7 +62,7 @@ class Manufacturer
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -70,10 +72,10 @@ class Manufacturer
     /**
      * Add products
      *
-     * @param \DeployNetBundle\Entity\Product $products
+     * @param Product $products
      * @return Manufacturer
      */
-    public function addProduct(\DeployNetBundle\Entity\Product $products)
+    public function addProduct(Product $products)
     {
         $this->products[] = $products;
     
@@ -83,9 +85,9 @@ class Manufacturer
     /**
      * Remove products
      *
-     * @param \DeployNetBundle\Entity\Product $products
+     * @param Product $products
      */
-    public function removeProduct(\DeployNetBundle\Entity\Product $products)
+    public function removeProduct(Product $products)
     {
         $this->products->removeElement($products);
     }
@@ -93,7 +95,7 @@ class Manufacturer
     /**
      * Get products
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return Collection
      */
     public function getProducts()
     {

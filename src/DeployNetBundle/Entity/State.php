@@ -1,6 +1,8 @@
 <?php
 namespace DeployNetBundle\Entity;
 
+use DeployNetBundle\Entity\Customer;
+use DeployNetBundle\Entity\Location;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -10,7 +12,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  * @ORM\Table(name="states")
  */
-class State {
+class State
+{
 
     /**
      * @ORM\Column(type="integer")
@@ -48,7 +51,7 @@ class State {
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -64,14 +67,14 @@ class State {
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -87,14 +90,14 @@ class State {
     public function setAbbreviation($abbreviation)
     {
         $this->abbreviation = $abbreviation;
-    
+
         return $this;
     }
 
     /**
      * Get abbreviation
      *
-     * @return string 
+     * @return string
      */
     public function getAbbreviation()
     {
@@ -104,22 +107,22 @@ class State {
     /**
      * Add customers
      *
-     * @param \DeployNetBundle\Entity\Customer $customers
+     * @param Customer $customers
      * @return State
      */
-    public function addCustomer(\DeployNetBundle\Entity\Customer $customers)
+    public function addCustomer(Customer $customers)
     {
         $this->customers[] = $customers;
-    
+
         return $this;
     }
 
     /**
      * Remove customers
      *
-     * @param \DeployNetBundle\Entity\Customer $customers
+     * @param Customer $customers
      */
-    public function removeCustomer(\DeployNetBundle\Entity\Customer $customers)
+    public function removeCustomer(Customer $customers)
     {
         $this->customers->removeElement($customers);
     }
@@ -127,7 +130,7 @@ class State {
     /**
      * Get customers
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCustomers()
     {
@@ -137,22 +140,22 @@ class State {
     /**
      * Add locations
      *
-     * @param \DeployNetBundle\Entity\Location $locations
+     * @param Location $locations
      * @return State
      */
-    public function addLocation(\DeployNetBundle\Entity\Location $locations)
+    public function addLocation(Location $locations)
     {
         $this->locations[] = $locations;
-    
+
         return $this;
     }
 
     /**
      * Remove locations
      *
-     * @param \DeployNetBundle\Entity\Location $locations
+     * @param Location $locations
      */
-    public function removeLocation(\DeployNetBundle\Entity\Location $locations)
+    public function removeLocation(Location $locations)
     {
         $this->locations->removeElement($locations);
     }
@@ -160,7 +163,7 @@ class State {
     /**
      * Get locations
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLocations()
     {

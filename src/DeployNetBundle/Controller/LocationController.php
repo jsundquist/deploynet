@@ -10,6 +10,8 @@ class LocationController extends Controller
 {
     /**
      * @Route("/customer/location/{locationId}/details")
+     * @param $locationId
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function detailAction($locationId)
     {
@@ -33,6 +35,9 @@ class LocationController extends Controller
 
     /**
      * @Route("/customer/location/{customerId}/add")
+     * @param Request $request
+     * @param $customerId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function addAction(Request $request, $customerId)
     {
@@ -49,7 +54,9 @@ class LocationController extends Controller
             ->add('address2', 'text')
             ->add('address3', 'text')
             ->add('city', 'text')
-            ->add('state', 'entity',
+            ->add(
+                'state',
+                'entity',
                 [
                     'class' => 'DeployNetBundle:State',
                     'property' => 'name'
@@ -128,7 +135,7 @@ class LocationController extends Controller
      * @Route("/customer/location/{id}/documents")
      */
     public function documentsAction()
-    {return $this->render("DeployNetBundle:Location:documents.html.twig");
-
+    {
+        return $this->render("DeployNetBundle:Location:documents.html.twig");
     }
 }

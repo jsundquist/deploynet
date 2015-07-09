@@ -1,6 +1,8 @@
 <?php
 namespace DeployNetBundle\Entity;
 
+use DeployNetBundle\Entity\Customer;
+use DeployNetBundle\Entity\State;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -94,7 +96,7 @@ class Location
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -117,7 +119,7 @@ class Location
     /**
      * Get customerId
      *
-     * @return integer 
+     * @return integer
      */
     public function getCustomerId()
     {
@@ -140,7 +142,7 @@ class Location
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -163,7 +165,7 @@ class Location
     /**
      * Get address1
      *
-     * @return string 
+     * @return string
      */
     public function getAddress1()
     {
@@ -186,7 +188,7 @@ class Location
     /**
      * Get address2
      *
-     * @return string 
+     * @return string
      */
     public function getAddress2()
     {
@@ -209,7 +211,7 @@ class Location
     /**
      * Get address3
      *
-     * @return string 
+     * @return string
      */
     public function getAddress3()
     {
@@ -232,7 +234,7 @@ class Location
     /**
      * Get city
      *
-     * @return string 
+     * @return string
      */
     public function getCity()
     {
@@ -255,7 +257,7 @@ class Location
     /**
      * Get stateId
      *
-     * @return string 
+     * @return string
      */
     public function getStateId()
     {
@@ -278,7 +280,7 @@ class Location
     /**
      * Get postalCode
      *
-     * @return string 
+     * @return string
      */
     public function getPostalCode()
     {
@@ -301,7 +303,7 @@ class Location
     /**
      * Get phoneNumber
      *
-     * @return string 
+     * @return string
      */
     public function getPhoneNumber()
     {
@@ -324,7 +326,7 @@ class Location
     /**
      * Get faxNumber
      *
-     * @return string 
+     * @return string
      */
     public function getFaxNumber()
     {
@@ -347,7 +349,7 @@ class Location
     /**
      * Get active
      *
-     * @return string 
+     * @return string
      */
     public function getActive()
     {
@@ -357,10 +359,10 @@ class Location
     /**
      * Set customer
      *
-     * @param \DeployNetBundle\Entity\Customer $customer
+     * @param Customer $customer
      * @return Location
      */
-    public function setCustomer(\DeployNetBundle\Entity\Customer $customer = null)
+    public function setCustomer(Customer $customer = null)
     {
         $this->customer = $customer;
     
@@ -370,7 +372,7 @@ class Location
     /**
      * Get customer
      *
-     * @return \DeployNetBundle\Entity\Customer 
+     * @return Customer
      */
     public function getCustomer()
     {
@@ -393,7 +395,7 @@ class Location
     /**
      * Get siteId
      *
-     * @return string 
+     * @return string
      */
     public function getSiteId()
     {
@@ -403,10 +405,10 @@ class Location
     /**
      * Set state
      *
-     * @param \DeployNetBundle\Entity\State $state
+     * @param State $state
      * @return Location
      */
-    public function setState(\DeployNetBundle\Entity\State $state = null)
+    public function setState(State $state = null)
     {
         $this->state = $state;
     
@@ -416,7 +418,7 @@ class Location
     /**
      * Get state
      *
-     * @return \DeployNetBundle\Entity\State 
+     * @return State
      */
     public function getState()
     {
