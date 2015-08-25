@@ -1,20 +1,16 @@
 <?php
 namespace DeployNetBundle\Entity;
 
-use DeployNetBundle\Entity\Customer;
-use DeployNetBundle\Entity\State;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Class Location
+ * Class Customer
  * @package DeployNetBundle\Entity
  * @ORM\Entity
- * @ORM\Table(name="locations")
+ * @ORM\Table(name="contacts")
  */
-class Location
+class Contact
 {
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -23,25 +19,14 @@ class Location
     protected $id;
 
     /**
-     * @ORM\Column(type="integer", name="customer_id")
+     * @ORM\Column(type="string", length=100, name="first_name")
      */
-    protected $customerId;
+    protected $firstName;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="locations")
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
+     * @ORM\Column(type="string", length=100, name="last_name")
      */
-    protected $customer;
-
-    /**
-     * @ORM\Column(type="string", length=100, name="name")
-     */
-    protected $name;
-
-    /**
-     * @ORM\Column(type="string", length=100, name="site_id")
-     */
-    protected $siteId;
+    protected $lastName;
 
     /**
      * @ORM\Column(type="string", length=100, name="address1")
@@ -54,11 +39,6 @@ class Location
     protected $address2;
 
     /**
-     * @ORM\Column(type="string", length=100, name="address3")
-     */
-    protected $address3;
-
-    /**
      * @ORM\Column(type="string", length=100, name="city")
      */
     protected $city;
@@ -69,7 +49,7 @@ class Location
     protected $stateId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="State", inversedBy="locations")
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="contacts")
      * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
      */
     protected $state;
@@ -90,24 +70,41 @@ class Location
     protected $faxNumber;
 
     /**
-     * @ORM\Column(type="string", length=100, name="active")
+     * @ORM\Column(type="string", length=100, name="cell_number")
      */
-    protected $active;
+    protected $cellNumber;
 
     /**
-     * @ORM\OneToMany(targetEntity="Contact", mappedBy="location")
+     * @ORM\Column(type="string", length=100, name="email")
      */
-    protected $contacts;
+    protected $email;
 
-    public function __construct()
-    {
-        $this->contacts = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="integer", length=100, name="customer_id")
+     */
+    protected $customerId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="contacts")
+     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
+     */
+    protected $customer;
+
+    /**
+     * @ORM\Column(type="integer", length=100, name="location_id")
+     */
+    protected $locationId = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Location", inversedBy="contacts")
+     * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
+     */
+    protected $location;
 
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -115,68 +112,68 @@ class Location
     }
 
     /**
-     * Set customerId
+     * Set firstName
      *
-     * @param integer $customerId
-     * @return Location
+     * @param string $firstName
+     * @return Contact
      */
-    public function setCustomerId($customerId)
+    public function setFirstName($firstName)
     {
-        $this->customerId = $customerId;
-    
+        $this->firstName = $firstName;
+
         return $this;
     }
 
     /**
-     * Get customerId
+     * Get firstName
      *
-     * @return integer
+     * @return string 
      */
-    public function getCustomerId()
+    public function getFirstName()
     {
-        return $this->customerId;
+        return $this->firstName;
     }
 
     /**
-     * Set name
+     * Set lastName
      *
-     * @param string $name
-     * @return Location
+     * @param string $lastName
+     * @return Contact
      */
-    public function setName($name)
+    public function setLastName($lastName)
     {
-        $this->name = $name;
-    
+        $this->lastName = $lastName;
+
         return $this;
     }
 
     /**
-     * Get name
+     * Get lastName
      *
-     * @return string
+     * @return string 
      */
-    public function getName()
+    public function getLastName()
     {
-        return $this->name;
+        return $this->lastName;
     }
 
     /**
      * Set address1
      *
      * @param string $address1
-     * @return Location
+     * @return Contact
      */
     public function setAddress1($address1)
     {
         $this->address1 = $address1;
-    
+
         return $this;
     }
 
     /**
      * Get address1
      *
-     * @return string
+     * @return string 
      */
     public function getAddress1()
     {
@@ -187,19 +184,19 @@ class Location
      * Set address2
      *
      * @param string $address2
-     * @return Location
+     * @return Contact
      */
     public function setAddress2($address2)
     {
         $this->address2 = $address2;
-    
+
         return $this;
     }
 
     /**
      * Get address2
      *
-     * @return string
+     * @return string 
      */
     public function getAddress2()
     {
@@ -207,45 +204,22 @@ class Location
     }
 
     /**
-     * Set address3
-     *
-     * @param string $address3
-     * @return Location
-     */
-    public function setAddress3($address3)
-    {
-        $this->address3 = $address3;
-    
-        return $this;
-    }
-
-    /**
-     * Get address3
-     *
-     * @return string
-     */
-    public function getAddress3()
-    {
-        return $this->address3;
-    }
-
-    /**
      * Set city
      *
      * @param string $city
-     * @return Location
+     * @return Contact
      */
     public function setCity($city)
     {
         $this->city = $city;
-    
+
         return $this;
     }
 
     /**
      * Get city
      *
-     * @return string
+     * @return string 
      */
     public function getCity()
     {
@@ -255,20 +229,20 @@ class Location
     /**
      * Set stateId
      *
-     * @param string $stateId
-     * @return Location
+     * @param integer $stateId
+     * @return Contact
      */
     public function setStateId($stateId)
     {
         $this->stateId = $stateId;
-    
+
         return $this;
     }
 
     /**
      * Get stateId
      *
-     * @return string
+     * @return integer 
      */
     public function getStateId()
     {
@@ -279,19 +253,19 @@ class Location
      * Set postalCode
      *
      * @param string $postalCode
-     * @return Location
+     * @return Contact
      */
     public function setPostalCode($postalCode)
     {
         $this->postalCode = $postalCode;
-    
+
         return $this;
     }
 
     /**
      * Get postalCode
      *
-     * @return string
+     * @return string 
      */
     public function getPostalCode()
     {
@@ -302,19 +276,19 @@ class Location
      * Set phoneNumber
      *
      * @param string $phoneNumber
-     * @return Location
+     * @return Contact
      */
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
-    
+
         return $this;
     }
 
     /**
      * Get phoneNumber
      *
-     * @return string
+     * @return string 
      */
     public function getPhoneNumber()
     {
@@ -325,19 +299,19 @@ class Location
      * Set faxNumber
      *
      * @param string $faxNumber
-     * @return Location
+     * @return Contact
      */
     public function setFaxNumber($faxNumber)
     {
         $this->faxNumber = $faxNumber;
-    
+
         return $this;
     }
 
     /**
      * Get faxNumber
      *
-     * @return string
+     * @return string 
      */
     public function getFaxNumber()
     {
@@ -345,91 +319,114 @@ class Location
     }
 
     /**
-     * Set active
+     * Set cellNumber
      *
-     * @param string $active
-     * @return Location
+     * @param string $cellNumber
+     * @return Contact
      */
-    public function setActive($active)
+    public function setCellNumber($cellNumber)
     {
-        $this->active = $active;
-    
+        $this->cellNumber = $cellNumber;
+
         return $this;
     }
 
     /**
-     * Get active
+     * Get cellNumber
      *
-     * @return string
+     * @return string 
      */
-    public function getActive()
+    public function getCellNumber()
     {
-        return $this->active;
+        return $this->cellNumber;
     }
 
     /**
-     * Set customer
+     * Set email
      *
-     * @param Customer $customer
-     * @return Location
+     * @param string $email
+     * @return Contact
      */
-    public function setCustomer(Customer $customer = null)
+    public function setEmail($email)
     {
-        $this->customer = $customer;
-    
+        $this->email = $email;
+
         return $this;
     }
 
     /**
-     * Get customer
+     * Get email
      *
-     * @return Customer
+     * @return string 
      */
-    public function getCustomer()
+    public function getEmail()
     {
-        return $this->customer;
+        return $this->email;
     }
 
     /**
-     * Set siteId
+     * Set customerId
      *
-     * @param string $siteId
-     * @return Location
+     * @param integer $customerId
+     * @return Contact
      */
-    public function setSiteId($siteId)
+    public function setCustomerId($customerId)
     {
-        $this->siteId = $siteId;
-    
+        $this->customerId = $customerId;
+
         return $this;
     }
 
     /**
-     * Get siteId
+     * Get customerId
      *
-     * @return string
+     * @return integer 
      */
-    public function getSiteId()
+    public function getCustomerId()
     {
-        return $this->siteId;
+        return $this->customerId;
+    }
+
+    /**
+     * Set locationId
+     *
+     * @param integer $locationId
+     * @return Contact
+     */
+    public function setLocationId($locationId)
+    {
+        $this->locationId = $locationId;
+
+        return $this;
+    }
+
+    /**
+     * Get locationId
+     *
+     * @return integer 
+     */
+    public function getLocationId()
+    {
+        return $this->locationId;
     }
 
     /**
      * Set state
      *
-     * @param State $state
-     * @return Location
+     * @param \DeployNetBundle\Entity\State $state
+     * @return Contact
      */
-    public function setState(State $state = null)
+    public function setState(\DeployNetBundle\Entity\State $state = null)
     {
         $this->state = $state;
-    
+
         return $this;
     }
 
     /**
      * Get state
      *
-     * @return State
+     * @return \DeployNetBundle\Entity\State 
      */
     public function getState()
     {
@@ -437,35 +434,48 @@ class Location
     }
 
     /**
-     * Add contacts
+     * Set customer
      *
-     * @param \DeployNetBundle\Entity\Contact $contacts
-     * @return Location
+     * @param \DeployNetBundle\Entity\State $customer
+     * @return Contact
      */
-    public function addContact(\DeployNetBundle\Entity\Contact $contacts)
+    public function setCustomer(\DeployNetBundle\Entity\State $customer = null)
     {
-        $this->contacts[] = $contacts;
+        $this->customer = $customer;
 
         return $this;
     }
 
     /**
-     * Remove contacts
+     * Get customer
      *
-     * @param \DeployNetBundle\Entity\Contact $contacts
+     * @return \DeployNetBundle\Entity\State 
      */
-    public function removeContact(\DeployNetBundle\Entity\Contact $contacts)
+    public function getCustomer()
     {
-        $this->contacts->removeElement($contacts);
+        return $this->customer;
     }
 
     /**
-     * Get contacts
+     * Set location
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @param \DeployNetBundle\Entity\Location $location
+     * @return Contact
      */
-    public function getContacts()
+    public function setLocation(\DeployNetBundle\Entity\Location $location = null)
     {
-        return $this->contacts;
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return \DeployNetBundle\Entity\Location 
+     */
+    public function getLocation()
+    {
+        return $this->location;
     }
 }

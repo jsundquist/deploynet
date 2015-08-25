@@ -2,6 +2,7 @@
 namespace DeployNetBundle\Controller;
 
 use DeployNetBundle\Entity\Customer;
+use DeployNetBundle\Form\Type\CustomerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,9 +46,7 @@ class CustomerController extends Controller
             ->add('address2', 'text')
             ->add('address3', 'text')
             ->add('city', 'text')
-            ->add(
-                'state',
-                'entity',
+            ->add('state', 'entity',
                 [
                     'class' => 'DeployNetBundle:State',
                     'property' => 'name'
@@ -94,9 +93,7 @@ class CustomerController extends Controller
             ->add('address2', 'text')
             ->add('address3', 'text')
             ->add('city', 'text')
-            ->add(
-                'state',
-                'entity',
+            ->add('state', 'entity',
                 [
                     'class' => 'DeployNetBundle:State',
                     'property' => 'name'
@@ -145,8 +142,6 @@ class CustomerController extends Controller
 
     /**
      * @Route("/customer/locations/{id}", name="customer_locations")
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function locationsAction($id)
     {

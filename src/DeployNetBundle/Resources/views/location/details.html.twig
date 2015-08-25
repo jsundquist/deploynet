@@ -1,19 +1,6 @@
 {% extends 'DeployNetBundle::layout.html.twig' %}
 {% block content %}
-<ol class="breadcrumb">
-    <li><a href="/">Home</a></li>
-    <li><a href="/customers">Customer List</a></li>
-    <li><a href="/customer/details/{{ customer.id }}">{{customer.name}}</a></li>
-    <li class="active">{{ location.name }} (Details)</li>
-</ol>
-<h1 class="sub-header">{{ location.name }}</h1>
-<ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="/customer/location/{{ location.id }}/details">Details</a></li>
-    <li role="presentation"><a href="/customer/location/{{ location.id }}/contacts">Contacts</a></li>
-    <li role="presentation"><a href="/customer/location/{{ location.id }}/projects">Projects</a></li>
-    <li role="presentation"><a href="/customer/location/{{ location.id }}/workorders">Work Orders</a></li>
-    <li role="presentation"><a href="/customer/location/{{ location.id }}/documents">Documents</a></li>
-</ul>
+    {{ include('DeployNetBundle::includes/location.header.html.twig', {'custer': customer, 'location': location, 'page': 'details'}) }}
 
 <h2>Site Information<a href="/customer/location/{{ location.id }}/edit" class="btn btn-default btn-sm pull-right" role="button">Edit Details</a></h2>
 
