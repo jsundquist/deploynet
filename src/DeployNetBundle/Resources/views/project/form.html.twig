@@ -1,0 +1,10 @@
+{% extends 'DeployNetBundle::layout.html.twig' %}
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/projects">Customer List</a></li>
+</ol>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}
