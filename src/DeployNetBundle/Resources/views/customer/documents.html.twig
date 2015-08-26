@@ -3,9 +3,9 @@
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
     <li><a href="/customers">Customer List</a></li>
-    <li class="active">NAME (Documents)</li>
+    <li class="active">{{ customer.name }} (Documents)</li>
 </ol>
-<h1 class="sub-header">NAME</h1>
+<h1 class="sub-header">{{ customer.name }}</h1>
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation"><a href="/customer/details/{{ customer.id }}">Details</a></li>
     <li role="presentation"><a href="/customer/locations/{{ customer.id }}">Sites</a></li>
