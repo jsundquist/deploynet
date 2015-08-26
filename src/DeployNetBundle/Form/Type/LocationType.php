@@ -13,8 +13,8 @@ class LocationType extends AbstractType
         $builder->add('name', 'text')
             ->add('siteId', 'text')
             ->add('address1', 'text')
-            ->add('address2', 'text')
-            ->add('address3', 'text')
+            ->add('address2', 'text', ['required' => false])
+            ->add('address3', 'text', ['required' => false])
             ->add('city', 'text')
             ->add('state', 'entity',
                 [
@@ -23,8 +23,8 @@ class LocationType extends AbstractType
                 ]
             )
             ->add('postalCode', 'text')
-            ->add('phoneNumber', 'text')
-            ->add('faxNumber', 'text')
+            ->add('phoneNumber', 'text', ['required' => false])
+            ->add('faxNumber', 'text', ['required' => false])
             ->add('save', 'submit', array('label' => 'Save'));
     }
 
