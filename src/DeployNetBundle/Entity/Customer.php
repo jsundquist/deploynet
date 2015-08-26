@@ -34,12 +34,12 @@ class Customer
     protected $address1;
 
     /**
-     * @ORM\Column(type="string", length=100, name="address2")
+     * @ORM\Column(type="string", length=100, name="address2", nullable=true)
      */
     protected $address2;
 
     /**
-     * @ORM\Column(type="string", length=100, name="address3")
+     * @ORM\Column(type="string", length=100, name="address3", nullable=true)
      */
     protected $address3;
 
@@ -65,12 +65,12 @@ class Customer
     protected $postalCode;
 
     /**
-     * @ORM\Column(type="string", length=100, name="phone_number")
+     * @ORM\Column(type="string", length=100, name="phone_number", nullable=true)
      */
     protected $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=100, name="fax_number")
+     * @ORM\Column(type="string", length=100, name="fax_number", nullable=true)
      */
     protected $faxNumber;
 
