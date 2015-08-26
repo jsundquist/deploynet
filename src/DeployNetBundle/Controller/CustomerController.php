@@ -43,8 +43,8 @@ class CustomerController extends Controller
         $form = $this->createFormBuilder($customer)
             ->add("name", "text")
             ->add('address1', 'text')
-            ->add('address2', 'text')
-            ->add('address3', 'text')
+            ->add('address2', 'text', ['required' => false])
+            ->add('address3', 'text', ['required' => false])
             ->add('city', 'text')
             ->add('state', 'entity',
                 [
@@ -53,8 +53,8 @@ class CustomerController extends Controller
                 ]
             )
             ->add('postalCode', 'text')
-            ->add('phoneNumber', 'text')
-            ->add('faxNumber', 'text')
+            ->add('phoneNumber', 'text', ['required' => false])
+            ->add('faxNumber', 'text', ['required' => false])
             ->add('save', 'submit', array('label' => 'Save'))
             ->getForm();
 
@@ -90,8 +90,8 @@ class CustomerController extends Controller
         $form = $this->createFormBuilder($customer)
             ->add("name", "text")
             ->add('address1', 'text')
-            ->add('address2', 'text')
-            ->add('address3', 'text')
+            ->add('address2', 'text', ['required' => false])
+            ->add('address3', 'text', ['required' => false])
             ->add('city', 'text')
             ->add('state', 'entity',
                 [
@@ -100,8 +100,8 @@ class CustomerController extends Controller
                 ]
             )
             ->add('postalCode', 'text')
-            ->add('phoneNumber', 'text')
-            ->add('faxNumber', 'text')
+            ->add('phoneNumber', 'text', ['required' => false])
+            ->add('faxNumber', 'text', ['required' => false])
             ->add('save', 'submit', array('label' => 'Save'))
             ->getForm();
 
