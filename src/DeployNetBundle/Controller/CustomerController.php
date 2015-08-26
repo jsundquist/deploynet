@@ -1,7 +1,9 @@
 <?php
 namespace DeployNetBundle\Controller;
 
+use DeployNetBundle\Entity\Contact;
 use DeployNetBundle\Entity\Customer;
+use DeployNetBundle\Form\Type\ContactType;
 use DeployNetBundle\Form\Type\CustomerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -163,27 +165,94 @@ class CustomerController extends Controller
     }
 
     /**
-     * @Route("/customer/contacts/{id}")
+     * @Route("/customer/contacts/{id}", name="customer_contacts")
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function contactsAction()
+    public function contactsAction($id)
     {
-        return $this->render("DeployNetBundle:Customer:contacts.html.twig");
+        $customerRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
+
+        $customer = $customerRepository->findOneBy(array('id' => $id));
+
+        $contactsRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Contact');
+
+        $contacts = $contactsRepository->findBy(array('customer' => $id));
+        return $this->render(
+            "DeployNetBundle:Customer:contacts.html.twig",
+            [
+                'customer' => $customer,
+                'contacts' => $contacts
+            ]
+        );
     }
 
     /**
-     * @Route("/customer/contacts/{id}/add");
+     * @Route("/customer/contacts/{customerId}/add");
+     * @param Request $request
+     * @param $customerId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function addContactAction()
+    public function addContactAction(Request $request, $customerId)
     {
-        return $this->render("DeployNetBundle:Customer:contact.form.html.twig");
+        $customer = $this->getCustomer($customerId);
+
+        $contact = new Contact();
+
+        $form = $this->createForm(new ContactType(), $contact);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $contact->setCustomer($customer);
+            $em->persist($contact);
+            $em->flush();
+
+            return $this->redirectToRoute('customer_contacts', ['id' => $customerId]);
+        }
+
+        return $this->render(
+            "DeployNetBundle:Customer:contact.form.html.twig",
+            [
+                'form' => $form->createView(),
+                'customer' => $customer
+            ]
+        );
     }
 
     /**
-     * @Route("/customer/contacts/{id}/edit/{contactId}")
+     * @Route("/customer/contacts/{customerId}/edit/{contactId}")
+     * @param Request $request
+     * @param $customerId
+     * @param $contactId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editContactAction()
+    public function editContactAction(Request $request, $customerId, $contactId)
     {
-        return $this->render("DeployNetBundle:Customer:contact.form.html.twig");
+        $customer = $this->getCustomer($customerId);
+
+        $contact = $this->getContact($contactId);
+
+        $form = $this->createForm(new ContactType(), $contact);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($contact);
+            $em->flush();
+
+            return $this->redirectToRoute('customer_contacts', ['id' => $customerId]);
+        }
+
+        return $this->render(
+            "DeployNetBundle:Customer:contact.form.html.twig",
+            [
+                'form' => $form->createView(),
+                'customer' => $customer
+            ]
+        );
     }
 
     /**
@@ -208,5 +277,19 @@ class CustomerController extends Controller
     public function documentsAction()
     {
         return $this->render("DeployNetBundle:Customer:documents.html.twig");
+    }
+
+    private function getCustomer($customerId)
+    {
+        $customerRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
+
+        return $customerRepository->findOneBy(array('id' => $customerId));
+    }
+
+    private function getContact($contactId)
+    {
+        $contactRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Contact');
+
+        return $contactRepository->findOneBy(array('id' => $contactId));
     }
 }

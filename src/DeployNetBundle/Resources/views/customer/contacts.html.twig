@@ -3,16 +3,16 @@
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
     <li><a href="/customers">Customer List</a></li>
-    <li class="active">NAME (Contacts)</li>
+    <li class="active">{{ customer.name }} (Contacts)</li>
 </ol>
-<h1 class="sub-header">NAME</h1>
+<h1 class="sub-header">{{ customer.name }}</h1>
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation"><a href="/customer/details/1">Details</a></li>
-    <li role="presentation"><a href="/customer/locations/1">Locations</a></li>
-    <li role="presentation" class="active"><a href="/customer/contacts/1">Contacts</a></li>
-    <li role="presentation"><a href="/customer/projects/1">Projects</a></li>
-    <li role="presentation"><a href="/customer/orders/1">Work Orders</a></li>
-    <li role="presentation"><a href="/customer/documents/1">Documents</a></li>
+    <li role="presentation"><a href="/customer/details/{{ customer.id }}">Details</a></li>
+    <li role="presentation"><a href="/customer/locations/{{ customer.id }}">Locations</a></li>
+    <li role="presentation" class="active"><a href="/customer/contacts/{{ customer.id }}">Contacts</a></li>
+    <li role="presentation"><a href="/customer/projects/{{ customer.id }}">Projects</a></li>
+    <li role="presentation"><a href="/customer/orders/{{ customer.id }}">Work Orders</a></li>
+    <li role="presentation"><a href="/customer/documents/{{ customer.id }}">Documents</a></li>
 </ul>
 <div class="table-responsive">
     <a href="/customer/contacts/1/add" class="btn btn-default btn-sm pull-right" role="button">Add Contact</a>
@@ -30,16 +30,18 @@
         </tr>
         </thead>
         <tbody>
+        {%  for contact in contacts %}
         <tr>
+            <td>{{ contact.firstName }} {{ contact.lastName }}</td>
             <td></td>
-            <td></td>
-            <td><!-- (000) 000-0000 --></td>
-            <td><!-- test@test.com --></td>
+            <td>{{ contact.phoneNumber }}<!-- (000) 000-0000 --></td>
+            <td>{{ contact.email }}<!-- test@test.com --></td>
             <td></td>
             <td> <!-- --/--/-- --:-- --></td>
             <td></td>
-            <td><a href="/customer/contacts/1/edit/1">Edit</a> | Delete</td>
+            <td><a href="/customer/contacts/{{ customer.id }}/edit/{{ customer.id }}">Edit</a> | Delete</td>
         </tr>
+            {% endfor %}
         </tbody>
     </table>
     <div class="center-block">
