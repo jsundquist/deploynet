@@ -73,6 +73,7 @@ class CustomerController extends Controller
             "DeployNetBundle:Customer:form.html.twig",
             [
                 'form' => $form->createView(),
+                'customer' => $customer
             ]
         );
     }
@@ -117,6 +118,7 @@ class CustomerController extends Controller
             "DeployNetBundle:Customer:form.html.twig",
             [
                 'form' => $form->createView(),
+                'customer' => $customer
             ]
         );
     }
