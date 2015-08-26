@@ -85,9 +85,7 @@ class CustomerController extends Controller
      */
     public function editAction($id, Request $request)
     {
-        $repository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
-
-        $customer = $repository->findOneBy(array('id' => $id));
+        $customer = $this->getCustomer($id);
 
         $form = $this->createFormBuilder($customer)
             ->add("name", "text")
@@ -130,9 +128,7 @@ class CustomerController extends Controller
      */
     public function detailsAction($id)
     {
-        $repository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
-
-        $customer = $repository->findOneBy(array('id' => $id));
+        $customer = $this->getCustomer($id);
 
         return $this->render(
             "DeployNetBundle:Customer:details.html.twig",
@@ -147,9 +143,7 @@ class CustomerController extends Controller
      */
     public function locationsAction($id)
     {
-        $customerRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
-
-        $customer = $customerRepository->findOneBy(array('id' => $id));
+        $customer = $this->getCustomer($id);
 
         $locationsRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Location');
 
@@ -258,25 +252,46 @@ class CustomerController extends Controller
     /**
      * @Route("/customer/projects/{id}")
      */
-    public function projectsAction()
+    public function projectsAction($id)
     {
-        return $this->render("DeployNetBundle:Customer:projects.html.twig");
+        $customer = $this->getCustomer($id);
+
+        return $this->render(
+            "DeployNetBundle:Customer:projects.html.twig",
+            [
+                'customer' => $customer
+            ]
+        );
     }
 
     /**
      * @Route("/customer/orders/{id}")
      */
-    public function ordersAction()
+    public function ordersAction($id)
     {
-        return $this->render("DeployNetBundle:Customer:orders.html.twig");
+        $customer = $this->getCustomer($id);
+
+        return $this->render(
+            "DeployNetBundle:Customer:orders.html.twig",
+            [
+                'customer' => $customer
+            ]
+        );
     }
 
     /**
      * @Route("/customer/documents/{id}")
      */
-    public function documentsAction()
+    public function documentsAction($id)
     {
-        return $this->render("DeployNetBundle:Customer:documents.html.twig");
+        $customer = $this->getCustomer($id);
+
+        return $this->render(
+            "DeployNetBundle:Customer:documents.html.twig",
+            [
+                'customer' => $customer
+            ]
+        );
     }
 
     private function getCustomer($customerId)

@@ -7,12 +7,12 @@
 </ol>
 <h1 class="sub-header">NAME</h1>
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation"><a href="/customer/details/1">Details</a></li>
-    <li role="presentation"><a href="/customer/locations/1">Sites</a></li>
-    <li role="presentation"><a href="/customer/contacts/1">Contacts</a></li>
-    <li role="presentation"><a href="/customer/projects/1">Projects</a></li>
-    <li role="presentation" class="active"><a href="/customer/orders/1">Work Orders</a></li>
-    <li role="presentation"><a href="/customer/documents/1">Documents</a></li>
+    <li role="presentation"><a href="/customer/details/{{ customer.id }}">Details</a></li>
+    <li role="presentation"><a href="/customer/locations/{{ customer.id }}">Sites</a></li>
+    <li role="presentation"><a href="/customer/contacts/{{ customer.id }}">Contacts</a></li>
+    <li role="presentation"><a href="/customer/projects/{{ customer.id }}">Projects</a></li>
+    <li role="presentation" class="active"><a href="/customer/orders/{{ customer.id }}">Work Orders</a></li>
+    <li role="presentation"><a href="/customer/documents/{{ customer.id }}">Documents</a></li>
 </ul>
 <div class="table-responsive">
     <table class="table table-striped">
