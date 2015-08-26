@@ -1,6 +1,9 @@
 <?php
 namespace DeployNetBundle\Entity;
 
+use DeployNetBundle\Entity\Location;
+use DeployNetBundle\Entity\State;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -31,12 +34,12 @@ class Customer
     protected $address1;
 
     /**
-     * @ORM\Column(type="string", length=100, name="address2")
+     * @ORM\Column(type="string", length=100, name="address2", nullable=true)
      */
     protected $address2;
 
     /**
-     * @ORM\Column(type="string", length=100, name="address3")
+     * @ORM\Column(type="string", length=100, name="address3", nullable=true)
      */
     protected $address3;
 
@@ -62,12 +65,12 @@ class Customer
     protected $postalCode;
 
     /**
-     * @ORM\Column(type="string", length=100, name="phone_number")
+     * @ORM\Column(type="string", length=100, name="phone_number", nullable=true)
      */
     protected $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=100, name="fax_number")
+     * @ORM\Column(type="string", length=100, name="fax_number", nullable=true)
      */
     protected $faxNumber;
 
@@ -95,7 +98,7 @@ class Customer
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -118,7 +121,7 @@ class Customer
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -141,7 +144,7 @@ class Customer
     /**
      * Get address1
      *
-     * @return string 
+     * @return string
      */
     public function getAddress1()
     {
@@ -164,7 +167,7 @@ class Customer
     /**
      * Get address2
      *
-     * @return string 
+     * @return string
      */
     public function getAddress2()
     {
@@ -187,7 +190,7 @@ class Customer
     /**
      * Get address3
      *
-     * @return string 
+     * @return string
      */
     public function getAddress3()
     {
@@ -210,7 +213,7 @@ class Customer
     /**
      * Get city
      *
-     * @return string 
+     * @return string
      */
     public function getCity()
     {
@@ -233,7 +236,7 @@ class Customer
     /**
      * Get stateId
      *
-     * @return string 
+     * @return string
      */
     public function getStateId()
     {
@@ -256,7 +259,7 @@ class Customer
     /**
      * Get postalCode
      *
-     * @return string 
+     * @return string
      */
     public function getPostalCode()
     {
@@ -279,7 +282,7 @@ class Customer
     /**
      * Get phoneNumber
      *
-     * @return string 
+     * @return string
      */
     public function getPhoneNumber()
     {
@@ -302,7 +305,7 @@ class Customer
     /**
      * Get faxNumber
      *
-     * @return string 
+     * @return string
      */
     public function getFaxNumber()
     {
@@ -325,7 +328,7 @@ class Customer
     /**
      * Get active
      *
-     * @return string 
+     * @return string
      */
     public function getActive()
     {
@@ -335,10 +338,10 @@ class Customer
     /**
      * Add locations
      *
-     * @param \DeployNetBundle\Entity\Location $locations
+     * @param Location $locations
      * @return Customer
      */
-    public function addLocation(\DeployNetBundle\Entity\Location $locations)
+    public function addLocation(Location $locations)
     {
         $this->locations[] = $locations;
     
@@ -348,9 +351,9 @@ class Customer
     /**
      * Remove locations
      *
-     * @param \DeployNetBundle\Entity\Location $locations
+     * @param Location $locations
      */
-    public function removeLocation(\DeployNetBundle\Entity\Location $locations)
+    public function removeLocation(Location $locations)
     {
         $this->locations->removeElement($locations);
     }
@@ -358,7 +361,7 @@ class Customer
     /**
      * Get locations
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return Collection
      */
     public function getLocations()
     {
@@ -368,10 +371,10 @@ class Customer
     /**
      * Set state
      *
-     * @param \DeployNetBundle\Entity\State $state
+     * @param State $state
      * @return Customer
      */
-    public function setState(\DeployNetBundle\Entity\State $state = null)
+    public function setState(State $state = null)
     {
         $this->state = $state;
     
@@ -381,7 +384,7 @@ class Customer
     /**
      * Get state
      *
-     * @return \DeployNetBundle\Entity\State 
+     * @return State
      */
     public function getState()
     {

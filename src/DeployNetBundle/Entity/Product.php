@@ -1,6 +1,7 @@
 <?php
 namespace DeployNetBundle\Entity;
 
+use DeployNetBundle\Entity\Manufacturer;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -49,7 +50,7 @@ class Product
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -72,7 +73,7 @@ class Product
     /**
      * Get partNumber
      *
-     * @return string 
+     * @return string
      */
     public function getPartNumber()
     {
@@ -95,7 +96,7 @@ class Product
     /**
      * Get altPartNumber
      *
-     * @return string 
+     * @return string
      */
     public function getAltPartNumber()
     {
@@ -118,7 +119,7 @@ class Product
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -141,7 +142,7 @@ class Product
     /**
      * Get manufacturerId
      *
-     * @return integer 
+     * @return integer
      */
     public function getManufacturerId()
     {
@@ -151,10 +152,10 @@ class Product
     /**
      * Set manufacturerName
      *
-     * @param \DeployNetBundle\Entity\Manufacturer $manufacturerName
+     * @param Manufacturer $manufacturerName
      * @return Product
      */
-    public function setManufacturerName(\DeployNetBundle\Entity\Manufacturer $manufacturerName = null)
+    public function setManufacturerName(Manufacturer $manufacturerName = null)
     {
         $this->manufacturerName = $manufacturerName;
     
@@ -164,7 +165,7 @@ class Product
     /**
      * Get manufacturerName
      *
-     * @return \DeployNetBundle\Entity\Manufacturer 
+     * @return Manufacturer
      */
     public function getManufacturerName()
     {

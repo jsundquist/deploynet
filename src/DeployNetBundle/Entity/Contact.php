@@ -34,7 +34,7 @@ class Contact
     protected $address1;
 
     /**
-     * @ORM\Column(type="string", length=100, name="address2")
+     * @ORM\Column(type="string", length=100, name="address2", nullable=true)
      */
     protected $address2;
 
@@ -60,22 +60,22 @@ class Contact
     protected $postalCode;
 
     /**
-     * @ORM\Column(type="string", length=100, name="phone_number")
+     * @ORM\Column(type="string", length=100, name="phone_number", nullable=true)
      */
     protected $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=100, name="fax_number")
+     * @ORM\Column(type="string", length=100, name="fax_number", nullable=true)
      */
     protected $faxNumber;
 
     /**
-     * @ORM\Column(type="string", length=100, name="cell_number")
+     * @ORM\Column(type="string", length=100, name="cell_number", nullable=true)
      */
     protected $cellNumber;
 
     /**
-     * @ORM\Column(type="string", length=100, name="email")
+     * @ORM\Column(type="string", length=100, name="email", nullable=true)
      */
     protected $email;
 
@@ -85,13 +85,13 @@ class Contact
     protected $customerId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="State", inversedBy="contacts")
+     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="contacts")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
     protected $customer;
 
     /**
-     * @ORM\Column(type="integer", length=100, name="location_id")
+     * @ORM\Column(type="integer", length=100, name="location_id", nullable=true)
      */
     protected $locationId = null;
 
@@ -436,10 +436,10 @@ class Contact
     /**
      * Set customer
      *
-     * @param \DeployNetBundle\Entity\State $customer
+     * @param \DeployNetBundle\Entity\Customer $customer
      * @return Contact
      */
-    public function setCustomer(\DeployNetBundle\Entity\State $customer = null)
+    public function setCustomer(\DeployNetBundle\Entity\Customer $customer = null)
     {
         $this->customer = $customer;
 

@@ -3,9 +3,9 @@
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
     <li><a href="/customers">Customer List</a></li>
-    <li>Customer Details <span >#customer.id</span></li>
+    <li>Customer Details <span >{{ customer.name }}</span></li>
 </ol>
-<h1 class="sub-header">customer.name</h1>
+<h1 class="sub-header">c{{ customer.name }}</h1>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}

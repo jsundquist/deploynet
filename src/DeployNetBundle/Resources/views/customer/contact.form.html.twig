@@ -3,142 +3,19 @@
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
     <li><a href="/customers">Customer List</a></li>
-    <li class="active">NAME (Contacts)</li>
+    <li class="active">{{ customer.name }} (Contacts)</li>
 </ol>
-<h1 class="sub-header">NAME</h1>
+<h1 class="sub-header">{{ customer.name }}</h1>
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation"><a href="/customer/details/1">Details</a></li>
-    <li role="presentation"><a href="/customer/locations/1">Sites</a></li>
-    <li role="presentation" class="active"><a href="/customer/contacts/1">Contacts</a></li>
-    <li role="presentation"><a href="/customer/projects/1">Projects</a></li>
-    <li role="presentation"><a href="/customer/orders/1">Work Orders</a></li>
-    <li role="presentation"><a href="/customer/documents/1">Documents</a></li>
+    <li role="presentation"><a href="/customer/details/{{ customer.id }}">Details</a></li>
+    <li role="presentation"><a href="/customer/locations/{{ customer.id }}">Sites</a></li>
+    <li role="presentation" class="active"><a href="/customer/contacts/{{ customer.id }}">Contacts</a></li>
+    <li role="presentation"><a href="/customer/projects/{{ customer.id }}">Projects</a></li>
+    <li role="presentation"><a href="/customer/orders/{{ customer.id }}">Work Orders</a></li>
+    <li role="presentation"><a href="/customer/documents/{{ customer.id }}">Documents</a></li>
 </ul>
 <div>&nbsp;</div>
-<form role="form" class="form-horizontal">
-    <div class="form-group">
-        <label for="contactFirstName" class="col-sm-2 control-label">
-            First Name
-        </label>
-
-        <div class="col-sm-10">
-            <input type="text" id="contactFirstName" name="contactFirstName" class="form-control"
-                   />
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="contactLastName" class="col-sm-2 control-label">
-            Last Name
-        </label>
-
-        <div class="col-sm-10">
-            <input type="text" id="contactLastName" name="contactLastName" class="form-control"
-                   />
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="contactAddress" class="col-sm-2 control-label">
-            Address
-        </label>
-
-        <div class="col-sm-10">
-            <input type="text" id="contactAddress" name="contactAddress" class="form-control"
-                   />
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="contactAddress2" class="col-sm-2 control-label">
-            &nbsp;
-        </label>
-
-        <div class="col-sm-10">
-            <input type="text" id="contactAddress2" name="contactAddress2" class="form-control"
-                   />
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="contactAddress3" class="col-sm-2 control-label">
-            &nbsp;
-        </label>
-
-        <div class="col-sm-10">
-            <input type="text" id="contactAddress3" name="contactAddress3" class="form-control"
-                   />
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="contactCity" class="col-sm-2 control-label">
-            City
-        </label>
-
-        <div class="col-sm-10">
-            <input type="text" id="contactCity" name="contactCity" class="form-control" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="contactState" class="col-sm-2 control-label">
-            State
-        </label>
-
-        <div class="col-sm-10">
-            <input type="text" id="contactState" name="contactState" class="form-control" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="contactPostalCode" class="col-sm-2 control-label">
-            Postal Code
-        </label>
-
-        <div class="col-sm-10">
-            <input type="text" id="contactPostalCode" name="contactPostalCode" class="form-control"
-                   />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="contactPhone" class="col-sm-2 control-label">
-            Phone
-        </label>
-
-        <div class="col-sm-10">
-            <input type="text" id="contactPhone" name="contactPhone" class="form-control" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="contactFax">
-            Fax
-        </label>
-
-        <div class="col-sm-10">
-            <input type="text" id="contactFax" name="contactFax" class="form-control" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="contactCellPhone" class="col-sm-2 control-label">
-            Cell Phone
-        </label>
-
-        <div class="col-sm-10">
-            <input type="text" id="contactCellPhone" name="contactCellPhone" class="form-control"
-                   />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="contactEmail" class="col-sm-2 control-label">
-            Email
-        </label>
-
-        <div class="col-sm-10">
-            <input type="text" id="contactEmail" name="contactEmail" class="form-control" />
-        </div>
-    </div>
-
-    <input type="hidden" name="customer_id" id="customer_id" value="" />
-    <input type="hidden" name="location_id" id="location_id" value="" />
-    <input type="hidden" name="id" id="id" value="" />
-    <button type="submit" class="btn btn-default">Submit</button>
-</form>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
 {% endblock%}
