@@ -99,6 +99,11 @@ class Location
      */
     protected $contacts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="location")
+     */
+    protected $projects;
+
     public function __construct()
     {
         $this->contacts = new ArrayCollection();

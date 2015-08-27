@@ -2,6 +2,7 @@
 namespace DeployNetBundle\Controller;
 
 use DeployNetBundle\Entity\Project;
+use DeployNetBundle\Form\Type\ProjectType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,29 +35,16 @@ class ProjectController extends Controller
     public function addAction(Request $request)
     {
         $project = new Project();
-        $form = $this->createFormBuilder($project)
-            ->add("name", "text")
-            ->add("description", "text")
-            ->add("type", "text")
-            ->add(
-                "location",
-                'entity',
-                [
-                    'class' => 'DeployNetBundle:Location',
-                    'property' => 'name'
-                ]
-            )
-            ->add('save', 'submit', ['label' => 'Save'])
-            ->getForm()
-            ;
+        $form = $this->createForm(new ProjectType(), $project);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $project->setCustomer($project->getLocation()->getCustomer());
             $em->persist($project);
             $em->flush();
-            return $this->redirectToRoute('customers_index');
+            return $this->redirectToRoute('project_index');
         }
 
         return $this->render(
