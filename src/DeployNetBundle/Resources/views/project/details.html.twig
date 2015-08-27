@@ -1,0 +1,32 @@
+{% extends 'DeployNetBundle::layout.html.twig' %}
+{% block content %}
+<h1>Project Information</h1>
+    <table class="table table-responsive">
+        <tr>
+            <td>Customer</td>
+            <td>
+                <a href="/customer/detail/{{ project.customer.id }}">{{ project.customer.name }}</a><br/>
+                {{ project.customer.address1 }}<br />
+                {{ project.customer.city }}, {{ project.customer.state.abbreviation }} {{ project.customer.postalCode }}
+            </td>
+            <td>Site</td>
+            <td>
+                <a href="/customer/location/{{ project.location.id }}/details">{{ project.location.name }}</a><br />
+                {{ project.location.address1 }}<br />
+                {{ project.location.city }}, {{ project.location.state.abbreviation }} {{ project.location.postalCode }}
+            </td>
+        </tr>
+    </table>
+    <h2>{{ project.name }}</h2>
+    {{ project.description }}
+    <hr>
+    <h2>Work Orders</h2>
+    <table class="table table-responsive table-bordered table-condensed table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Site</th>
+            <th></th>
+        </tr>
+        </thead>
+    </table>
+{% endblock %}

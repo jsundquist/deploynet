@@ -65,14 +65,17 @@ class ProjectController extends Controller
         $repository = $this->getDoctrine()->getRepository('DeployNetBundle:Project');
 
         $project = $repository->findOneBy(array('id' => $id));
-
-        $project->setLastAccessDate(Date('m/d/Y h:i:s'));
+        $lastAccess = new \DateTime('now');
+        $project->setLastAccess($lastAccess);
         $em = $this->getDoctrine()->getManager();
         $em->persist($project);
         $em->flush();
 
         return $this->render(
-            "DeployNetBundle:Project:details.html.twig"
+            "DeployNetBundle:Project:details.html.twig",
+            [
+                'project' => $project
+            ]
         );
     }
 }
