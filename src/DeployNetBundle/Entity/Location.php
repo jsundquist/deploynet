@@ -473,4 +473,37 @@ class Location
     {
         return $this->contacts;
     }
+
+    /**
+     * Add projects
+     *
+     * @param \DeployNetBundle\Entity\Project $projects
+     * @return Location
+     */
+    public function addProject(\DeployNetBundle\Entity\Project $projects)
+    {
+        $this->projects[] = $projects;
+
+        return $this;
+    }
+
+    /**
+     * Remove projects
+     *
+     * @param \DeployNetBundle\Entity\Project $projects
+     */
+    public function removeProject(\DeployNetBundle\Entity\Project $projects)
+    {
+        $this->projects->removeElement($projects);
+    }
+
+    /**
+     * Get projects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProjects()
+    {
+        return $this->projects;
+    }
 }
