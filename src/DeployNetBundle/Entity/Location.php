@@ -104,9 +104,15 @@ class Location
      */
     protected $projects;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Workorder", mappedBy="location")
+     */
+    protected $workorders;
+
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
+        $this->workorders = new ArrayCollection();
     }
 
     /**
