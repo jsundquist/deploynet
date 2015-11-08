@@ -56,7 +56,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projects/details/{id}")
+     * @Route("/project/details/{id}")
      * @param string $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
