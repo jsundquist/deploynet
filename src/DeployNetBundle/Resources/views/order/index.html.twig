@@ -1,0 +1,34 @@
+{% extends 'DeployNetBundle::layout.html.twig' %}
+{% block content %}
+    <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Project List</a></li>
+        {% if project %}
+        <li><a href="/project/details/{{ project.id }}">{{ project.name }}</a></li>
+        {% endif %}
+    </ol>
+    <h1 class="sub-header">Orders</h1>
+    <a href="/orders/add">Add Project</a>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Order Id</th>
+                <th>Customer</th>
+                <th>Location</th>
+                <th>Type</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Order Id</td>
+                    <td>Customer</td>
+                    <td>Location</td>
+                    <td>Type</td>
+                    <td>Status</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

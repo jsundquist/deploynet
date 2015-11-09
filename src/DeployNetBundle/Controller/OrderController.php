@@ -8,11 +8,45 @@ use Symfony\Component\HttpFoundation\Response;
 class OrderController extends Controller
 {
     /**
-     * @Route("/project/{projectId}/orders")
+     * @Route("/orders")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
-        return $this->render("DeployNetBundle:Order:index.html.twig");
+        $repository = $this->getDoctrine()->getRepository('DeployNetBundle:Workorder');
+
+        $orders = $repository->findAll();
+
+        return $this->render(
+            "DeployNetBundle:Order:index.html.twig",
+            [
+                'project' => null,
+                'orders' => $orders
+            ]
+        );
+    }
+
+    /**
+     * @Route("/project/{projectId}/orders")
+     * @param $projectId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function projectOrdersAction($projectId)
+    {
+        $orderRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Workorder');
+        $projectRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Project');
+
+        $orders  = $orderRepository->findBy(array('project' => $projectId));
+
+        $project = $projectRepository->findOneBy(array('id' => $projectId));
+
+        return $this->render(
+            "DeployNetBundle:Order:index.html.twig",
+            [
+                'project' => $project,
+                'orders' => $orders
+            ]
+        );
     }
 
     /**

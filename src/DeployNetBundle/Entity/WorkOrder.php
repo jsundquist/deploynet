@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  * @ORM\Table(name="work_orders")
  */
-class WorkOrder
+class Workorder
 {
     /**
      * @ORM\Column(type="integer")
@@ -30,26 +30,40 @@ class WorkOrder
     protected $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="work_orders")
+     * @ORM\Column(type="integer", length=100, name="customer_id")
+     */
+    protected $customerId;
+
+    /**
+     * @ORM\Column(type="integer", length=100, name="location_id")
+     */
+    protected $locationId;
+
+    /**
+     * @ORM\Column(type="integer", length=100, name="project_id")
+     */
+    protected $projectId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="workorders")
      * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
      */
     protected $customer;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Location", inversedBy="work_orders")
-     * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
-     */
-    protected $location;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Project", inversedBy="work_orders")
+     * @ORM\ManyToOne(targetEntity="Project", inversedBy="workorders")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     protected $project;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Location", inversedBy="workorders")
+     * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
+     */
+    protected $location;
+
     public function __construct()
     {
-
     }
 
     /**
@@ -175,5 +189,74 @@ class WorkOrder
     public function getProject()
     {
         return $this->project;
+    }
+
+    /**
+     * Set customerId
+     *
+     * @param integer $customerId
+     * @return Workorder
+     */
+    public function setCustomerId($customerId)
+    {
+        $this->customerId = $customerId;
+
+        return $this;
+    }
+
+    /**
+     * Get customerId
+     *
+     * @return integer 
+     */
+    public function getCustomerId()
+    {
+        return $this->customerId;
+    }
+
+    /**
+     * Set locationId
+     *
+     * @param integer $locationId
+     * @return Workorder
+     */
+    public function setLocationId($locationId)
+    {
+        $this->locationId = $locationId;
+
+        return $this;
+    }
+
+    /**
+     * Get locationId
+     *
+     * @return integer 
+     */
+    public function getLocationId()
+    {
+        return $this->locationId;
+    }
+
+    /**
+     * Set projectId
+     *
+     * @param integer $projectId
+     * @return Workorder
+     */
+    public function setProjectId($projectId)
+    {
+        $this->projectId = $projectId;
+
+        return $this;
+    }
+
+    /**
+     * Get projectId
+     *
+     * @return integer 
+     */
+    public function getProjectId()
+    {
+        return $this->projectId;
     }
 }
