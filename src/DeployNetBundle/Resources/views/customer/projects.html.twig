@@ -34,14 +34,14 @@
             <td>{{ project.status }}</td>
             <td>{{ project.type }}</td>
             <td>{{ project.activeWorkOrders }}</td>
-            <td>John Doe</td>
-            <td>--/--/---- --:-- AM</td>
-            <td>--/--/---- --:-- AM</td>
+            <td>{#John Doe#}</td>
+            <td>{#--/--/---- --:-- AM#}</td>
+            <td>{#--/--/---- --:-- AM#}</td>
         </tr>
             {% endfor %}
         </tbody>
     </table>
-    <div class="center-block">
+    {#<div class="center-block">
         <ul class="pagination text-center">
             <li class="disabled"><span>&laquo;</span></li>
             <li class="active"><span>1 <span class="sr-only">(current)</span></span></li>
@@ -51,6 +51,6 @@
             <li><a href="#">5</a></li>
             <li><a href="#">&raquo;</a></li>
         </ul>
-    </div>
+    </div>#}
 </div>
 {% endblock %}
