@@ -13,10 +13,10 @@ class ProjectType extends AbstractType
             ->add("description", "text")
             ->add("type", "text")
             ->add(
-                "location",
+                "customer",
                 'entity',
                 [
-                    'class' => 'DeployNetBundle:Location',
+                    'class' => 'DeployNetBundle:Customer',
                     'property' => 'name'
                 ]
             )

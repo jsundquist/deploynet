@@ -1,32 +1,68 @@
 {% extends 'DeployNetBundle::layout.html.twig' %}
 {% block content %}
 <h1>Project Information</h1>
-    <table class="table table-responsive">
-        <tr>
-            <td>Customer</td>
-            <td>
-                <a href="/customer/detail/{{ project.customer.id }}">{{ project.customer.name }}</a><br/>
-                {{ project.customer.address1 }}<br />
-                {{ project.customer.city }}, {{ project.customer.state.abbreviation }} {{ project.customer.postalCode }}
-            </td>
-            <td>Site</td>
-            <td>
-                <a href="/customer/location/{{ project.location.id }}/details">{{ project.location.name }}</a><br />
-                {{ project.location.address1 }}<br />
-                {{ project.location.city }}, {{ project.location.state.abbreviation }} {{ project.location.postalCode }}
-            </td>
-        </tr>
-    </table>
-    <h2>{{ project.name }}</h2>
-    {{ project.description }}
-    <hr>
-    <h2>Work Orders</h2>
-    <table class="table table-responsive table-bordered table-condensed table-striped table-hover">
-        <thead>
-        <tr>
-            <th>Site</th>
-            <th></th>
-        </tr>
-        </thead>
-    </table>
+<table class="table table-responsive">
+    <tr>
+        <td>Customer</td>
+        <td>
+            <a href="/customer/detail/{{ project.customer.id }}">{{ project.customer.name }}</a><br/>
+            {{ project.customer.address1 }}<br />
+            {{ project.customer.city }}, {{ project.customer.state.abbreviation }} {{ project.customer.postalCode }}
+        </td>
+    </tr>
+</table>
+<h2>{{ project.name }}</h2>
+{{ project.description }}
+<hr>
+<h2>Work Orders</h2>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orderModal">
+        Add Order
+    </button>
+<table class="table table-responsive table-bordered table-condensed table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Site</th>
+        <th></th>
+    </tr>
+    </thead>
+</table>
+
+    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Site</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Schedule Date</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Short Description</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Long Description</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">PO Number</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

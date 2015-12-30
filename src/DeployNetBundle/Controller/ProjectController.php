@@ -41,7 +41,7 @@ class ProjectController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $project->setCustomer($project->getLocation()->getCustomer());
+//            $project->setCustomer($project->getLocation()->getCustomer());
             $em->persist($project);
             $em->flush();
             return $this->redirectToRoute('project_index');
