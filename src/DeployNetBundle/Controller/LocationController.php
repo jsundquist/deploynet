@@ -66,7 +66,7 @@ class LocationController extends Controller
     }
 
     /**
-     * @Route("/customer/location/{id}/edit")
+     * @Route("/customer/location/{locationId}/edit")
      * @param Request $request
      * @param $locationId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -76,8 +76,6 @@ class LocationController extends Controller
         $location = $this->getLocation($locationId);
 
         $customer = $this->getCustomer($location->getCustomer()->getId());
-
-        $location = new Location();
 
         $form = $this->createForm(new LocationType(), $location);
 
@@ -90,7 +88,7 @@ class LocationController extends Controller
             $em->persist($location);
             $em->flush();
 
-            return $this->redirectToRoute('customer_location', ['id' => $locationId]);
+            return $this->redirectToRoute('customer_location', ['locationId' => $locationId]);
         }
 
         return $this->render(
@@ -219,7 +217,7 @@ class LocationController extends Controller
     {
         $locationRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Location');
 
-        return $locationRepository->findOneBy(array('id' => $locationId));
+        return $locationRepository->find($locationId);
     }
 
     private function getCustomer($customerId)
