@@ -5,12 +5,12 @@ namespace DeployNetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * OrderList
+ * WorkOrderLine
  *
  * @ORM\Table("order_lines")
  * @ORM\Entity
  */
-class WorkOrderLines
+class WorkOrderLine
 {
     /**
      * @var integer
@@ -24,13 +24,6 @@ class WorkOrderLines
     /**
      * @var integer
      *
-     * @ORM\Column(name="order_id", type="integer")
-     */
-    private $orderId;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="product_id", type="integer")
      */
     private $productId;
@@ -38,21 +31,21 @@ class WorkOrderLines
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="serial_number_in", type="string", length=255)
+     * @ORM\Column(name="serial_number_in", type="string", length=255, nullable=true)
      */
     private $serialNumberIn;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="serial_number_out", type="string", length=255)
+     * @ORM\Column(name="serial_number_out", type="string", length=255, nullable=true)
      */
     private $serialNumberOut;
 
@@ -66,43 +59,49 @@ class WorkOrderLines
     /**
      * @var string
      *
-     * @ORM\Column(name="work_preformed", type="text")
+     * @ORM\Column(name="work_preformed", type="text", nullable=true)
      */
     private $workPreformed;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="problem_found", type="text")
+     * @ORM\Column(name="problem_found", type="text", nullable=true)
      */
     private $problemFound;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="nri", type="smallint")
+     * @ORM\Column(name="nri", type="smallint", nullable=true)
      */
     private $nri;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="doa", type="smallint")
+     * @ORM\Column(name="doa", type="smallint", nullable=true)
      */
     private $doa;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="found_doa", type="smallint")
+     * @ORM\Column(name="found_doa", type="smallint", nullable=true)
      */
     private $foundDoa;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WorkOrder", inversedBy="workOrder")
+     * @ORM\ManyToOne(targetEntity="WorkOrder", inversedBy="workOrderLines")
      * @ORM\JoinColumn(name="work_order_id", referencedColumnName="id")
      */
     protected $workOrder;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="workOrderLines")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     */
+    protected $product;
 
     /**
      * Get id
@@ -115,33 +114,10 @@ class WorkOrderLines
     }
 
     /**
-     * Set orderId
-     *
-     * @param integer $orderId
-     * @return OrderList
-     */
-    public function setOrderId($orderId)
-    {
-        $this->orderId = $orderId;
-
-        return $this;
-    }
-
-    /**
-     * Get orderId
-     *
-     * @return integer 
-     */
-    public function getOrderId()
-    {
-        return $this->orderId;
-    }
-
-    /**
      * Set productId
      *
      * @param integer $productId
-     * @return OrderList
+     * @return WorkOrderLine
      */
     public function setProductId($productId)
     {
@@ -164,7 +140,7 @@ class WorkOrderLines
      * Set description
      *
      * @param string $description
-     * @return OrderList
+     * @return WorkOrderLine
      */
     public function setDescription($description)
     {
@@ -187,7 +163,7 @@ class WorkOrderLines
      * Set serialNumberIn
      *
      * @param string $serialNumberIn
-     * @return OrderList
+     * @return WorkOrderLine
      */
     public function setSerialNumberIn($serialNumberIn)
     {
@@ -210,7 +186,7 @@ class WorkOrderLines
      * Set serialNumberOut
      *
      * @param string $serialNumberOut
-     * @return OrderList
+     * @return WorkOrderLine
      */
     public function setSerialNumberOut($serialNumberOut)
     {
@@ -233,7 +209,7 @@ class WorkOrderLines
      * Set orderLineStatusId
      *
      * @param integer $orderLineStatusId
-     * @return OrderList
+     * @return WorkOrderLine
      */
     public function setOrderLineStatusId($orderLineStatusId)
     {
@@ -256,7 +232,7 @@ class WorkOrderLines
      * Set workPreformed
      *
      * @param string $workPreformed
-     * @return OrderList
+     * @return WorkOrderLine
      */
     public function setWorkPreformed($workPreformed)
     {
@@ -279,7 +255,7 @@ class WorkOrderLines
      * Set problemFound
      *
      * @param string $problemFound
-     * @return OrderList
+     * @return WorkOrderLine
      */
     public function setProblemFound($problemFound)
     {
@@ -302,7 +278,7 @@ class WorkOrderLines
      * Set nri
      *
      * @param integer $nri
-     * @return OrderList
+     * @return WorkOrderLine
      */
     public function setNri($nri)
     {
@@ -325,7 +301,7 @@ class WorkOrderLines
      * Set doa
      *
      * @param integer $doa
-     * @return OrderList
+     * @return WorkOrderLine
      */
     public function setDoa($doa)
     {
@@ -348,7 +324,7 @@ class WorkOrderLines
      * Set foundDoa
      *
      * @param integer $foundDoa
-     * @return OrderList
+     * @return WorkOrderLine
      */
     public function setFoundDoa($foundDoa)
     {
@@ -365,5 +341,51 @@ class WorkOrderLines
     public function getFoundDoa()
     {
         return $this->foundDoa;
+    }
+
+    /**
+     * Set workOrder
+     *
+     * @param WorkOrder $workOrder
+     * @return WorkOrderLine
+     */
+    public function setWorkOrder(WorkOrder $workOrder = null)
+    {
+        $this->workOrder = $workOrder;
+
+        return $this;
+    }
+
+    /**
+     * Get workOrder
+     *
+     * @return WorkOrder 
+     */
+    public function getWorkOrder()
+    {
+        return $this->workOrder;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \DeployNetBundle\Entity\Product $product
+     * @return WorkOrderLine
+     */
+    public function setProduct(\DeployNetBundle\Entity\Product $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \DeployNetBundle\Entity\Product 
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 }

@@ -1,7 +1,6 @@
 <?php
 namespace DeployNetBundle\Entity;
 
-use DeployNetBundle\Entity\Manufacturer;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -51,6 +50,11 @@ class Product
      * @ORM\JoinColumn(name="manufacturer_id", referencedColumnName="id")
      */
     protected $manufacturer;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WorkOrderLine", mappedBy="product")
+     */
+    protected $workOrderLines;
 
     /**
      * Get id
@@ -195,8 +199,48 @@ class Product
      *
      * @return boolean 
      */
-    public function isSerialized()
+    public function getSerialized()
     {
         return $this->serialized;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->workOrderLine = new ArrayCollection();
+    }
+
+    /**
+     * Add workOrderLine
+     *
+     * @param WorkOrderLine $workOrderLine
+     * @return Product
+     */
+    public function addWorkOrderLine(WorkOrderLine $workOrderLine)
+    {
+        $this->workOrderLine[] = $workOrderLine;
+
+        return $this;
+    }
+
+    /**
+     * Remove workOrderLine
+     *
+     * @param WorkOrderLine $workOrderLine
+     */
+    public function removeWorkOrderLine(WorkOrderLine $workOrderLine)
+    {
+        $this->workOrderLine->removeElement($workOrderLine);
+    }
+
+    /**
+     * Get workOrderLine
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkOrderLine()
+    {
+        return $this->workOrderLine;
     }
 }

@@ -27,7 +27,7 @@ class Manufacturer
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="manufacturer")
      */
     protected $products;
 

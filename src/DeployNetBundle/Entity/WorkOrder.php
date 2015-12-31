@@ -81,7 +81,7 @@ class WorkOrder
     protected $location;
 
     /**
-     * @ORM\OneToMany(targetEntity="WorkOrderLines", mappedBy="workOrder")
+     * @ORM\OneToMany(targetEntity="WorkOrderLine", mappedBy="workOrder")
      */
     protected $workOrderLines;
 
@@ -97,29 +97,6 @@ class WorkOrder
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return WorkOrder
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -396,5 +373,38 @@ class WorkOrder
     public function getPoNumber()
     {
         return $this->poNumber;
+    }
+
+    /**
+     * Add workOrderLine
+     *
+     * @param WorkOrderLine $workOrderLine
+     * @return WorkOrder
+     */
+    public function addWorkOrderLine(WorkOrderLine $workOrderLine)
+    {
+        $this->workOrderLines[] = $workOrderLine;
+
+        return $this;
+    }
+
+    /**
+     * Remove workOrderLine
+     *
+     * @param WorkOrderLine $workOrderLine
+     */
+    public function removeWorkOrderLine(WorkOrderLine $workOrderLine)
+    {
+        $this->workOrderLines->removeElement($workOrderLine);
+    }
+
+    /**
+     * Get workOrderLine
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkOrderLine()
+    {
+        return $this->workOrderLines;
     }
 }
