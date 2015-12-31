@@ -1,6 +1,11 @@
 {% extends 'DeployNetBundle::layout.html.twig' %}
 {% block content %}
-<h1>Project Information</h1>
+    <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/projects">Project List</a></li>
+    <li class="active">{{ project.name }} Details</li>
+    </ul>
+<h1>Work Order Information</h1>
 <table class="table table-responsive">
     <tr>
         <td>Customer</td>
@@ -33,7 +38,7 @@
             <tbody>
                 {% for workOrder in project.workOrders %}
                 <tr>
-                    <td><a href="">{{ workOrder.id }}</a></td>
+                    <td><a href="/project/{{ workOrder.project.id }}/order/{{ workOrder.id }}/view/">{{ workOrder.id }}</a></td>
                     <td>{{ workOrder.location.name }}<br/>{{ workOrder.location.city }}, {{ workOrder.location.state.name }} {{ workOrder.location.postalCode }}</td>
                     <td>{{ workOrder.createdDate|date }}</td>
                     <td>{{ workOrder.scheduleDate|date }}</td>
