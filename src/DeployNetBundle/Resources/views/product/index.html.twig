@@ -1,6 +1,6 @@
 {% extends 'DeployNetBundle::layout.html.twig' %}
 {% block content %}
-<a href="/configuration/product/" class="btn btn-default">Add Product</a>
+<a href="/configuration/product/add" class="btn btn-default">Add Product</a>
 <table class="table table-responsive">
     <thead>
     <tr>
@@ -12,13 +12,15 @@
     </tr>
     </thead>
     <tbody>
+    {% for product in products %}
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><a href="/configuration/product/">Edit</a> | Delete</td>
+        <td>{{ product.partNumber }}</td>
+        <td>{{ product.altPartNumber }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.manufacturer.name }}</td>
+        <td><a href="/configuration/product/edit/{{ product.id }}">Edit</a> | Delete</td>
     </tr>
+        {% endfor %}
     </tbody>
 </table>
 {% endblock %}

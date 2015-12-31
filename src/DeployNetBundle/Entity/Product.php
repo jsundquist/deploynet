@@ -37,6 +37,11 @@ class Product
     protected $description;
 
     /**
+     * @ORM\Column(type="boolean", options={"default"="1"})
+     */
+    protected $serialized;
+
+    /**
      * @ORM\Column(type="integer", name="manufacturer_id")
      */
     protected $manufacturerId;
@@ -45,7 +50,7 @@ class Product
      * @ORM\ManyToOne(targetEntity="Manufacturer", inversedBy="products")
      * @ORM\JoinColumn(name="manufacturer_id", referencedColumnName="id")
      */
-    protected $manufacturerName;
+    protected $manufacturer;
 
     /**
      * Get id
@@ -152,23 +157,46 @@ class Product
     /**
      * Set manufacturerName
      *
-     * @param Manufacturer $manufacturerName
+     * @param Manufacturer $manufacturer
      * @return Product
      */
-    public function setManufacturerName(Manufacturer $manufacturerName = null)
+    public function setManufacturer(Manufacturer $manufacturer = null)
     {
-        $this->manufacturerName = $manufacturerName;
+        $this->manufacturer = $manufacturer;
     
         return $this;
     }
 
     /**
-     * Get manufacturerName
+     * Get manufacturer
      *
      * @return Manufacturer
      */
-    public function getManufacturerName()
+    public function getManufacturer()
     {
-        return $this->manufacturerName;
+        return $this->manufacturer;
+    }
+
+    /**
+     * Set serialized
+     *
+     * @param boolean $serialized
+     * @return Product
+     */
+    public function setSerialized($serialized)
+    {
+        $this->serialized = $serialized;
+
+        return $this;
+    }
+
+    /**
+     * Get serialized
+     *
+     * @return boolean 
+     */
+    public function isSerialized()
+    {
+        return $this->serialized;
     }
 }
