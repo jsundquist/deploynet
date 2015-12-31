@@ -54,6 +54,7 @@ class ProductController extends Controller
             ]
         );
     }
+
     /**
      * @Route("/configuration/product/edit/{id}", requirements={"id" = "\d+"})
      * @param $id
@@ -80,6 +81,21 @@ class ProductController extends Controller
                 'form' => $form->createView(),
             ]
         );
+    }
+
+    /**
+     * @Route("/configuration/product/delete/{id}", requirements={"id" = "\d+"})
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteAction($id)
+    {
+        $product = $this->getProduct($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($product);
+        $em->flush();
+        return $this->redirectToRoute('product_index');
     }
 
     private function getProduct($productId)
