@@ -2,7 +2,6 @@
 namespace DeployNetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class WorkOrder
@@ -10,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  * @ORM\Table(name="work_orders")
  */
-class Workorder
+class WorkOrder
 {
     /**
      * @ORM\Column(type="integer")
@@ -20,19 +19,44 @@ class Workorder
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=100, name="name")
-     */
-    protected $name;
-
-    /**
-     * @ORM\Column(type="string", length=100, name="status")
+     * @ORM\Column(type="string", length=100, name="status", options={"default"="New"}, nullable=true)
      */
     protected $status;
 
     /**
-     * @ORM\Column(type="integer", length=100, name="customer_id")
+     * @ORM\Column(type="date", name="schedule_date")
      */
-    protected $customerId;
+    protected $scheduleDate;
+
+    /**
+     * @ORM\Column(type="datetime", name="created_date")
+     */
+    protected $createdDate;
+
+    /**
+     * @ORM\Column(type="datetime", name="close_date", nullable=true)
+     */
+    protected $closeDate;
+
+    /**
+     * @ORM\Column(type="integer", name="work_order_type_id")
+     */
+    protected $type;
+
+    /**
+     * @ORM\Column(type="string", length=255, name="short_description")
+     */
+    protected $shortDescription;
+
+    /**
+     * @ORM\Column(type="text", name="long_description")
+     */
+    protected $longDescription;
+
+    /**
+     * @ORM\Column(type="string", length=100, name="po_number", nullable=true)
+     */
+    protected $poNumber;
 
     /**
      * @ORM\Column(type="integer", length=100, name="location_id")
@@ -45,19 +69,13 @@ class Workorder
     protected $projectId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="workorders")
-     * @ORM\JoinColumn(name="customer_id", referencedColumnName="id")
-     */
-    protected $customer;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Project", inversedBy="workorders")
+     * @ORM\ManyToOne(targetEntity="Project", inversedBy="workOrders")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
     protected $project;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Location", inversedBy="workorders")
+     * @ORM\ManyToOne(targetEntity="Location", inversedBy="workOrders")
      * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
      */
     protected $location;
@@ -123,35 +141,12 @@ class Workorder
     }
 
     /**
-     * Set customer
-     *
-     * @param \DeployNetBundle\Entity\Customer $customer
-     * @return WorkOrder
-     */
-    public function setCustomer(\DeployNetBundle\Entity\Customer $customer = null)
-    {
-        $this->customer = $customer;
-    
-        return $this;
-    }
-
-    /**
-     * Get customer
-     *
-     * @return \DeployNetBundle\Entity\Customer 
-     */
-    public function getCustomer()
-    {
-        return $this->customer;
-    }
-
-    /**
      * Set location
      *
-     * @param \DeployNetBundle\Entity\Location $location
+     * @param Location $location
      * @return WorkOrder
      */
-    public function setLocation(\DeployNetBundle\Entity\Location $location = null)
+    public function setLocation(Location $location = null)
     {
         $this->location = $location;
     
@@ -161,7 +156,7 @@ class Workorder
     /**
      * Get location
      *
-     * @return \DeployNetBundle\Entity\Location 
+     * @return Location
      */
     public function getLocation()
     {
@@ -171,10 +166,10 @@ class Workorder
     /**
      * Set project
      *
-     * @param \DeployNetBundle\Entity\Project $project
+     * @param Project $project
      * @return WorkOrder
      */
-    public function setProject(\DeployNetBundle\Entity\Project $project = null)
+    public function setProject(Project $project = null)
     {
         $this->project = $project;
     
@@ -184,34 +179,11 @@ class Workorder
     /**
      * Get project
      *
-     * @return \DeployNetBundle\Entity\Project 
+     * @return Project
      */
     public function getProject()
     {
         return $this->project;
-    }
-
-    /**
-     * Set customerId
-     *
-     * @param integer $customerId
-     * @return Workorder
-     */
-    public function setCustomerId($customerId)
-    {
-        $this->customerId = $customerId;
-
-        return $this;
-    }
-
-    /**
-     * Get customerId
-     *
-     * @return integer 
-     */
-    public function getCustomerId()
-    {
-        return $this->customerId;
     }
 
     /**
@@ -258,5 +230,166 @@ class Workorder
     public function getProjectId()
     {
         return $this->projectId;
+    }
+
+    /**
+     * Set scheduleDate
+     *
+     * @param \DateTime $scheduleDate
+     * @return WorkOrder
+     */
+    public function setScheduleDate($scheduleDate)
+    {
+        $this->scheduleDate = $scheduleDate;
+
+        return $this;
+    }
+
+    /**
+     * Get scheduleDate
+     *
+     * @return \DateTime 
+     */
+    public function getScheduleDate()
+    {
+        return $this->scheduleDate;
+    }
+
+    /**
+     * Set createdDate
+     *
+     * @param \DateTime $createdDate
+     * @return WorkOrder
+     */
+    public function setCreatedDate($createdDate)
+    {
+        $this->createdDate = $createdDate;
+
+        return $this;
+    }
+
+    /**
+     * Get createdDate
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedDate()
+    {
+        return $this->createdDate;
+    }
+
+    /**
+     * Set closeDate
+     *
+     * @param \DateTime $closeDate
+     * @return WorkOrder
+     */
+    public function setCloseDate($closeDate)
+    {
+        $this->closeDate = $closeDate;
+
+        return $this;
+    }
+
+    /**
+     * Get closeDate
+     *
+     * @return \DateTime 
+     */
+    public function getCloseDate()
+    {
+        return $this->closeDate;
+    }
+
+    /**
+     * Set type
+     *
+     * @param $type
+     * @return WorkOrder
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \int 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set shortDescription
+     *
+     * @param string $shortDescription
+     * @return WorkOrder
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get shortDescription
+     *
+     * @return string 
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
+
+    /**
+     * Set longDescription
+     *
+     * @param string $longDescription
+     * @return WorkOrder
+     */
+    public function setLongDescription($longDescription)
+    {
+        $this->longDescription = $longDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get longDescription
+     *
+     * @return string 
+     */
+    public function getLongDescription()
+    {
+        return $this->longDescription;
+    }
+
+    /**
+     * Set poNumber
+     *
+     * @param string $poNumber
+     * @return WorkOrder
+     */
+    public function setPoNumber($poNumber)
+    {
+        $this->poNumber = $poNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get poNumber
+     *
+     * @return string 
+     */
+    public function getPoNumber()
+    {
+        return $this->poNumber;
     }
 }

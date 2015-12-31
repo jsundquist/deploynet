@@ -18,49 +18,41 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orderModal">
         Add Order
     </button>
-<table class="table table-responsive table-bordered table-condensed table-striped table-hover">
-    <thead>
-    <tr>
-        <th>Site</th>
-        <th></th>
-    </tr>
-    </thead>
-</table>
-
+    <br />
+    <br />
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Site</th>
+                <th>Created Date</th>
+                <th>Schedule Date</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for workOrder in project.workOrders %}
+                <tr>
+                    <td><a href="">{{ workOrder.id }}</a></td>
+                    <td>{{ workOrder.location.name }}<br/>{{ workOrder.location.city }}, {{ workOrder.location.state.name }} {{ workOrder.location.postalCode }}</td>
+                    <td>{{ workOrder.createdDate|date }}</td>
+                    <td>{{ workOrder.scheduleDate|date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    <h4 class="modal-title" id="myModalLabel">Add Order</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Site</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Schedule Date</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Short Description</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Long Description</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">PO Number</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>

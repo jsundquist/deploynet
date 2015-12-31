@@ -2,7 +2,9 @@
 namespace DeployNetBundle\Controller;
 
 use DeployNetBundle\Entity\Project;
+use DeployNetBundle\Entity\WorkOrder;
 use DeployNetBundle\Form\Type\ProjectType;
+use DeployNetBundle\Form\Type\WorkOrderType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +43,6 @@ class ProjectController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-//            $project->setCustomer($project->getLocation()->getCustomer());
             $em->persist($project);
             $em->flush();
             return $this->redirectToRoute('project_index');
@@ -57,11 +58,32 @@ class ProjectController extends Controller
 
     /**
      * @Route("/project/details/{id}")
+     * @param Request $request
      * @param string $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function detailAction($id)
+    public function detailAction(Request $request, $id)
     {
+
+        $repository = $this->getDoctrine()->getRepository('DeployNetBundle:Project');
+
+        $workOrder = new WorkOrder();
+        $form = $this->createForm(new WorkOrderType(), $workOrder);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $lastAccess = new \DateTime('now');
+            $workOrder->setCreatedDate($lastAccess);
+
+            $workOrder->setProjectId((int)$id);
+            $project = $repository->findOneBy(array('id' => $id));
+            $workOrder->setProject($project);
+            $em->persist($workOrder);
+            $em->flush();
+        }
+
         $repository = $this->getDoctrine()->getRepository('DeployNetBundle:Project');
 
         $project = $repository->findOneBy(array('id' => $id));
@@ -74,7 +96,8 @@ class ProjectController extends Controller
         return $this->render(
             "DeployNetBundle:Project:details.html.twig",
             [
-                'project' => $project
+                'project' => $project,
+                'form' => $form->createView(),
             ]
         );
     }

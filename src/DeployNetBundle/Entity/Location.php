@@ -105,14 +105,14 @@ class Location
     protected $projects;
 
     /**
-     * @ORM\OneToMany(targetEntity="Workorder", mappedBy="location")
+     * @ORM\OneToMany(targetEntity="WorkOrder", mappedBy="location")
      */
-    protected $workorders;
+    protected $workOrders;
 
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
-        $this->workorders = new ArrayCollection();
+        $this->workOrders = new ArrayCollection();
     }
 
     /**
@@ -511,5 +511,38 @@ class Location
     public function getProjects()
     {
         return $this->projects;
+    }
+
+    /**
+     * Add workOrders
+     *
+     * @param \DeployNetBundle\Entity\WorkOrder $workOrders
+     * @return Location
+     */
+    public function addWorkOrder(\DeployNetBundle\Entity\WorkOrder $workOrders)
+    {
+        $this->workOrders[] = $workOrders;
+
+        return $this;
+    }
+
+    /**
+     * Remove workOrders
+     *
+     * @param \DeployNetBundle\Entity\WorkOrder $workOrders
+     */
+    public function removeWorkOrder(\DeployNetBundle\Entity\WorkOrder $workOrders)
+    {
+        $this->workOrders->removeElement($workOrders);
+    }
+
+    /**
+     * Get workOrders
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkOrders()
+    {
+        return $this->workOrders;
     }
 }

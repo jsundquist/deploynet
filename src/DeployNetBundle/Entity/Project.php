@@ -60,13 +60,13 @@ class Project
     protected $location;
 
     /**
-     * @ORM\OneToMany(targetEntity="Workorder", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="WorkOrder", mappedBy="project")
      */
-    protected $workorders;
+    protected $workOrders;
 
     public function __construct()
     {
-        $this->workorders = new ArrayCollection();
+        $this->workOrders = new ArrayCollection();
     }
 
     /**
@@ -218,42 +218,42 @@ class Project
     }
 
     /**
-     * Add workorders
+     * Add workOrders
      *
-     * @param \DeployNetBundle\Entity\WorkOrder $workorders
+     * @param \DeployNetBundle\Entity\WorkOrder $workOrders
      * @return Project
      */
-    public function addWorkOrder(\DeployNetBundle\Entity\WorkOrder $workorders)
+    public function addWorkOrder(\DeployNetBundle\Entity\WorkOrder $workOrders)
     {
-        $this->workorders[] = $workorders;
+        $this->workOrders[] = $workOrders;
     
         return $this;
     }
 
     /**
-     * Remove workorders
+     * Remove workOrders
      *
-     * @param \DeployNetBundle\Entity\WorkOrder $workorders
+     * @param \DeployNetBundle\Entity\WorkOrder $workOrders
      */
-    public function removeWorkOrder(\DeployNetBundle\Entity\WorkOrder $workorders)
+    public function removeWorkOrder(\DeployNetBundle\Entity\WorkOrder $workOrders)
     {
-        $this->workorders->removeElement($workorders);
+        $this->workOrders->removeElement($workOrders);
     }
 
     /**
-     * Get workorders
+     * Get workOrders
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getWorkOrders()
     {
-        return $this->workorders;
+        return $this->workOrders;
     }
 
     public function getActiveWorkOrders()
     {
         $activeWorkOrders = 0;
-        foreach ($this->workorders as $workOrder) {
+        foreach ($this->workOrders as $workOrder) {
             if ($workOrder->getStatus() == '') {
                 $activeWorkOrders++;
             }

@@ -94,16 +94,10 @@ class Customer
      */
     protected $projects;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Workorder", mappedBy="customer")
-     */
-    protected $workorders;
-
     public function __construct()
     {
         $this->locations = new ArrayCollection();
         $this->contacts = new ArrayCollection();
-        $this->workorders = new ArrayCollection();
     }
 
     /**
@@ -466,71 +460,5 @@ class Customer
     public function getProjects()
     {
         return $this->projects;
-    }
-
-    /**
-     * Get orders
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOrders()
-    {
-        return $this->workorders;
-    }
-
-    /**
-     * Add orders
-     *
-     * @param \DeployNetBundle\Entity\Workorder $orders
-     * @return Customer
-     */
-    public function addOrder(\DeployNetBundle\Entity\Workorder $orders)
-    {
-        $this->workorders[] = $orders;
-
-        return $this;
-    }
-
-    /**
-     * Remove orders
-     *
-     * @param \DeployNetBundle\Entity\Workorder $orders
-     */
-    public function removeOrder(\DeployNetBundle\Entity\Workorder $orders)
-    {
-        $this->workorders->removeElement($orders);
-    }
-
-    /**
-     * Add workorders
-     *
-     * @param \DeployNetBundle\Entity\Workorder $workorders
-     * @return Customer
-     */
-    public function addWorkorder(\DeployNetBundle\Entity\Workorder $workorders)
-    {
-        $this->workorders[] = $workorders;
-
-        return $this;
-    }
-
-    /**
-     * Remove workorders
-     *
-     * @param \DeployNetBundle\Entity\Workorder $workorders
-     */
-    public function removeWorkorder(\DeployNetBundle\Entity\Workorder $workorders)
-    {
-        $this->workorders->removeElement($workorders);
-    }
-
-    /**
-     * Get workorders
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getWorkorders()
-    {
-        return $this->workorders;
     }
 }
