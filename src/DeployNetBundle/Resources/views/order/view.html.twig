@@ -1,3 +1,79 @@
 {% extends 'DeployNetBundle::layout.html.twig' %}
 {% block content %}
+    <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Project List</a></li>
+        <li><a href="/project/details/{{ workOrder.project.id }}">{{ workOrder.project.name }} Details</a></li>
+        <li class="active">Work Order #{{ workOrder.id }}</li>
+    </ol>
+    <h1>Project Information</h1>
+    <table class="table table-responsive">
+        <tr>
+            <td>Customer</td>
+            <td>
+                <a href="/customer/detail/{{ workOrder.project.customer.id }}">{{ workOrder.project.customer.name }}</a><br/>
+                {{ workOrder.project.customer.address1 }}<br />
+                {{ workOrder.project.customer.city }}, {{ workOrder.project.customer.state.abbreviation }} {{ workOrder.project.customer.postalCode }}
+            </td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td>
+                <a href="/customer/detail/{{ workOrder.location.id }}">{{ workOrder.location.name }}</a><br/>
+                {{ workOrder.location.address1 }}<br />
+                {{ workOrder.location.city }}, {{ workOrder.location.state.abbreviation }} {{ workOrder.location.postalCode }}
+            </td>
+        </tr>
+    </table>
+
+    {{ workOrder.shortDescription }}
+    <hr>
+    <h2>Work Order Lines</h2>
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orderModal">
+            Add Line Item
+        </button>
+        <button type="button" class="btn btn-default" {% if workOrder.workOrderLine|length == 0 %} disabled="disabled"{% endif %}>Ship Items</button>
+    </div>
+    <br />
+    <br />
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Part Number</th>
+                <th>Description</th>
+                <th>Serial # In</th>
+                <th>Serial # Out</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for workOrderLine in workOrder.workOrderLine %}
+                <tr>
+                    <td>{{ workOrderLine.product.partNumber }}</td>
+                    <td>{{ workOrderLine.description }}</td>
+                    <td>{% if workOrderLine.serialNumberIn %}{{ workOrderLine.serialNumberIn }} {% else %} <button type="button" class="btn btn-primary btn-sm">Add Serial</button> {% endif %}</td>
+                    <td>{% if workOrderLine.serialNumberOut %}{{ workOrderLine.serialNumberOut }} {% else %} <button type="button" class="btn btn-primary btn-sm">Add Serial</button> {% endif %}</td>
+                    <td>{{ workOrderLine.orderLineStatusId}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Order</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,8 +1,11 @@
 <?php
 namespace DeployNetBundle\Controller;
 
+use DeployNetBundle\Entity\WorkOrderLine;
+use DeployNetBundle\Form\Type\WorkOrderLineType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class OrderController extends Controller
@@ -51,10 +54,39 @@ class OrderController extends Controller
 
     /**
      * @Route("/project/{projectId}/order/{orderId}/view/")
+     * @param $projectId
+     * @param $orderId
+     * @param Request $request
+     * @return Response
      */
-    public function viewAction()
+    public function viewAction($projectId, $orderId, Request $request)
     {
-        return $this->render("DeployNetBundle:Order:view.html.twig");
+        $repository = $this->getDoctrine()->getRepository('DeployNetBundle:WorkOrder');
+        $order = $repository->findOneBy(array('id' => $orderId));
+
+        $workOrderLine = new WorkOrderLine();
+        $form = $this->createForm(new WorkOrderLineType(), $workOrderLine);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $workOrderLine->setWorkOrder($order);
+            $workOrderLine->setOrderLineStatusId(1);
+            $em->persist($workOrderLine);
+            $em->flush();
+
+            $order = $repository->findOneBy(array('id' => $orderId));
+        }
+
+
+        return $this->render(
+            "DeployNetBundle:Order:view.html.twig",
+            [
+                'workOrder' => $order,
+                'form' => $form->createView()
+            ]
+        );
     }
 
     /**
