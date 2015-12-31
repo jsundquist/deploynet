@@ -38,7 +38,7 @@ class WorkOrderType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'DeployNetBundle\Entity\Workorder'
+            'data_class' => 'DeployNetBundle\Entity\WorkOrder'
         ]);
     }
 
