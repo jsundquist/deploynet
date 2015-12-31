@@ -21,13 +21,15 @@
             </tr>
             </thead>
             <tbody>
+                {% for workOrder in workOrders %}
                 <tr>
-                    <td>Order Id</td>
-                    <td>Customer</td>
-                    <td>Location</td>
-                    <td>Type</td>
-                    <td>Status</td>
+                    <td><a href="/project/{{ workOrder.project.id }}/order/{{ workOrder.id }}/view/">{{ workOrder.id }}</a></td>
+                    <td>{{ workOrder.project.customer.name }}</td>
+                    <td>{{ workOrder.location.name }}</td>
+                    <td>{{ workOrder.type }}</td>
+                    <td>{{ workOrder.status }}</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

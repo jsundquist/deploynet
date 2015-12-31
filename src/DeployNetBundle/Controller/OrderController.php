@@ -13,7 +13,7 @@ class OrderController extends Controller
      */
     public function indexAction()
     {
-        $repository = $this->getDoctrine()->getRepository('DeployNetBundle:Workorder');
+        $repository = $this->getDoctrine()->getRepository('DeployNetBundle:WorkOrder');
 
         $orders = $repository->findAll();
 
@@ -21,7 +21,7 @@ class OrderController extends Controller
             "DeployNetBundle:Order:index.html.twig",
             [
                 'project' => null,
-                'orders' => $orders
+                'workOrders' => $orders
             ]
         );
     }
@@ -50,7 +50,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/project/{projectId}/order/{orderId}view/")
+     * @Route("/project/{projectId}/order/{orderId}/view/")
      */
     public function viewAction()
     {

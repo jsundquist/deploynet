@@ -80,6 +80,11 @@ class WorkOrder
      */
     protected $location;
 
+    /**
+     * @ORM\OneToMany(targetEntity="WorkOrderLines", mappedBy="workOrder")
+     */
+    protected $workOrderLines;
+
     public function __construct()
     {
     }
