@@ -92,6 +92,7 @@ class ProductController extends Controller
     {
         $product = $this->getProduct($id);
 
+        // TODO: Change to a soft delete so that we never actually delete the product from the database
         $em = $this->getDoctrine()->getManager();
         $em->remove($product);
         $em->flush();
