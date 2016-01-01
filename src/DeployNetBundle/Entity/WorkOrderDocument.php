@@ -29,7 +29,7 @@ class WorkOrderDocument
      *
      * @var File
      *
-     * @Assert\File(
+     * Assert\File(
      *     maxSize = "5M",
      *     mimeTypes = {"image/jpeg", "image/gif", "image/png", "image/tiff"},
      *     maxSizeMessage = "The maxmimum allowed file size is 5MB.",
@@ -38,6 +38,14 @@ class WorkOrderDocument
      */
     protected $file;
 
+    /**
+     * The original file name
+     *
+     * @var string
+     *
+     * @ORM\Column(type="text", nullable=false, name="file_name")
+     */
+    protected $fileName;
     /**
      * Image path
      *
@@ -55,6 +63,31 @@ class WorkOrderDocument
      * @ORM\Column(type="text", nullable=false)
      */
     protected $description;
+
+    /**
+     * File size
+     *
+     * @var integer
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    protected $size;
+
+    /**
+     * Document type?
+     *
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=false)
+     */
+    protected $type;
+
+    /**
+     * Date Uploaded
+     *
+     * @var \DateTime
+     * @ORM\Column(type="datetime", nullable=false)
+     */
+    protected $uploadDate;
 
     /**
      * Owning Side
@@ -127,10 +160,10 @@ class WorkOrderDocument
     /**
      * Set workOrder
      *
-     * @param \DeployNetBundle\Entity\WorkOrder $workOrder
+     * @param WorkOrder $workOrder
      * @return WorkOrderDocument
      */
-    public function setWorkOrder(\DeployNetBundle\Entity\WorkOrder $workOrder = null)
+    public function setWorkOrder(WorkOrder $workOrder = null)
     {
         $this->workOrder = $workOrder;
 
@@ -140,7 +173,7 @@ class WorkOrderDocument
     /**
      * Get workOrder
      *
-     * @return \DeployNetBundle\Entity\WorkOrder 
+     * @return WorkOrder
      */
     public function getWorkOrder()
     {
@@ -159,6 +192,10 @@ class WorkOrderDocument
             // do whatever you want to generate a unique name
             $filename = sha1(uniqid(mt_rand(), true));
             $this->path = $filename.'.'.$this->file->guessExtension();
+            $this->fileName = $this->file->getClientOriginalName();
+            $this->size = $this->file->getSize();
+            $this->type = $this->file->getMimeType();
+            $this->uploadDate = new \DateTime('now');
         }
     }
 
@@ -289,5 +326,97 @@ class WorkOrderDocument
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set size
+     *
+     * @param integer $size
+     * @return WorkOrderDocument
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    /**
+     * Get size
+     *
+     * @return integer 
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return WorkOrderDocument
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set uploadDate
+     *
+     * @param \DateTime $uploadDate
+     * @return WorkOrderDocument
+     */
+    public function setUploadDate($uploadDate)
+    {
+        $this->uploadDate = $uploadDate;
+
+        return $this;
+    }
+
+    /**
+     * Get uploadDate
+     *
+     * @return \DateTime 
+     */
+    public function getUploadDate()
+    {
+        return $this->uploadDate;
+    }
+
+    /**
+     * Set fileName
+     *
+     * @param string $fileName
+     * @return WorkOrderDocument
+     */
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
+
+        return $this;
+    }
+
+    /**
+     * Get fileName
+     *
+     * @return string 
+     */
+    public function getFileName()
+    {
+        return $this->fileName;
     }
 }

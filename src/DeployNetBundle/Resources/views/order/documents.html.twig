@@ -53,12 +53,17 @@
             </thead>
             <tbody>
                 {% for document in workOrder.workOrderDocuments %}
+                    {% set visibilities = [] %}
+
+                    {% for visibility in document.visibility %}
+                        {% set visibilities = visibilities|merge([visibility.name]) %}
+                    {% endfor %}
                 <tr>
-                    <td>{{ document.path }}</td>
+                    <td><a href="/documents/{{ document.path }}">{{ document.fileName }}</a></td>
                     <td>{{ document.description }}</td>
-                    <td>Visibility</td>
-                    <td>Type</td>
-                    <td>Size</td>
+                    <td>{{ visibilities|join(', ') }}</td>
+                    <td>{{ document.type }}</td>
+                    <td>{{ document.size|filesize }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
