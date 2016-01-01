@@ -13,7 +13,7 @@ class ProductType extends AbstractType
         $builder->add("partNumber", "text")
             ->add("altPartNumber", "text")
             ->add("description", "text")
-            ->add('serialized', 'checkbox')
+            ->add('serialized', 'checkbox', ['required'  => false])
             ->add(
                 "manufacturer",
                 'entity',

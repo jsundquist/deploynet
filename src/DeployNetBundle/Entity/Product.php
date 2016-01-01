@@ -36,7 +36,7 @@ class Product
     protected $description;
 
     /**
-     * @ORM\Column(type="boolean", options={"default"="1"})
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $serialized;
 
@@ -242,5 +242,15 @@ class Product
     public function getWorkOrderLine()
     {
         return $this->workOrderLine;
+    }
+
+    /**
+     * Get workOrderLines
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkOrderLines()
+    {
+        return $this->workOrderLines;
     }
 }
