@@ -399,11 +399,11 @@ class WorkOrder
     }
 
     /**
-     * Get workOrderLine
+     * Get workOrderLines
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getWorkOrderLine()
+    public function getWorkOrderLines()
     {
         return $this->workOrderLines;
     }
