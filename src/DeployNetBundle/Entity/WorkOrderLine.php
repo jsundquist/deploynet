@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * WorkOrderLine
  *
- * @ORM\Table("order_lines")
+ * @ORM\Table("work_order_lines")
  * @ORM\Entity
  */
 class WorkOrderLine
