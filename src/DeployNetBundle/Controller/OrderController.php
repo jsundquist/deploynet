@@ -1,7 +1,9 @@
 <?php
 namespace DeployNetBundle\Controller;
 
+use DeployNetBundle\Entity\WorkOrderDocument;
 use DeployNetBundle\Entity\WorkOrderLine;
+use DeployNetBundle\Form\Type\WorkOrderDocumentType;
 use DeployNetBundle\Form\Type\WorkOrderLineType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -53,7 +55,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/project/{projectId}/order/{orderId}/view")
+     * @Route("/project/{projectId}/order/{orderId}/view", name="work_order_view")
      * @param $projectId
      * @param $orderId
      * @param Request $request
@@ -90,13 +92,7 @@ class OrderController extends Controller
             }
 
             $em->flush();
-
-            $order = $repository->findOneBy(array('id' => $orderId));
-
-            unset($workOrderLine);
-
-            $workOrderLine = new WorkOrderLine();
-            $form = $this->createForm(new WorkOrderLineType(), $workOrderLine);
+            return $this->redirectToRoute('work_order_view');
         }
 
 
@@ -127,7 +123,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/project/{projectId}/order/{orderId}/documents")
+     * @Route("/project/{projectId}/order/{orderId}/documents", name="work_order_documents")
      * @param $projectId
      * @param $orderId
      * @param Request $request
@@ -137,10 +133,30 @@ class OrderController extends Controller
     {
         $repository = $this->getDoctrine()->getRepository('DeployNetBundle:WorkOrder');
         $order = $repository->findOneBy(array('id' => $orderId));
+        $workOrderDocument = new WorkOrderDocument();
+
+        $form = $this->createForm(new WorkOrderDocumentType(), $workOrderDocument);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $workOrderDocument->setWorkOrder($order);
+            $em->persist($workOrderDocument);
+            $em->flush();
+            return $this->redirectToRoute(
+                'work_order_documents',
+                [
+                    'projectId' => $order->getProject()->getId(),
+                    'orderId' => $order->getId()
+                ]
+            );
+        }
+
         return $this->render(
             "DeployNetBundle:Order:documents.html.twig",
             [
-                'workOrder' => $order
+                'workOrder' => $order,
+                'form' => $form->createView()
             ]
         );
     }

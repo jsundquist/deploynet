@@ -54,8 +54,8 @@
             <tbody>
                 {% for document in workOrder.workOrderDocuments %}
                 <tr>
-                    <td>File Name</td>
-                    <td>Description</td>
+                    <td>{{ document.path }}</td>
+                    <td>{{ document.description }}</td>
                     <td>Visibility</td>
                     <td>Type</td>
                     <td>Size</td>
@@ -72,6 +72,9 @@
                     <h4 class="modal-title" id="myModalLabel">Add Order</h4>
                 </div>
                 <div class="modal-body">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>
