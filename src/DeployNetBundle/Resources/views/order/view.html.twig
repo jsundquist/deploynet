@@ -46,6 +46,7 @@
             <thead>
             <tr>
                 <th>Part Number</th>
+                <th>Quantity</th>
                 <th>Description</th>
                 <th>Serial # In</th>
                 <th>Serial # Out</th>
@@ -56,9 +57,26 @@
             {% for workOrderLine in workOrder.workOrderLines %}
                 <tr>
                     <td>{{ workOrderLine.product.partNumber }}</td>
+                    <td>{{ workOrderLine.quantity }}</td>
                     <td>{{ workOrderLine.description }}</td>
-                    <td>{% if workOrderLine.serialNumberIn %}{{ workOrderLine.serialNumberIn }} {% else %} <button type="button" class="btn btn-primary btn-sm">Add Serial</button> {% endif %}</td>
-                    <td>{% if workOrderLine.serialNumberOut %}{{ workOrderLine.serialNumberOut }} {% else %} <button type="button" class="btn btn-primary btn-sm">Add Serial</button> {% endif %}</td>
+                    <td>
+                        {% if workOrderLine.product.serialized %}
+                            {% if workOrderLine.serialNumberIn %}
+                                {{ workOrderLine.serialNumberIn }}
+                            {% else %}
+                                <button type="button" class="btn btn-primary btn-sm">Add Serial</button>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if workOrderLine.product.serialized %}
+                            {% if workOrderLine.serialNumberOut %}
+                                {{ workOrderLine.serialNumberOut }}
+                            {% else %}
+                                <button type="button" class="btn btn-primary btn-sm">Add Serial</button>
+                            {% endif %}
+                        {% endif %}
+                    </td>
                     <td>{{ workOrderLine.orderLineStatusId}}</td>
                 </tr>
             {% endfor %}

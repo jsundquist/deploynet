@@ -29,6 +29,11 @@ class WorkOrderLine
     private $productId;
 
     /**
+     * @ORM\Column(name="quantity", type="integer", nullable=true, options={"default":1})
+     */
+    private $quantity = 1;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -387,5 +392,28 @@ class WorkOrderLine
     public function getProduct()
     {
         return $this->product;
+    }
+
+    /**
+     * Set quantity
+     *
+     * @param integer $quantity
+     * @return WorkOrderLine
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * Get quantity
+     *
+     * @return integer 
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
     }
 }

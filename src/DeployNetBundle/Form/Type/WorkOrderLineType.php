@@ -20,9 +20,7 @@ class WorkOrderLineType extends AbstractType
             ]
         )
             ->add('description', 'text')
-            ->add('quantity', 'text', [
-                "mapped" => false,
-            ])
+            ->add('quantity', 'text')
             ->add('save', 'submit', ['label' => 'Save']);
     }
 

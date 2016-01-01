@@ -71,13 +71,34 @@ class OrderController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $workOrderLine->setWorkOrder($order);
-            $workOrderLine->setOrderLineStatusId(1);
-            $em->persist($workOrderLine);
+
+            if ((int)$workOrderLine->getQuantity() > 1 && $workOrderLine->getProduct()->getSerialized() == true) {
+                $quantity = $workOrderLine->getQuantity();
+                for ($i=0; $i<$quantity; $i++) {
+                    $line = new WorkOrderLine();
+                    $line->setProduct($workOrderLine->getProduct());
+                    $line->setDescription($workOrderLine->getDescription());
+                    $line->setWorkOrder($order);
+                    $line->setQuantity(1);
+                    $line->setOrderLineStatusId(1);
+                    $em->persist($line);
+                }
+            } else {
+                $workOrderLine->setOrderLineStatusId(1);
+                $workOrderLine->setWorkOrder($order);
+                $em->persist($workOrderLine);
+            }
+
             $em->flush();
 
             $order = $repository->findOneBy(array('id' => $orderId));
+
+            unset($workOrderLine);
+
+            $workOrderLine = new WorkOrderLine();
+            $form = $this->createForm(new WorkOrderLineType(), $workOrderLine);
         }
+
 
 
         return $this->render(
