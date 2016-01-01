@@ -38,7 +38,7 @@
             <tbody>
                 {% for workOrder in project.workOrders %}
                 <tr>
-                    <td><a href="/project/{{ workOrder.project.id }}/order/{{ workOrder.id }}/view/">{{ workOrder.id }}</a></td>
+                    <td><a href="/project/{{ workOrder.project.id }}/order/{{ workOrder.id }}/view">{{ workOrder.id }}</a></td>
                     <td>{{ workOrder.location.name }}<br/>{{ workOrder.location.city }}, {{ workOrder.location.state.name }} {{ workOrder.location.postalCode }}</td>
                     <td>{{ workOrder.createdDate|date }}</td>
                     <td>{{ workOrder.scheduleDate|date }}</td>

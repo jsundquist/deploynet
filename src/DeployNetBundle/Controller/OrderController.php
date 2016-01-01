@@ -53,7 +53,7 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/project/{projectId}/order/{orderId}/view/")
+     * @Route("/project/{projectId}/order/{orderId}/view")
      * @param $projectId
      * @param $orderId
      * @param Request $request
@@ -106,11 +106,22 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/project/{projectId}/order/documents")
+     * @Route("/project/{projectId}/order/{orderId}/documents")
+     * @param $projectId
+     * @param $orderId
+     * @param Request $request
+     * @return Response
      */
-    public function documentsAction()
+    public function documentsAction($projectId, $orderId, Request $request)
     {
-        return $this->render("DeployNetBundle:Order:documents.html.twig");
+        $repository = $this->getDoctrine()->getRepository('DeployNetBundle:WorkOrder');
+        $order = $repository->findOneBy(array('id' => $orderId));
+        return $this->render(
+            "DeployNetBundle:Order:documents.html.twig",
+            [
+                'workOrder' => $order
+            ]
+        );
     }
 
     /**
