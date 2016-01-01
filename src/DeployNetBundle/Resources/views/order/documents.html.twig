@@ -6,7 +6,7 @@
         <li><a href="/project/details/{{ workOrder.project.id }}">{{ workOrder.project.name }} Details</a></li>
         <li class="active">Work Order #{{ workOrder.id }}</li>
     </ol>
-    <h1>Project Information</h1>
+    <h1>Work Order Information</h1>
     <table class="table table-responsive">
         <tr>
             <td>Customer</td>
@@ -32,12 +32,11 @@
         <li role="presentation"><a href="/project/{{ workOrder.project.id }}/order/{{ workOrder.id }}/view">Lines</a></li>
         <li role="presentation" class="active"><a href="/project/{{ workOrder.project.id }}/order/{{ workOrder.id }}/documents">Documents</a></li>
     </ul>
-    <h2>Work Order Lines</h2>
+    <br />
     <div class="btn-group" role="group" aria-label="...">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orderModal">
             Add Line Item
         </button>
-        <button type="button" class="btn btn-default" {% if workOrder.workOrderLine|length == 0 %} disabled="disabled"{% endif %}>Ship Items</button>
     </div>
     <br />
     <br />
@@ -53,6 +52,7 @@
             </tr>
             </thead>
             <tbody>
+                {% for document in workOrder.workOrderDocuments %}
                 <tr>
                     <td>File Name</td>
                     <td>Description</td>
@@ -60,6 +60,7 @@
                     <td>Type</td>
                     <td>Size</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

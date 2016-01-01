@@ -61,6 +61,12 @@ class WorkOrderDocument
     private $visibility;
 
     /**
+     * @ORM\ManyToOne(targetEntity="WorkOrder", inversedBy="workOrderDocuments")
+     * @ORM\JoinColumn(name="work_order_id", referencedColumnName="id")
+     */
+    protected $workOrder;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -200,5 +206,28 @@ class WorkOrderDocument
     public function getVisibility()
     {
         return $this->visibility;
+    }
+
+    /**
+     * Set workOrder
+     *
+     * @param \DeployNetBundle\Entity\WorkOrder $workOrder
+     * @return WorkOrderDocument
+     */
+    public function setWorkOrder(\DeployNetBundle\Entity\WorkOrder $workOrder = null)
+    {
+        $this->workOrder = $workOrder;
+
+        return $this;
+    }
+
+    /**
+     * Get workOrder
+     *
+     * @return \DeployNetBundle\Entity\WorkOrder 
+     */
+    public function getWorkOrder()
+    {
+        return $this->workOrder;
     }
 }

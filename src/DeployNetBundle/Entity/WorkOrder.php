@@ -85,6 +85,11 @@ class WorkOrder
      */
     protected $workOrderLines;
 
+    /**
+     * @ORM\OneToMany(targetEntity="WorkOrderDocument", mappedBy="workOrder")
+     */
+    protected $workOrderDocuments;
+
     public function __construct()
     {
     }
@@ -406,5 +411,38 @@ class WorkOrder
     public function getWorkOrderLines()
     {
         return $this->workOrderLines;
+    }
+
+    /**
+     * Add workOrderDocuments
+     *
+     * @param \DeployNetBundle\Entity\WorkOrderDocument $workOrderDocuments
+     * @return WorkOrder
+     */
+    public function addWorkOrderDocument(\DeployNetBundle\Entity\WorkOrderDocument $workOrderDocuments)
+    {
+        $this->workOrderDocuments[] = $workOrderDocuments;
+
+        return $this;
+    }
+
+    /**
+     * Remove workOrderDocuments
+     *
+     * @param \DeployNetBundle\Entity\WorkOrderDocument $workOrderDocuments
+     */
+    public function removeWorkOrderDocument(\DeployNetBundle\Entity\WorkOrderDocument $workOrderDocuments)
+    {
+        $this->workOrderDocuments->removeElement($workOrderDocuments);
+    }
+
+    /**
+     * Get workOrderDocuments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkOrderDocuments()
+    {
+        return $this->workOrderDocuments;
     }
 }
