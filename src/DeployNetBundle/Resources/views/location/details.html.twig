@@ -27,8 +27,8 @@
             <td>
                 <address>
                     {{ location.address1 }}<br />
-                    {{ location.address2 }}<br />
-                    {{ location.address3 }}<br />
+                    {% if location.address2 %}{{ location.address2 }}<br />{% endif %}
+                    {% if location.address3 %}{{ location.address3 }}<br />{% endif %}
                     {{ location.city}}, {{ location.state.abbreviation }} {{ location.postalCode }}
                 </address>
             </td>
