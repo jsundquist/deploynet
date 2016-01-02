@@ -16,28 +16,30 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td><a href="#">1,001</a></td>
-            <td><a href="#">Project</a></td>
-            <td><a href="#">SITE</a></td>
-            <td>NAME</td>
-            <td>City, ST 00000</td>
-            <td>OPEN</td>
-            <td>--/--/---- --:-- AM</td>
-            <td>--/--/---- --:-- AM</td>
-        </tr>
+        {% for workOrder in location.workOrders %}
+            <tr>
+                <td><a href="#">{{ workOrder.id }}</a></td>
+                <td><a href="#">{{ workOrder.project.name }}</a></td>
+                <td><a href="#">SITE</a></td>
+                <td>????</td>
+                <td>???</td>
+                <td>{{ workOrder.status }}</td>
+                <td></td>{#<td>--/--/---- --:-- AM</td>#}
+                <td></td>{#<td>--/--/---- --:-- AM</td>#}
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
-    <div class="center-block">
-        <ul class="pagination text-center">
-            <li class="disabled"><span>&laquo;</span></li>
-            <li class="active"><span>1 <span class="sr-only">(current)</span></span></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
-        </ul>
-    </div>
+    {#<div class="center-block">#}
+        {#<ul class="pagination text-center">#}
+            {#<li class="disabled"><span>&laquo;</span></li>#}
+            {#<li class="active"><span>1 <span class="sr-only">(current)</span></span></li>#}
+            {#<li><a href="#">2</a></li>#}
+            {#<li><a href="#">3</a></li>#}
+            {#<li><a href="#">4</a></li>#}
+            {#<li><a href="#">5</a></li>#}
+            {#<li><a href="#">&raquo;</a></li>#}
+        {#</ul>#}
+    {#</div>#}
 </div>
 {% endblock %}
