@@ -8,6 +8,7 @@ class AppExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFilter('filesize', array($this, 'fileSizeFilter')),
+            new \Twig_SimpleFilter('phoneNumber', array($this, 'phoneNumberFilter')),
         );
     }
 
@@ -29,6 +30,26 @@ class AppExtension extends \Twig_Extension
         }
 
         return 'unknown';
+    }
+
+    public function phoneNumberFilter($number)
+    {
+        $number = preg_replace("/[^0-9]/", "", $number);
+        $length = strlen($number);
+        switch($length) {
+            case 7:
+                return preg_replace("/([0-9]{3})([0-9]{4})/", "$1-$2", $number);
+                break;
+            case 10:
+                return preg_replace("/([0-9]{3})([0-9]{3})([0-9]{4})/", "($1) $2-$3", $number);
+                break;
+            case 11:
+                return preg_replace("/([0-9]{1})([0-9]{3})([0-9]{3})([0-9]{4})/", "$1($2) $3-$4", $number);
+                break;
+            default:
+                return $number;
+                break;
+        }
     }
 
     public function getName()

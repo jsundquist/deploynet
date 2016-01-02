@@ -40,19 +40,19 @@
             <td>
                 <address>
                     {{ customer.address1 }}<br />
-                    {{ customer.address2 }}<br />
-                    {{ customer.address3 }}<br />
+                    {% if customer.address2 %}{{ customer.address2 }}<br />{% endif %}
+                    {% if customer.address3 %}{{ customer.address3 }}<br />{% endif %}
                     {{ customer.city}}, {{ customer.state.abbreviation }} {{ customer.postalCode }}
                 </address>
             </td>
         </tr>
         <tr>
             <th>Phone: </th>
-            <td>{{ customer.phoneNumber }}<!--(000) 000-0000--></td>
+            <td>{{ customer.phoneNumber|phoneNumber }}<!--(000) 000-0000--></td>
         </tr>
         <tr>
             <th>Fax: </th>
-            <td>{{ customer.faxNumber }}<!--(000) 000-0000--></td>
+            <td>{{ customer.faxNumber|phoneNumber }}<!--(000) 000-0000--></td>
         </tr>
     </table>
 </div>

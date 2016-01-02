@@ -40,7 +40,7 @@
             <td>{{location.city}}</td>
             <td>{{location.state.abbreviation}}</td>
             <td>{{location.postalCode}}</td>
-            <td>{{location.phoneNumber}}</td>
+            <td>{{location.phoneNumber|phoneNumber}}</td>
         </tr>
         {% endfor %}
         </tbody>

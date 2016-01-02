@@ -23,10 +23,10 @@
                 <td><a href="/customer/details/{{ customer.id }}">{{ customer.name }}</a></td>
                 <td>
                     {{ customer.address1 }}<br />
-                    {{ customer.address2 }}<br />
+                {% if customer.address2 %}{{ customer.address2 }}<br />{% endif %}
                     {{ customer.city }}, {{ customer.state.abbreviation }} {{ customer.postalCode }}
                 </td>
-                <td>{{ customer.phoneNumber }}</td>
+                <td>{{ customer.phoneNumber|phoneNumber }}</td>
                 <td></td>
             </tr>
                 {% endfor %}

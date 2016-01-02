@@ -35,11 +35,11 @@
         </tr>
         <tr>
             <th>Phone: </th>
-            <td>{{ location.phoneNumber }}<!--(000) 000-0000--></td>
+            <td>{{ location.phoneNumber|phoneNumber }}<!--(000) 000-0000--></td>
         </tr>
         <tr>
             <th>Fax: </th>
-            <td>{{ location.faxNumber }}<!--(000) 000-0000--></td>
+            <td>{{ location.faxNumber|phoneNumber }}<!--(000) 000-0000--></td>
         </tr>
     </table>
 </div>
