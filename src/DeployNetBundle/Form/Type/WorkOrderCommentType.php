@@ -14,7 +14,6 @@ class WorkOrderCommentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('author', 'text');
         $builder->add('comment', 'textarea');
         $builder->add('important', 'checkbox', ['required'  => false]);
         $builder->add(

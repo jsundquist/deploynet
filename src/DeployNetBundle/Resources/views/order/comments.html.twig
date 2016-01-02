@@ -44,7 +44,7 @@
     {% for comment in workOrder.workOrderComments %}
         <div class="panel {% if comment.important %}panel-danger{% else %}panel-default{% endif %}">
             <div class="panel-heading">
-                Posted by: <strong>{{ comment.author }}</strong> on {{ comment.commentDate|date('m/d/Y \a\t h:i a') }}
+                Posted by: <strong>{% if comment.author %}{{ comment.author.firstName }} {{ comment.author.lastName }}{% endif %}</strong> on {{ comment.commentDate|date('m/d/Y \a\t h:i a') }}
             </div>
             <div class="panel-body">
                 <div class="pull-left" style="padding-right: 15px;">

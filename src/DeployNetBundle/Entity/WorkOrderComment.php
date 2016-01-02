@@ -23,10 +23,8 @@ class WorkOrderComment
     private $id;
 
     /**
-     * Who posted the comment
-     *
-     * @var string
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="workOrderComments")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $author;
 

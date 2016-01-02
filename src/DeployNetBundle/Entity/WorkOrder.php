@@ -487,10 +487,10 @@ class WorkOrder
     /**
      * Add workOrderComments
      *
-     * @param \DeployNetBundle\Entity\WorkOrderComment $workOrderComments
+     * @param WorkOrderComment $workOrderComments
      * @return WorkOrder
      */
-    public function addWorkOrderComment(\DeployNetBundle\Entity\WorkOrderComment $workOrderComments)
+    public function addWorkOrderComment(WorkOrderComment $workOrderComments)
     {
         $this->workOrderComments[] = $workOrderComments;
 
@@ -500,9 +500,9 @@ class WorkOrder
     /**
      * Remove workOrderComments
      *
-     * @param \DeployNetBundle\Entity\WorkOrderComment $workOrderComments
+     * @param WorkOrderComment $workOrderComments
      */
-    public function removeWorkOrderComment(\DeployNetBundle\Entity\WorkOrderComment $workOrderComments)
+    public function removeWorkOrderComment(WorkOrderComment $workOrderComments)
     {
         $this->workOrderComments->removeElement($workOrderComments);
     }

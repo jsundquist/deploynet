@@ -167,6 +167,8 @@ class OrderController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $workOrderComment->setAuthor($this->getUser());
             $workOrderComment->setWorkOrder($order);
             $em->persist($workOrderComment);
             $em->flush();

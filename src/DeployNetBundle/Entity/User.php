@@ -31,6 +31,11 @@ class User extends BaseUser
 
     protected $fullName;
 
+    /**
+     * @ORM\OneToMany(targetEntity="WorkOrderComment", mappedBy="author")
+     */
+    protected $workOrderComments;
+
     public function __construct()
     {
         parent::__construct();
@@ -86,5 +91,38 @@ class User extends BaseUser
     public function getFullName()
     {
         return $this->firstName . ' ' . $this->lastName;
+    }
+
+    /**
+     * Add workOrderComments
+     *
+     * @param WorkOrderComment $workOrderComments
+     * @return User
+     */
+    public function addWorkOrderComment(WorkOrderComment $workOrderComments)
+    {
+        $this->workOrderComments[] = $workOrderComments;
+
+        return $this;
+    }
+
+    /**
+     * Remove workOrderComments
+     *
+     * @param WorkOrderComment $workOrderComments
+     */
+    public function removeWorkOrderComment(WorkOrderComment $workOrderComments)
+    {
+        $this->workOrderComments->removeElement($workOrderComments);
+    }
+
+    /**
+     * Get workOrderComments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkOrderComments()
+    {
+        return $this->workOrderComments;
     }
 }
