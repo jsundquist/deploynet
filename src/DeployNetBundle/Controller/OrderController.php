@@ -1,8 +1,10 @@
 <?php
 namespace DeployNetBundle\Controller;
 
+use DeployNetBundle\Entity\WorkOrderComment;
 use DeployNetBundle\Entity\WorkOrderDocument;
 use DeployNetBundle\Entity\WorkOrderLine;
+use DeployNetBundle\Form\Type\WorkOrderCommentType;
 use DeployNetBundle\Form\Type\WorkOrderDocumentType;
 use DeployNetBundle\Form\Type\WorkOrderLineType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -107,22 +109,6 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/project/{projectId}/order/create")
-     */
-    public function createAction()
-    {
-        return $this->render("DeployNetBundle:Order:create.html.twig");
-    }
-
-    /**
-     * @Route("/project/{projectId}/order/{orderId}/edit")
-     */
-    public function editAction()
-    {
-
-    }
-
-    /**
      * @Route("/project/{projectId}/order/{orderId}/documents", name="work_order_documents")
      * @param $projectId
      * @param $orderId
@@ -162,10 +148,43 @@ class OrderController extends Controller
     }
 
     /**
-     * @Route("/configuration/manufacturers")
+     * @Route("/project/{projectId}/order/{orderId}/comments", name="work_order_comments")
+     * @param $projectId
+     * @param $orderId
+     * @param Request $request
+     * @return Response
      */
-    public function addDocumentAction()
+    public function commentsAction($projectId, $orderId, Request $request)
     {
-        return $this->render("DeployNetBundle:Order:view.html.twig");
+        $repository = $this->getDoctrine()->getRepository('DeployNetBundle:WorkOrder');
+        $order = $repository->findOneBy(array('id' => $orderId));
+
+        $workOrderComment = new WorkOrderComment();
+
+        $form = $this->createForm(new WorkOrderCommentType(), $workOrderComment);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $workOrderComment->setWorkOrder($order);
+            $em->persist($workOrderComment);
+            $em->flush();
+            return $this->redirectToRoute(
+                'work_order_comments',
+                [
+                    'projectId' => $order->getProject()->getId(),
+                    'orderId' => $order->getId()
+                ]
+            );
+        }
+
+        return $this->render(
+            "DeployNetBundle:Order:comments.html.twig",
+            [
+                'workOrder' => $order,
+                'form' => $form->createView()
+            ]
+        );
     }
 }

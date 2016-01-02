@@ -90,6 +90,11 @@ class WorkOrder
      */
     protected $workOrderDocuments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="WorkOrderComment", mappedBy="workOrder")
+     */
+    protected $workOrderComments;
+
     public function __construct()
     {
     }
@@ -416,10 +421,10 @@ class WorkOrder
     /**
      * Add workOrderDocuments
      *
-     * @param \DeployNetBundle\Entity\WorkOrderDocument $workOrderDocuments
+     * @param WorkOrderDocument $workOrderDocuments
      * @return WorkOrder
      */
-    public function addWorkOrderDocument(\DeployNetBundle\Entity\WorkOrderDocument $workOrderDocuments)
+    public function addWorkOrderDocument(WorkOrderDocument $workOrderDocuments)
     {
         $this->workOrderDocuments[] = $workOrderDocuments;
 
@@ -429,9 +434,9 @@ class WorkOrder
     /**
      * Remove workOrderDocuments
      *
-     * @param \DeployNetBundle\Entity\WorkOrderDocument $workOrderDocuments
+     * @param WorkOrderDocument $workOrderDocuments
      */
-    public function removeWorkOrderDocument(\DeployNetBundle\Entity\WorkOrderDocument $workOrderDocuments)
+    public function removeWorkOrderDocument(WorkOrderDocument $workOrderDocuments)
     {
         $this->workOrderDocuments->removeElement($workOrderDocuments);
     }
@@ -444,5 +449,61 @@ class WorkOrder
     public function getWorkOrderDocuments()
     {
         return $this->workOrderDocuments;
+    }
+
+    /**
+     * Add workOrderCommentss
+     *
+     * @param WorkOrderComment $workOrderComments
+     * @return WorkOrder
+     */
+    public function addWorkOrderCommentss(WorkOrderComment $workOrderComments)
+    {
+        $this->workOrderComments[] = $workOrderComments;
+
+        return $this;
+    }
+
+    /**
+     * Remove workOrderCommentss
+     *
+     * @param WorkOrderComment $workOrderComments
+     */
+    public function removeWorkOrderComments(WorkOrderComment $workOrderComments)
+    {
+        $this->workOrderComments->removeElement($workOrderComments);
+    }
+
+    /**
+     * Get workOrderCommentss
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkOrderComments()
+    {
+        return $this->workOrderComments;
+    }
+
+    /**
+     * Add workOrderComments
+     *
+     * @param \DeployNetBundle\Entity\WorkOrderComment $workOrderComments
+     * @return WorkOrder
+     */
+    public function addWorkOrderComment(\DeployNetBundle\Entity\WorkOrderComment $workOrderComments)
+    {
+        $this->workOrderComments[] = $workOrderComments;
+
+        return $this;
+    }
+
+    /**
+     * Remove workOrderComments
+     *
+     * @param \DeployNetBundle\Entity\WorkOrderComment $workOrderComments
+     */
+    public function removeWorkOrderComment(\DeployNetBundle\Entity\WorkOrderComment $workOrderComments)
+    {
+        $this->workOrderComments->removeElement($workOrderComments);
     }
 }

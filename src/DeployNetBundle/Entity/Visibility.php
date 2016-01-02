@@ -34,6 +34,11 @@ class Visibility
     private $documents;
 
     /**
+     * @ORM\ManyToMany(targetEntity="WorkOrderComment", mappedBy="visibility")
+     */
+    private $comments;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -104,5 +109,38 @@ class Visibility
     public function getDocuments()
     {
         return $this->documents;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \DeployNetBundle\Entity\WorkOrderComment $comments
+     * @return Visibility
+     */
+    public function addComment(\DeployNetBundle\Entity\WorkOrderComment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \DeployNetBundle\Entity\WorkOrderComment $comments
+     */
+    public function removeComment(\DeployNetBundle\Entity\WorkOrderComment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
