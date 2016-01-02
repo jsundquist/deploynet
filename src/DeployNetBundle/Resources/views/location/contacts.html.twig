@@ -17,16 +17,18 @@
         </tr>
         </thead>
         <tbody>
+        {% for contact in location.contacts %}
         <tr>
+            <td>{{ contact.firstName }} {{ contact.lastName }}</td>
             <td></td>
-            <td></td>
-            <td><!-- (000) 000-0000 --></td>
-            <td><!-- test@test.com --></td>
+            <td>{{ contact.phoneNumber }}<!-- (000) 000-0000 --></td>
+            <td>{{ contact.email }}<!-- test@test.com --></td>
             <td></td>
             <td> <!-- --/--/-- --:-- --></td>
             <td></td>
-            <td><a href="/customer/contacts/{{ location.id }}/edit/{{ customer.id }}">Edit</a> | Delete</td>
+            <td><a href="/customer/contacts/{{ location.id }}/edit/{{ contact.id }}">Edit</a> | Delete</td>
         </tr>
+            {% endfor %}
         </tbody>
     </table>
     <div class="center-block">

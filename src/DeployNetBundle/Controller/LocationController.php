@@ -1,7 +1,9 @@
 <?php
 namespace DeployNetBundle\Controller;
 
+use DeployNetBundle\Entity\Contact;
 use DeployNetBundle\Entity\Location;
+use DeployNetBundle\Form\Type\ContactType;
 use DeployNetBundle\Form\Type\LocationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -64,7 +66,7 @@ class LocationController extends Controller
     }
 
     /**
-     * @Route("/customer/location/{id}/edit")
+     * @Route("/customer/location/{locationId}/edit")
      * @param Request $request
      * @param $locationId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -74,8 +76,6 @@ class LocationController extends Controller
         $location = $this->getLocation($locationId);
 
         $customer = $this->getCustomer($location->getCustomer()->getId());
-
-        $location = new Location();
 
         $form = $this->createForm(new LocationType(), $location);
 
@@ -88,7 +88,7 @@ class LocationController extends Controller
             $em->persist($location);
             $em->flush();
 
-            return $this->redirectToRoute('customer_location', ['id' => $locationId]);
+            return $this->redirectToRoute('customer_location', ['locationId' => $locationId]);
         }
 
         return $this->render(
@@ -101,7 +101,7 @@ class LocationController extends Controller
     }
 
     /**
-     * @Route("/customer/location/{locationId}/contacts")
+     * @Route("/customer/location/{locationId}/contacts", name="location_contacts")
      * @param $locationId
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -119,12 +119,42 @@ class LocationController extends Controller
     }
 
     /**
-     * @Route("/customer/location/{id}/contacts/add")
-     * @Route("/customer/location/{id}/{contactId}/edit")
+     * @Route("/customer/location/{locationId}/contacts/add")
+     * @Route("/customer/location/{locationId}/contacts/edit/{contactId}")
+     * @param Request $request
+     * @param $locationId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function contactFormAction()
+    public function contactFormAction(Request $request, $locationId, $contactId = null)
     {
-        return $this->render("DeployNetBundle:Location:contact.form.html.twig");
+        $location = $this->getLocation($locationId);
+
+        $contact = new Contact();
+
+        if ($contactId) {
+            $contact = $this->getContact($contactId);
+        }
+
+        $form = $this->createForm(new ContactType(), $contact);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $contact->setCustomer($location->getCustomer());
+            $contact->setLocation($location);
+            $em->persist($contact);
+            $em->flush();
+
+            return $this->redirectToRoute('location_contacts', ['locationId' => $locationId]);
+        }
+        return $this->render(
+            "DeployNetBundle:Location:contact.form.html.twig",
+            [
+                'location' => $location,
+                'form' => $form->createView()
+            ]
+        );
     }
 
 
@@ -187,7 +217,7 @@ class LocationController extends Controller
     {
         $locationRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Location');
 
-        return $locationRepository->findOneBy(array('id' => $locationId));
+        return $locationRepository->find($locationId);
     }
 
     private function getCustomer($customerId)
@@ -195,5 +225,12 @@ class LocationController extends Controller
         $customerRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Customer');
 
         return $customerRepository->findOneBy(array('id' => $customerId));
+    }
+
+    private function getContact($contactId)
+    {
+        $contactRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Contact');
+
+        return $contactRepository->findOneBy(array('id' => $contactId));
     }
 }

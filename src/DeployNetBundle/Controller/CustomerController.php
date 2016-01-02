@@ -73,12 +73,13 @@ class CustomerController extends Controller
             "DeployNetBundle:Customer:form.html.twig",
             [
                 'form' => $form->createView(),
+                'customer' => $customer
             ]
         );
     }
 
     /**
-     * @Route("/customer/details/{id}/edit")
+     * @Route("/customer/details/{id}/edit", requirements={"id" = "\d+"})
      * @param $id
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -117,12 +118,13 @@ class CustomerController extends Controller
             "DeployNetBundle:Customer:form.html.twig",
             [
                 'form' => $form->createView(),
+                'customer' => $customer
             ]
         );
     }
 
     /**
-     * @Route("/customer/details/{id}", name="customer_details")
+     * @Route("/customer/details/{id}", name="customer_details", requirements={"id" = "\d+"})
      * @param string $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -139,7 +141,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * @Route("/customer/locations/{id}", name="customer_locations")
+     * @Route("/customer/locations/{id}", name="customer_locations", requirements={"id" = "\d+"})
      */
     public function locationsAction($id)
     {
@@ -159,7 +161,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * @Route("/customer/contacts/{id}", name="customer_contacts")
+     * @Route("/customer/contacts/{id}", name="customer_contacts", requirements={"id" = "\d+"})
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -171,7 +173,7 @@ class CustomerController extends Controller
 
         $contactsRepository = $this->getDoctrine()->getRepository('DeployNetBundle:Contact');
 
-        $contacts = $contactsRepository->findBy(array('customer' => $id));
+        $contacts = $contactsRepository->findBy(array('customer' => $id, 'location' => null));
         return $this->render(
             "DeployNetBundle:Customer:contacts.html.twig",
             [
@@ -182,7 +184,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * @Route("/customer/contacts/{customerId}/add");
+     * @Route("/customer/contacts/{customerId}/add", requirements={"customerId" = "\d+"});
      * @param Request $request
      * @param $customerId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -216,7 +218,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * @Route("/customer/contacts/{customerId}/edit/{contactId}")
+     * @Route("/customer/contacts/{customerId}/edit/{contactId}", requirements={"customerId" = "\d+", "contactId" = "\d+"})
      * @param Request $request
      * @param $customerId
      * @param $contactId
@@ -250,7 +252,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * @Route("/customer/projects/{id}")
+     * @Route("/customer/projects/{id}", requirements={"id" = "\d+"})
      */
     public function projectsAction($id)
     {
@@ -265,7 +267,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * @Route("/customer/orders/{id}")
+     * @Route("/customer/orders/{id}", requirements={"id" = "\d+"})
      */
     public function ordersAction($id)
     {
@@ -280,7 +282,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * @Route("/customer/documents/{id}")
+     * @Route("/customer/documents/{id}", requirements={"id" = "\d+"})
      */
     public function documentsAction($id)
     {

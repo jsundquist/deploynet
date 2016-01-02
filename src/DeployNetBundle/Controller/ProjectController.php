@@ -2,6 +2,9 @@
 namespace DeployNetBundle\Controller;
 
 use DeployNetBundle\Entity\Project;
+use DeployNetBundle\Entity\WorkOrder;
+use DeployNetBundle\Form\Type\ProjectType;
+use DeployNetBundle\Form\Type\WorkOrderType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,21 +37,7 @@ class ProjectController extends Controller
     public function addAction(Request $request)
     {
         $project = new Project();
-        $form = $this->createFormBuilder($project)
-            ->add("name", "text")
-            ->add("description", "text")
-            ->add("type", "text")
-            ->add(
-                "location",
-                'entity',
-                [
-                    'class' => 'DeployNetBundle:Location',
-                    'property' => 'name'
-                ]
-            )
-            ->add('save', 'submit', ['label' => 'Save'])
-            ->getForm()
-            ;
+        $form = $this->createForm(new ProjectType(), $project);
 
         $form->handleRequest($request);
 
@@ -56,7 +45,7 @@ class ProjectController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($project);
             $em->flush();
-            return $this->redirectToRoute('customers_index');
+            return $this->redirectToRoute('project_index');
         }
 
         return $this->render(
@@ -68,23 +57,48 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/projects/details/{id}")
+     * @Route("/project/details/{id}")
+     * @param Request $request
      * @param string $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function detailAction($id)
+    public function detailAction(Request $request, $id)
     {
+
+        $repository = $this->getDoctrine()->getRepository('DeployNetBundle:Project');
+
+        $workOrder = new WorkOrder();
+        $form = $this->createForm(new WorkOrderType(), $workOrder);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $lastAccess = new \DateTime('now');
+            $workOrder->setCreatedDate($lastAccess);
+
+            $workOrder->setProjectId((int)$id);
+            $project = $repository->findOneBy(array('id' => $id));
+            $workOrder->setProject($project);
+            $em->persist($workOrder);
+            $em->flush();
+        }
+
         $repository = $this->getDoctrine()->getRepository('DeployNetBundle:Project');
 
         $project = $repository->findOneBy(array('id' => $id));
-
-        $project->setLastAccessDate(Date('m/d/Y h:i:s'));
+        $lastAccess = new \DateTime('now');
+        $project->setLastAccess($lastAccess);
         $em = $this->getDoctrine()->getManager();
         $em->persist($project);
         $em->flush();
 
         return $this->render(
-            "DeployNetBundle:Project:details.html.twig"
+            "DeployNetBundle:Project:details.html.twig",
+            [
+                'project' => $project,
+                'form' => $form->createView(),
+            ]
         );
     }
 }

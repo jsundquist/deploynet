@@ -9,6 +9,7 @@ class DashboardController extends Controller
 {
     /**
      * @Route("/")
+     * @Route("/dashboard")
      */
     public function indexAction()
     {

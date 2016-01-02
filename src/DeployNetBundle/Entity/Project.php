@@ -38,12 +38,12 @@ class Project
     protected $activeWorkOrders;
 
     /**
-     * @ORM\Column(type="datetime", name="last_access")
+     * @ORM\Column(type="datetime", name="last_access", nullable=true)
      */
     protected $lastAccess;
 
     /**
-     * @ORM\Column(type="string", length=100, name="status")
+     * @ORM\Column(type="string", length=100, name="status", options={"default"="Open"}, nullable=true)
      */
     protected $status;
 
@@ -60,8 +60,8 @@ class Project
     protected $location;
 
     /**
-    * @ORM\OneToMany(targetEntity="WorkOrder", mappedBy="workorder")
-    */
+     * @ORM\OneToMany(targetEntity="WorkOrder", mappedBy="project")
+     */
     protected $workOrders;
 
     public function __construct()

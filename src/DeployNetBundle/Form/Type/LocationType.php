@@ -16,7 +16,9 @@ class LocationType extends AbstractType
             ->add('address2', 'text', ['required' => false])
             ->add('address3', 'text', ['required' => false])
             ->add('city', 'text')
-            ->add('state', 'entity',
+            ->add(
+                'state',
+                'entity',
                 [
                     'class' => 'DeployNetBundle:State',
                     'property' => 'name'

@@ -99,9 +99,20 @@ class Location
      */
     protected $contacts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="location")
+     */
+    protected $projects;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WorkOrder", mappedBy="location")
+     */
+    protected $workOrders;
+
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
+        $this->workOrders = new ArrayCollection();
     }
 
     /**
@@ -467,5 +478,71 @@ class Location
     public function getContacts()
     {
         return $this->contacts;
+    }
+
+    /**
+     * Add projects
+     *
+     * @param \DeployNetBundle\Entity\Project $projects
+     * @return Location
+     */
+    public function addProject(\DeployNetBundle\Entity\Project $projects)
+    {
+        $this->projects[] = $projects;
+
+        return $this;
+    }
+
+    /**
+     * Remove projects
+     *
+     * @param \DeployNetBundle\Entity\Project $projects
+     */
+    public function removeProject(\DeployNetBundle\Entity\Project $projects)
+    {
+        $this->projects->removeElement($projects);
+    }
+
+    /**
+     * Get projects
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProjects()
+    {
+        return $this->projects;
+    }
+
+    /**
+     * Add workOrders
+     *
+     * @param \DeployNetBundle\Entity\WorkOrder $workOrders
+     * @return Location
+     */
+    public function addWorkOrder(\DeployNetBundle\Entity\WorkOrder $workOrders)
+    {
+        $this->workOrders[] = $workOrders;
+
+        return $this;
+    }
+
+    /**
+     * Remove workOrders
+     *
+     * @param \DeployNetBundle\Entity\WorkOrder $workOrders
+     */
+    public function removeWorkOrder(\DeployNetBundle\Entity\WorkOrder $workOrders)
+    {
+        $this->workOrders->removeElement($workOrders);
+    }
+
+    /**
+     * Get workOrders
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkOrders()
+    {
+        return $this->workOrders;
     }
 }

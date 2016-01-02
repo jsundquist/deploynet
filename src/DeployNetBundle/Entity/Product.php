@@ -1,7 +1,6 @@
 <?php
 namespace DeployNetBundle\Entity;
 
-use DeployNetBundle\Entity\Manufacturer;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -37,6 +36,11 @@ class Product
     protected $description;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $serialized;
+
+    /**
      * @ORM\Column(type="integer", name="manufacturer_id")
      */
     protected $manufacturerId;
@@ -45,7 +49,12 @@ class Product
      * @ORM\ManyToOne(targetEntity="Manufacturer", inversedBy="products")
      * @ORM\JoinColumn(name="manufacturer_id", referencedColumnName="id")
      */
-    protected $manufacturerName;
+    protected $manufacturer;
+
+    /**
+     * @ORM\OneToMany(targetEntity="WorkOrderLine", mappedBy="product")
+     */
+    protected $workOrderLines;
 
     /**
      * Get id
@@ -152,23 +161,96 @@ class Product
     /**
      * Set manufacturerName
      *
-     * @param Manufacturer $manufacturerName
+     * @param Manufacturer $manufacturer
      * @return Product
      */
-    public function setManufacturerName(Manufacturer $manufacturerName = null)
+    public function setManufacturer(Manufacturer $manufacturer = null)
     {
-        $this->manufacturerName = $manufacturerName;
+        $this->manufacturer = $manufacturer;
     
         return $this;
     }
 
     /**
-     * Get manufacturerName
+     * Get manufacturer
      *
      * @return Manufacturer
      */
-    public function getManufacturerName()
+    public function getManufacturer()
     {
-        return $this->manufacturerName;
+        return $this->manufacturer;
+    }
+
+    /**
+     * Set serialized
+     *
+     * @param boolean $serialized
+     * @return Product
+     */
+    public function setSerialized($serialized)
+    {
+        $this->serialized = $serialized;
+
+        return $this;
+    }
+
+    /**
+     * Get serialized
+     *
+     * @return boolean 
+     */
+    public function getSerialized()
+    {
+        return $this->serialized;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->workOrderLine = new ArrayCollection();
+    }
+
+    /**
+     * Add workOrderLine
+     *
+     * @param WorkOrderLine $workOrderLine
+     * @return Product
+     */
+    public function addWorkOrderLine(WorkOrderLine $workOrderLine)
+    {
+        $this->workOrderLine[] = $workOrderLine;
+
+        return $this;
+    }
+
+    /**
+     * Remove workOrderLine
+     *
+     * @param WorkOrderLine $workOrderLine
+     */
+    public function removeWorkOrderLine(WorkOrderLine $workOrderLine)
+    {
+        $this->workOrderLine->removeElement($workOrderLine);
+    }
+
+    /**
+     * Get workOrderLine
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkOrderLine()
+    {
+        return $this->workOrderLine;
+    }
+
+    /**
+     * Get workOrderLines
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorkOrderLines()
+    {
+        return $this->workOrderLines;
     }
 }

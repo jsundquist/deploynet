@@ -22,8 +22,8 @@
         <tbody>
         {% for project in projects %}
         <tr>
-            <td><a href="#">{{ project.customer.name }}</a></td>
-            <td><a href="#">{{ project.name }}e</a></td>
+            <td><a href="/customer/details/{{ project.customer.id }}">{{ project.customer.name }}</a></td>
+            <td><a href="/project/details/{{ project.id }}">{{ project.name }}</a></td>
             <td>{{ project.description }}</td>
             <td>{{ project.type }}</td>
             <td>{{ project.activeWorkOrders }}</td>

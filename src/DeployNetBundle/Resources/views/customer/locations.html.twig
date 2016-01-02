@@ -14,7 +14,10 @@
     <li role="presentation"><a href="/customer/orders/{{customer.id}}">Work Orders</a></li>
     <li role="presentation"><a href="/customer/documents/{{customer.id}}">Documents</a></li>
 </ul>
+<br />
 <a href="/customer/location/{{customer.id}}/add" class="btn btn-default btn-sm pull-right" role="button">Add Location</a>
+<div class="clearfix"></div>
+<br />
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -42,7 +45,7 @@
         {% endfor %}
         </tbody>
     </table>
-    <div class="center-block">
+    {#<div class="center-block">
         <ul class="pagination text-center">
             <li class="disabled"><span>&laquo;</span></li>
             <li class="active"><span>1 <span class="sr-only">(current)</span></span></li>
@@ -52,6 +55,6 @@
             <li><a href="#">5</a></li>
             <li><a href="#">&raquo;</a></li>
         </ul>
-    </div>
+    </div>#}
 </div>
 {% endblock %}

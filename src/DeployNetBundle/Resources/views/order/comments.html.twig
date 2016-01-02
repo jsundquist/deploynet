@@ -1,0 +1,78 @@
+{% extends 'DeployNetBundle::layout.html.twig' %}
+{% block content %}
+    <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/projects">Project List</a></li>
+        <li><a href="/project/details/{{ workOrder.project.id }}">{{ workOrder.project.name }} Details</a></li>
+        <li class="active">Work Order #{{ workOrder.id }}</li>
+    </ol>
+    <h1>Work Order Information</h1>
+    <table class="table table-responsive">
+        <tr>
+            <td>Customer</td>
+            <td>
+                <a href="/customer/detail/{{ workOrder.project.customer.id }}">{{ workOrder.project.customer.name }}</a><br/>
+                {{ workOrder.project.customer.address1 }}<br />
+                {{ workOrder.project.customer.city }}, {{ workOrder.project.customer.state.abbreviation }} {{ workOrder.project.customer.postalCode }}
+            </td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td>
+                <a href="/customer/detail/{{ workOrder.location.id }}">{{ workOrder.location.name }}</a><br/>
+                {{ workOrder.location.address1 }}<br />
+                {{ workOrder.location.city }}, {{ workOrder.location.state.abbreviation }} {{ workOrder.location.postalCode }}
+            </td>
+        </tr>
+    </table>
+
+    {{ workOrder.shortDescription }}
+    <hr>
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation"><a href="/project/{{ workOrder.project.id }}/order/{{ workOrder.id }}/view">Details</a></li>
+        <li role="presentation"><a href="/project/{{ workOrder.project.id }}/order/{{ workOrder.id }}/documents">Documents</a></li>
+        <li role="presentation" class="active"><a href="/project/{{ workOrder.project.id }}/order/{{ workOrder.id }}/comments">Comments</a></li>
+    </ul>
+    <br />
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orderModal">
+            Add Comment
+        </button>
+    </div>
+    <br />
+    <br />
+    {% for comment in workOrder.workOrderComments %}
+        <div class="panel {% if comment.important %}panel-danger{% else %}panel-default{% endif %}">
+            <div class="panel-heading">
+                Posted by: <strong>{% if comment.author %}{{ comment.author.firstName }} {{ comment.author.lastName }}{% endif %}</strong> on {{ comment.commentDate|date('m/d/Y \a\t h:i a') }}
+            </div>
+            <div class="panel-body">
+                <div class="pull-left" style="padding-right: 15px;">
+                    <div class="well">
+                        <strong>Viewable by</strong>
+                        <br />
+                        {% for visibility in comment.visibility %}
+                        {{ visibility.name }}<br>
+                        {% endfor %}
+                    </div>
+                </div>
+                {{ comment.comment }}
+            </div>
+        </div>
+    {% endfor %}
+    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Comment</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

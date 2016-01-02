@@ -1,0 +1,65 @@
+{% extends 'DeployNetBundle::layout.html.twig' %}
+{% block content %}
+    <ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="/projects">Project List</a></li>
+    <li class="active">{{ project.name }} Details</li>
+    </ul>
+<h1>Work Order Information</h1>
+<table class="table table-responsive">
+    <tr>
+        <td>Customer</td>
+        <td>
+            <a href="/customer/detail/{{ project.customer.id }}">{{ project.customer.name }}</a><br/>
+            {{ project.customer.address1 }}<br />
+            {{ project.customer.city }}, {{ project.customer.state.abbreviation }} {{ project.customer.postalCode }}
+        </td>
+    </tr>
+</table>
+<h2>{{ project.name }}</h2>
+{{ project.description }}
+<hr>
+<h2>Work Orders</h2>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orderModal">
+        Add Order
+    </button>
+    <br />
+    <br />
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Site</th>
+                <th>Created Date</th>
+                <th>Schedule Date</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for workOrder in project.workOrders %}
+                <tr>
+                    <td><a href="/project/{{ workOrder.project.id }}/order/{{ workOrder.id }}/view">{{ workOrder.id }}</a></td>
+                    <td>{{ workOrder.location.name }}<br/>{{ workOrder.location.city }}, {{ workOrder.location.state.name }} {{ workOrder.location.postalCode }}</td>
+                    <td>{{ workOrder.createdDate|date }}</td>
+                    <td>{{ workOrder.scheduleDate|date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="modal fade" id="orderModal" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Order</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
