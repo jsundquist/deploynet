@@ -31,11 +31,12 @@
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation"><a href="/project/{{ workOrder.project.id }}/order/{{ workOrder.id }}/view">Details</a></li>
         <li role="presentation" class="active"><a href="/project/{{ workOrder.project.id }}/order/{{ workOrder.id }}/documents">Documents</a></li>
+        <li role="presentation"><a href="/project/{{ workOrder.project.id }}/order/{{ workOrder.id }}/comments">Comments</a></li>
     </ul>
     <br />
     <div class="btn-group" role="group" aria-label="...">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orderModal">
-            Add Line Item
+            Add Document
         </button>
     </div>
     <br />
