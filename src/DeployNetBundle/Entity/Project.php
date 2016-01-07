@@ -35,6 +35,11 @@ class Project
      */
     protected $type;
 
+    /**
+     * The number of work orders open for the project
+     *
+     * @var integer
+     */
     protected $activeWorkOrders;
 
     /**
@@ -58,6 +63,15 @@ class Project
      * @ORM\JoinColumn(name="location_id", referencedColumnName="id")
      */
     protected $location;
+
+    /**
+     * Date the project was created
+     *
+     * @var \DateTime
+     *
+     * @ORM\Column(
+     */
+    protected $createdDate;
 
     /**
      * @ORM\OneToMany(targetEntity="WorkOrder", mappedBy="project")
@@ -174,10 +188,10 @@ class Project
     /**
      * Set customer
      *
-     * @param \DeployNetBundle\Entity\Customer $customer
+     * @param Customer $customer
      * @return Project
      */
-    public function setCustomer(\DeployNetBundle\Entity\Customer $customer = null)
+    public function setCustomer(Customer $customer = null)
     {
         $this->customer = $customer;
     
@@ -187,7 +201,7 @@ class Project
     /**
      * Get customer
      *
-     * @return \DeployNetBundle\Entity\Customer
+     * @return Customer
      */
     public function getCustomer()
     {
@@ -197,10 +211,10 @@ class Project
     /**
      * Set location
      *
-     * @param \DeployNetBundle\Entity\Location $location
+     * @param Location $location
      * @return Project
      */
-    public function setLocation(\DeployNetBundle\Entity\Location $location = null)
+    public function setLocation(Location $location = null)
     {
         $this->location = $location;
     
@@ -210,7 +224,7 @@ class Project
     /**
      * Get location
      *
-     * @return \DeployNetBundle\Entity\Location
+     * @return Location
      */
     public function getLocation()
     {
@@ -220,10 +234,10 @@ class Project
     /**
      * Add workOrders
      *
-     * @param \DeployNetBundle\Entity\WorkOrder $workOrders
+     * @param WorkOrder $workOrders
      * @return Project
      */
-    public function addWorkOrder(\DeployNetBundle\Entity\WorkOrder $workOrders)
+    public function addWorkOrder(WorkOrder $workOrders)
     {
         $this->workOrders[] = $workOrders;
     
@@ -233,9 +247,9 @@ class Project
     /**
      * Remove workOrders
      *
-     * @param \DeployNetBundle\Entity\WorkOrder $workOrders
+     * @param WorkOrder $workOrders
      */
-    public function removeWorkOrder(\DeployNetBundle\Entity\WorkOrder $workOrders)
+    public function removeWorkOrder(WorkOrder $workOrders)
     {
         $this->workOrders->removeElement($workOrders);
     }

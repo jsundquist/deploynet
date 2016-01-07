@@ -36,7 +36,7 @@
             <td>{{ project.activeWorkOrders }}</td>
             <td>{#John Doe#}</td>
             <td>{#--/--/---- --:-- AM#}</td>
-            <td>{#--/--/---- --:-- AM#}</td>
+            <td>{{ project.lastAccess|date('m/d/Y h:i A') }}{#--/--/---- --:-- AM#}</td>
         </tr>
             {% endfor %}
         </tbody>

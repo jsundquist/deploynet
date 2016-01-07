@@ -399,10 +399,10 @@ class Customer
     /**
      * Add contacts
      *
-     * @param \DeployNetBundle\Entity\Contact $contacts
+     * @param Contact $contacts
      * @return Customer
      */
-    public function addContact(\DeployNetBundle\Entity\Contact $contacts)
+    public function addContact(Contact $contacts)
     {
         $this->contacts[] = $contacts;
 
@@ -412,9 +412,9 @@ class Customer
     /**
      * Remove contacts
      *
-     * @param \DeployNetBundle\Entity\Contact $contacts
+     * @param Contact $contacts
      */
-    public function removeContact(\DeployNetBundle\Entity\Contact $contacts)
+    public function removeContact(Contact $contacts)
     {
         $this->contacts->removeElement($contacts);
     }
@@ -432,10 +432,10 @@ class Customer
     /**
      * Add projects
      *
-     * @param \DeployNetBundle\Entity\Project $projects
+     * @param Project $projects
      * @return Customer
      */
-    public function addProject(\DeployNetBundle\Entity\Project $projects)
+    public function addProject(Project $projects)
     {
         $this->projects[] = $projects;
 
@@ -445,9 +445,9 @@ class Customer
     /**
      * Remove projects
      *
-     * @param \DeployNetBundle\Entity\Project $projects
+     * @param Project $projects
      */
-    public function removeProject(\DeployNetBundle\Entity\Project $projects)
+    public function removeProject(Project $projects)
     {
         $this->projects->removeElement($projects);
     }
