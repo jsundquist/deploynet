@@ -63,18 +63,18 @@
                     <td>
                         {% if workOrderLine.product.serialized %}
                             {% if workOrderLine.serialNumberIn %}
-                                {{ workOrderLine.serialNumberIn }}
+                                {{ workOrderLine.serialNumberIn }} <button type="button" class="btn btn-primary btn-sm">Remove Serial</button>
                             {% else %}
-                                <button type="button" class="btn btn-primary btn-sm">Add Serial</button>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#serialInModal">Add Serial</button>
                             {% endif %}
                         {% endif %}
                     </td>
                     <td>
                         {% if workOrderLine.product.serialized %}
                             {% if workOrderLine.serialNumberOut %}
-                                {{ workOrderLine.serialNumberOut }}
+                                {{ workOrderLine.serialNumberOut }} <button type="button" class="btn btn-primary btn-sm">Remove Serial</button>
                             {% else %}
-                                <button type="button" class="btn btn-primary btn-sm">Add Serial</button>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#serialOutModal">Add Serial</button>
                             {% endif %}
                         {% endif %}
                     </td>
@@ -89,12 +89,44 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Add Order</h4>
+                    <h4 class="modal-title" id="myModalLabel">Add Line Item</h4>
                 </div>
                 <div class="modal-body">
                     {{ form_start(form) }}
                     {{ form_widget(form) }}
                     {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="serialInModal" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Update Serial In</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(serialInForm) }}
+                    {{ form_widget(serialInForm) }}
+                    {{ form_end(serialInForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="serialOutModal" tabindex="-1" role="dialog" aria-labelledby="serialOutModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Update Serial Out</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(serialOutForm) }}
+                    {{ form_widget(serialOutForm) }}
+                    {{ form_end(serialOutForm) }}
                 </div>
             </div>
         </div>

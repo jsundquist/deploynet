@@ -43,6 +43,7 @@ class ProjectController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $project->setCreatedDate(new \DateTime('now'));
             $em->persist($project);
             $em->flush();
             return $this->redirectToRoute('project_index');

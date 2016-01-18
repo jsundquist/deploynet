@@ -69,7 +69,7 @@ class Project
      *
      * @var \DateTime
      *
-     * @ORM\Column(
+     * @ORM\Column(type="datetime")
      */
     protected $createdDate;
 
@@ -297,5 +297,28 @@ class Project
     public function getLastAccess()
     {
         return $this->lastAccess;
+    }
+
+    /**
+     * Set createdDate
+     *
+     * @param \DateTime $createdDate
+     * @return Project
+     */
+    public function setCreatedDate($createdDate)
+    {
+        $this->createdDate = $createdDate;
+
+        return $this;
+    }
+
+    /**
+     * Get createdDate
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedDate()
+    {
+        return $this->createdDate;
     }
 }

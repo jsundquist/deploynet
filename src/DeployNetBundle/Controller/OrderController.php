@@ -4,11 +4,13 @@ namespace DeployNetBundle\Controller;
 use DeployNetBundle\Entity\WorkOrderComment;
 use DeployNetBundle\Entity\WorkOrderDocument;
 use DeployNetBundle\Entity\WorkOrderLine;
+use DeployNetBundle\Form\Type\SerialType;
 use DeployNetBundle\Form\Type\WorkOrderCommentType;
 use DeployNetBundle\Form\Type\WorkOrderDocumentType;
 use DeployNetBundle\Form\Type\WorkOrderLineType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -94,16 +96,25 @@ class OrderController extends Controller
             }
 
             $em->flush();
-            return $this->redirectToRoute('work_order_view');
+            return $this->redirectToRoute('work_order_view', ['projectId' => $projectId, 'orderId' => $orderId]);
         }
 
+        $serialIn = new SerialType();
+        $serialIn->setFieldName('serialNumberIn');
 
+        $serialOut = new SerialType();
+        $serialOut->setFieldName('serialNumberOut');
+
+        $serialInForm = $this->createForm($serialIn, $workOrderLine);
+        $serialOutForm = $this->createForm($serialOut, $workOrderLine);
 
         return $this->render(
             "DeployNetBundle:Order:view.html.twig",
             [
                 'workOrder' => $order,
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'serialInForm' => $serialInForm->createView(),
+                'serialOutForm' => $serialOutForm->createView()
             ]
         );
     }
